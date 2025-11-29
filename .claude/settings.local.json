@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir:*)",
+      "Bash(mvn clean:*)",
+      "Bash(.mvnw clean:*)",
+      "Bash(cmd:*)",
+      "Bash(powershell -Command:*)",
+      "Bash(mvnw.cmd clean:*)",
+      "Bash(./mvnw.cmd:*)",
+      "Bash(java:*)",
+      "Bash(dir:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
