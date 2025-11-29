@@ -1,0 +1,527 @@
+{
+  "ui_design": {
+    "metadata": {
+      "document_name": "Sportio UI System Design - Angular NativeScript",
+      "version": "1.0",
+      "created_date": "2025-11-29",
+      "format": "AI-Agent Friendly JSON Specification",
+      "platform": "Mobile (iOS/Android)",
+      "framework": "Angular NativeScript"
+    },
+    "technology_stack": {
+      "frontend_framework": "Angular NativeScript",
+      "ui_components": "NativeScript UI Components",
+      "navigation": "NativeScript Router",
+      "state_management": "NgRx Store",
+      "styling": "SCSS with NativeScript Theme",
+      "icons": "NativeScript Font Icons",
+      "maps": "NativeScript Google Maps Plugin",
+      "charts": "NativeScript Charts Plugin",
+      "push_notifications": "NativeScript Push Plugin",
+      "camera": "NativeScript Camera Plugin",
+      "geolocation": "NativeScript Geolocation Plugin"
+    },
+    "screen_architecture": {
+      "overview": "Modular screen-based architecture with lazy loading",
+      "screen_groups": {
+        "authentication": {
+          "description": "User authentication and onboarding",
+          "screens": [
+            "LoginScreen",
+            "RegisterScreen",
+            "ForgotPasswordScreen",
+            "OnboardingScreen"
+          ]
+        },
+        "session_discovery": {
+          "description": "Finding and browsing sessions",
+          "screens": [
+            "HomeScreen",
+            "SessionListScreen",
+            "SessionDetailScreen",
+            "MapViewScreen",
+            "SearchScreen"
+          ]
+        },
+        "session_management": {
+          "description": "Creating and managing sessions",
+          "screens": [
+            "ProposeSessionScreen",
+            "SessionLobbyScreen",
+            "SessionWaitScreen",
+            "SessionChatScreen"
+          ]
+        },
+        "booking_flow": {
+          "description": "Venue booking and payment",
+          "screens": [
+            "VenueSuggestScreen",
+            "VenueDetailScreen",
+            "BookingSlotScreen",
+            "BookingConfirmScreen",
+            "PaymentScreen"
+          ]
+        },
+        "user_profile": {
+          "description": "User profile and settings",
+          "screens": [
+            "ProfileScreen",
+            "EditProfileScreen",
+            "SettingsScreen",
+            "NotificationSettingsScreen"
+          ]
+        },
+        "notifications": {
+          "description": "Notifications and alerts",
+          "screens": [
+            "NotificationsScreen",
+            "NotificationDetailScreen"
+          ]
+        }
+      }
+    },
+    "component_library": {
+      "layout_components": {
+        "TopBarComponent": {
+          "description": "Header with navigation and actions",
+          "properties": [
+            "title: string",
+            "showBackButton: boolean",
+            "showMenuButton: boolean",
+            "actions: ActionButton[]"
+          ],
+          "events": [
+            "backPressed",
+            "menuPressed",
+            "actionSelected"
+          ]
+        },
+        "BottomNavComponent": {
+          "description": "Bottom navigation bar",
+          "tabs": [
+            {
+              "id": "home",
+              "label": "Home",
+              "icon": "🏠",
+              "route": "/home"
+            },
+            {
+              "id": "map",
+              "label": "Map",
+              "icon": "🗺️",
+              "route": "/map"
+            },
+            {
+              "id": "propose",
+              "label": "Create",
+              "icon": "➕",
+              "route": "/propose"
+            },
+            {
+              "id": "notifications",
+              "label": "Alerts",
+              "icon": "🔔",
+              "route": "/notifications"
+            },
+            {
+              "id": "profile",
+              "label": "Profile",
+              "icon": "👤",
+              "route": "/profile"
+            }
+          ]
+        },
+        "SearchBarComponent": {
+          "description": "Search input with filtering",
+          "properties": [
+            "placeholder: string",
+            "autoFocus: boolean",
+            "showFilters: boolean"
+          ],
+          "events": [
+            "searchChanged",
+            "filterToggled"
+          ]
+        }
+      },
+      "data_components": {
+        "SessionCardComponent": {
+          "description": "Session listing card",
+          "properties": [
+            "session: Session",
+            "showDistance: boolean",
+            "showActionButton: boolean"
+          ],
+          "slots": [
+            "sportIcon",
+            "actionButton"
+          ]
+        },
+        "VenueCardComponent": {
+          "description": "Venue listing card",
+          "properties": [
+            "venue: Venue",
+            "showPrice: boolean",
+            "showRating: boolean"
+          ]
+        },
+        "PlayerAvatarComponent": {
+          "description": "Player avatar with initials",
+          "properties": [
+            "player: User",
+            "size: 'small' | 'medium' | 'large'",
+            "showStatus: boolean"
+          ]
+        },
+        "MessageBubbleComponent": {
+          "description": "Chat message bubble",
+          "properties": [
+            "message: Message",
+            "isOwn: boolean",
+            "showTimestamp: boolean"
+          ]
+        }
+      },
+      "form_components": {
+        "SportSelectorComponent": {
+          "description": "Sport type selection",
+          "properties": [
+            "selectedSport: string",
+            "availableSports: Sport[]"
+          ],
+          "events": [
+            "sportSelected"
+          ]
+        },
+        "DateTimePickerComponent": {
+          "description": "Date and time selection",
+          "properties": [
+            "selectedDate: Date",
+            "selectedTime: string",
+            "minDate: Date",
+            "maxDate: Date"
+          ],
+          "events": [
+            "dateTimeSelected"
+          ]
+        },
+        "PlayerCountSelectorComponent": {
+          "description": "Player count selection",
+          "properties": [
+            "selectedCount: number",
+            "minPlayers: number",
+            "maxPlayers: number"
+          ],
+          "events": [
+            "countSelected"
+          ]
+        }
+      },
+      "action_components": {
+        "PrimaryButtonComponent": {
+          "description": "Primary action button",
+          "properties": [
+            "text: string",
+            "loading: boolean",
+            "disabled: boolean",
+            "icon: string"
+          ],
+          "events": [
+            "buttonPressed"
+          ]
+        },
+        "SecondaryButtonComponent": {
+          "description": "Secondary action button",
+          "properties": [
+            "text: string",
+            "outline: boolean",
+            "disabled: boolean"
+          ],
+          "events": [
+            "buttonPressed"
+          ]
+        },
+        "FloatingActionButtonComponent": {
+          "description": "Floating action button",
+          "properties": [
+            "icon: string",
+            "position: 'bottom-right' | 'bottom-left'",
+            "visible: boolean"
+          ],
+          "events": [
+            "buttonPressed"
+          ]
+        }
+      }
+    },
+    "navigation_flow": {
+      "authentication_flow": {
+        "description": "User authentication and onboarding",
+        "screens": [
+          {
+            "screen": "LoginScreen",
+            "actions": [
+              {
+                "action": "loginSuccess",
+                "next": "HomeScreen"
+              },
+              {
+                "action": "registerPressed",
+                "next": "RegisterScreen"
+              },
+              {
+                "action": "forgotPassword",
+                "next": "ForgotPasswordScreen"
+              }
+            ]
+          },
+          {
+            "screen": "RegisterScreen",
+            "actions": [
+              {
+                "action": "registerSuccess",
+                "next": "HomeScreen"
+              },
+              {
+                "action": "backPressed",
+                "next": "LoginScreen"
+              }
+            ]
+          }
+        ]
+      },
+      "session_discovery_flow": {
+        "description": "Finding and joining sessions",
+        "screens": [
+          {
+            "screen": "HomeScreen",
+            "actions": [
+              {
+                "action": "sessionSelected",
+                "next": "SessionDetailScreen"
+              },
+              {
+                "action": "mapViewPressed",
+                "next": "MapViewScreen"
+              },
+              {
+                "action": "proposeSessionPressed",
+                "next": "ProposeSessionScreen"
+              }
+            ]
+          },
+          {
+            "screen": "SessionDetailScreen",
+            "actions": [
+              {
+                "action": "joinPressed",
+                "next": "PlayerJoinScreen"
+              },
+              {
+                "action": "chatPressed",
+                "next": "SessionChatScreen"
+              },
+              {
+                "action": "backPressed",
+                "next": "HomeScreen"
+              }
+            ]
+          }
+        ]
+      },
+      "session_creation_flow": {
+        "description": "Creating and managing sessions",
+        "screens": [
+          {
+            "screen": "ProposeSessionScreen",
+            "actions": [
+              {
+                "action": "sessionCreated",
+                "next": "SessionLobbyScreen"
+              },
+              {
+                "action": "backPressed",
+                "next": "HomeScreen"
+              }
+            ]
+          },
+          {
+            "screen": "SessionLobbyScreen",
+            "actions": [
+              {
+                "action": "lockSessionPressed",
+                "next": "VenueSuggestScreen"
+              },
+              {
+                "action": "backPressed",
+                "next": "HomeScreen"
+              }
+            ]
+          }
+        ]
+      },
+      "booking_flow": {
+        "description": "Venue booking and payment",
+        "screens": [
+          {
+            "screen": "VenueSuggestScreen",
+            "actions": [
+              {
+                "action": "venueSelected",
+                "next": "BookingSlotScreen"
+              },
+              {
+                "action": "backPressed",
+                "next": "SessionLobbyScreen"
+              }
+            ]
+          },
+          {
+            "screen": "BookingSlotScreen",
+            "actions": [
+              {
+                "action": "slotSelected",
+                "next": "BookingConfirmScreen"
+              },
+              {
+                "action": "backPressed",
+                "next": "VenueSuggestScreen"
+              }
+            ]
+          },
+          {
+            "screen": "BookingConfirmScreen",
+            "actions": [
+              {
+                "action": "bookingConfirmed",
+                "next": "PaymentScreen"
+              },
+              {
+                "action": "backPressed",
+                "next": "BookingSlotScreen"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "ui_patterns": {
+      "card_based_layout": {
+        "description": "Cards for session and venue listings",
+        "components": ["SessionCardComponent", "VenueCardComponent"],
+        "usage": "HomeScreen, SessionListScreen, VenueSuggestScreen"
+      },
+      "floating_action_button": {
+        "description": "Floating button for primary actions",
+        "components": ["FloatingActionButtonComponent"],
+        "usage": "Propose session, Quick actions"
+      },
+      "bottom_navigation": {
+        "description": "Bottom tab navigation",
+        "components": ["BottomNavComponent"],
+        "usage": "Main app navigation"
+      },
+      "search_and_filter": {
+        "description": "Search with filter options",
+        "components": ["SearchBarComponent"],
+        "usage": "Session discovery, Venue search"
+      },
+      "progressive_disclosure": {
+        "description": "Step-by-step forms",
+        "components": ["SportSelectorComponent", "DateTimePickerComponent", "PlayerCountSelectorComponent"],
+        "usage": "Session creation, Booking flow"
+      }
+    },
+    "design_system": {
+      "colors": {
+        "primary": "#06b6d4",
+        "secondary": "#7c3aed",
+        "success": "#10b981",
+        "warning": "#f59e0b",
+        "error": "#ef4444",
+        "background": "#0f1724",
+        "surface": "#0b1220",
+        "text_primary": "#e6eef6",
+        "text_secondary": "#94a3b8",
+        "border": "rgba(255, 255, 255, 0.06)"
+      },
+      "typography": {
+        "font_family": "Inter, ui-sans-serif, system-ui",
+        "font_sizes": {
+          "h1": "24px",
+          "h2": "20px",
+          "h3": "18px",
+          "body": "16px",
+          "caption": "14px",
+          "small": "12px"
+        },
+        "font_weights": {
+          "light": "300",
+          "regular": "400",
+          "medium": "500",
+          "semibold": "600",
+          "bold": "700"
+        }
+      },
+      "spacing": {
+        "xs": "4px",
+        "sm": "8px",
+        "md": "12px",
+        "lg": "16px",
+        "xl": "24px",
+        "xxl": "32px"
+      },
+      "border_radius": {
+        "small": "8px",
+        "medium": "12px",
+        "large": "16px",
+        "full": "999px"
+      },
+      "shadows": {
+        "small": "0 1px 3px rgba(0, 0, 0, 0.12)",
+        "medium": "0 4px 6px rgba(0, 0, 0, 0.15)",
+        "large": "0 10px 25px rgba(0, 0, 0, 0.2)"
+      }
+    },
+    "responsive_design": {
+      "breakpoints": {
+        "mobile": "320px - 768px",
+        "tablet": "768px - 1024px",
+        "desktop": "1024px+"
+      },
+      "adaptive_layouts": {
+        "mobile": "Single column, bottom navigation",
+        "tablet": "Two column layout, side navigation",
+        "desktop": "Multi-column, full navigation"
+      }
+    },
+    "accessibility": {
+      "screen_reader_support": "NativeScript accessibility features",
+      "keyboard_navigation": "Tab navigation support",
+      "color_contrast": "WCAG AA compliant",
+      "font_scaling": "Dynamic text sizing",
+      "focus_management": "Proper focus indicators"
+    },
+    "performance_optimization": {
+      "lazy_loading": "Screen and component lazy loading",
+      "image_optimization": "Progressive image loading",
+      "list_optimization": "Virtual scrolling for long lists",
+      "caching": "Offline data caching",
+      "bundle_optimization": "Code splitting and tree shaking"
+    },
+    "testing_strategy": {
+      "unit_tests": {
+        "framework": "Jasmine + Karma",
+        "coverage": "Components, Services, Pipes"
+      },
+      "integration_tests": {
+        "framework": "NativeScript Testing",
+        "coverage": "Screen flows, Navigation"
+      },
+      "e2e_tests": {
+        "framework": "Appium",
+        "coverage": "Critical user journeys"
+      }
+    }
+  }
+}
