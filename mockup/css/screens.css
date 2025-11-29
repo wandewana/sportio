@@ -1,0 +1,87 @@
+/* Screen-Specific Styles */
+
+/* Chat */
+.chat-window {
+  display: flex;
+  flex-direction: column;
+  height: calc(100% - 80px);
+}
+
+.messages {
+  flex: 1;
+  overflow: auto;
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.msg {
+  max-width: 70%;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.msg.me {
+  margin-left: auto;
+  background: linear-gradient(90deg, var(--accent), #7c3aed);
+  color: #002024;
+}
+
+.input-row {
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+}
+
+/* Profile */
+.profile-hero {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.stat {
+  background: rgba(255, 255, 255, 0.02);
+  padding: 12px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Booking */
+.venue-card {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 12px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), transparent);
+}
+
+.time-grid {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.slot {
+  padding: 8px 10px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+}
+
+.slot.selected {
+  border: 1px solid var(--accent);
+  background: linear-gradient(90deg, rgba(6, 182, 212, 0.12), rgba(124, 58, 237, 0.06));
+}
+

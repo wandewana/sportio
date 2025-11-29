@@ -1,0 +1,70 @@
+<!-- Home Screen - Session Discovery -->
+
+<div id="home" class="screen">
+  <div class="topbar">
+    <div style="display:flex;gap:8px;align-items:center">
+      <div style="width:40px;height:40px;border-radius:10px;background:rgba(255,255,255,0.02);display:flex;align-items:center;justify-content:center">📍</div>
+      <div>
+        <div style="font-size:14px">Nearby Sessions</div>
+        <div class="muted small">Showing 12 results • 2 km radius</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px">
+      <button class="outline-btn" style="width:auto" onclick="go('notifications')">🔔</button>
+      <button class="outline-btn" style="width:auto" onclick="go('profile')">👤</button>
+    </div>
+  </div>
+
+  <div style="margin-top:12px" class="search">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 21l-4.35-4.35" stroke="white" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M11 19a8 8 0 1 0 0-16 8 8 0 0 0 0 16z" stroke="white" stroke-opacity="0.8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <input placeholder="Find sessions, sports, players..." />
+  </div>
+
+  <div class="card-list">
+    <div class="card">
+      <div class="sport">🏸</div>
+      <div class="meta">
+        <h4>Casual Badminton • 2 spots left</h4>
+        <small class="muted">Tomorrow • 19:00 • 4 players needed</small>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+          <div class="pill">Intermediate</div>
+          <div class="pill">Indoor</div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-end">
+        <button class="btn" style="width:auto" onclick="go('session-detail')">Join</button>
+        <small class="muted">0.55 km</small>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sport">⚽</div>
+      <div class="meta">
+        <h4>Pickup Futsal • Need 4 more</h4>
+        <small class="muted">Today • 20:30 • 9/14 joined</small>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end">
+        <button class="outline-btn" style="width:auto" onclick="go('session-detail')">View</button>
+        <small class="muted">1.2 km</small>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="sport">🎾</div>
+      <div class="meta">
+        <h4>Tennis Doubles • Find Partner</h4>
+        <small class="muted">Sat • 08:00 • 1 needed</small>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end">
+        <button class="btn" style="width:auto" onclick="go('propose')">I'll Play</button>
+        <small class="muted">0.4 km</small>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:100px;left:20px;right:20px;display:flex;gap:8px;justify-content:space-between">
+    <button class="btn" style="flex:1;margin-right:8px" onclick="go('propose')">Propose Session</button>
+    <button class="outline-btn" style="width:56px" onclick="go('map')">🗺️</button>
+  </div>
+</div>
+

@@ -1,0 +1,122 @@
+<!-- Support & Communication Screens -->
+
+<!-- Chat -->
+<div id="chat" class="screen">
+  <div class="topbar">
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="outline-btn" style="width:auto" onclick="go('session-detail')">←</button>
+      <div style="font-weight:600">Session Chat</div>
+    </div>
+    <div class="muted small">Badminton • 19:00</div>
+  </div>
+
+  <div class="chat-window">
+    <div class="messages" id="msgs">
+      <div class="msg">Hey — I can bring extra shuttlecocks.</div>
+      <div class="msg me">Awesome! See you at 19:00.</div>
+      <div class="msg">Where is parking?</div>
+    </div>
+
+    <div class="input-row">
+      <input placeholder="Write a message..." style="flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);background:rgba(255,255,255,0.02)" />
+      <button class="btn" style="width:auto">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Profile -->
+<div id="profile" class="screen">
+  <div class="topbar">
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="outline-btn" style="width:auto" onclick="go('home')">←</button>
+      <div style="font-weight:600">My Profile</div>
+    </div>
+    <div class="muted small">Edit your skills & bookings</div>
+  </div>
+
+  <div style="margin-top:12px">
+    <div class="profile-hero">
+      <div style="width:72px;height:72px;border-radius:16px;background:linear-gradient(90deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-size:20px">AB</div>
+      <div>
+        <div style="font-weight:700">Alex B</div>
+        <div class="muted small">Intermediate • 120 games</div>
+        <div style="margin-top:8px"><button class="outline-btn" style="width:auto">Edit profile</button></div>
+      </div>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat">
+        <div style="font-weight:700">32</div>
+        <div class="muted small">Bookings</div>
+      </div>
+      <div class="stat">
+        <div style="font-weight:700">4.6</div>
+        <div class="muted small">Avg rating</div>
+      </div>
+      <div class="stat">
+        <div style="font-weight:700">12</div>
+        <div class="muted small">Friends</div>
+      </div>
+    </div>
+    
+    <div style="margin-top:16px">
+       <button class="outline-btn" style="width:100%;text-align:left;color:#ef4444;border-color:rgba(239,68,68,0.2)" onclick="go('login')">Log Out</button>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:26px;left:20px;right:20px;display:flex;gap:8px">
+    <button class="outline-btn" style="flex:1" onclick="go('home')">Close</button>
+    <button class="btn" style="flex:1">Save</button>
+  </div>
+</div>
+
+<!-- Notifications -->
+<div id="notifications" class="screen">
+  <div class="topbar">
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="outline-btn" style="width:auto" onclick="go('home')">←</button>
+      <div style="font-weight:600">Notifications</div>
+    </div>
+    <div class="muted small">Important updates</div>
+  </div>
+
+  <div style="margin-top:12px;display:flex;flex-direction:column;gap:8px">
+    <div class="card">
+      <div style="font-weight:700">Payment reminder</div>
+      <div class="muted small">2 players still need to pay for Badminton 19:00</div>
+    </div>
+    <div class="card">
+      <div style="font-weight:700">Slot opened</div>
+      <div class="muted small">A slot opened at BlueCourt 20:00 — 0.8 km away</div>
+    </div>
+  </div>
+</div>
+
+<!-- Report -->
+<div id="report" class="screen">
+  <div class="topbar">
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="outline-btn" style="width:auto" onclick="go('session-detail')">←</button>
+      <div style="font-weight:600">Report session / user</div>
+    </div>
+    <div class="muted small">Help us keep Sportio safe</div>
+  </div>
+
+  <div style="margin-top:12px" class="card">
+    <label class="muted small">Reason</label>
+    <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
+      <div class="slot">Inappropriate behavior</div>
+      <div class="slot">No-show</div>
+      <div class="slot">Spam</div>
+    </div>
+    <div style="margin-top:12px">
+      <textarea style="width:100%;height:90px;border-radius:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:var(--white);padding:8px"></textarea>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:28px;left:20px;right:20px;display:flex;gap:8px">
+    <button class="outline-btn" style="flex:1" onclick="go('session-detail')">Cancel</button>
+    <button class="btn" style="flex:1">Submit</button>
+  </div>
+</div>
+

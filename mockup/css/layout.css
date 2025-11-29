@@ -1,0 +1,130 @@
+/* Layout & Structure */
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #071026 0%, #071422 100%);
+  color: var(--white);
+  display: flex;
+  gap: 20px;
+  height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 300px;
+  padding: 24px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
+  backdrop-filter: blur(6px);
+  border-right: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), #7c3aed);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.desc {
+  color: var(--muted);
+  font-size: 13px;
+  margin-top: 6px;
+}
+
+.screens {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.screen-btn {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: var(--glass);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.screen-btn small {
+  color: var(--muted);
+}
+
+/* Mobile Device Frame */
+.mobile-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.device {
+  width: 375px;
+  height: 812px;
+  border-radius: 36px;
+  background: linear-gradient(180deg, #071025, #0b1728);
+  box-shadow: 0 20px 60px rgba(2, 6, 23, 0.7);
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.screen {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, #072032 0%, #052034 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  position: absolute;
+  inset: 20px;
+  left: 20px;
+  right: 20px;
+  top: 20px;
+  padding: 18px;
+  box-sizing: border-box;
+  display: none;
+}
+
+.screen.active {
+  display: block;
+}
+
+/* Responsive */
+@media (max-width: 980px) {
+  body {
+    flex-direction: column;
+    height: auto;
+  }
+  .sidebar {
+    width: 100%;
+    display: flex;
+    overflow: auto;
+  }
+  .mobile-wrap {
+    order: 2;
+  }
+}
+

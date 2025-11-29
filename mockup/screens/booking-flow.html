@@ -1,0 +1,128 @@
+<!-- Booking Flow Screens -->
+
+<!-- Venue Suggestions -->
+<div id="venue-suggest" class="screen">
+  <div class="topbar">
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="outline-btn" style="width:auto" onclick="go('session-detail')">←</button>
+      <div style="font-weight:600">Choose a venue</div>
+    </div>
+    <div class="muted small">Recommended for 4 players</div>
+  </div>
+
+  <div style="margin-top:12px">
+    <div class="venue-card">
+      <div style="width:72px;height:72px;border-radius:10px;background:linear-gradient(180deg,#1e293b,#0f1724);display:flex;align-items:center;justify-content:center">🏟️</div>
+      <div style="flex:1">
+        <div style="font-weight:700">BlueCourt Sports Center</div>
+        <div class="muted small">Indoor courts • 0.8 km away</div>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+          <div class="pill">$8 / hr per person</div>
+          <div class="pill">4.5 ⭐</div>
+        </div>
+      </div>
+      <div>
+        <button class="btn" style="width:auto" onclick="go('booking')">Select</button>
+      </div>
+    </div>
+
+    <div class="venue-card" style="margin-top:10px">
+      <div style="width:72px;height:72px;border-radius:10px;background:linear-gradient(180deg,#0b1220,#071025);display:flex;align-items:center;justify-content:center">🏟️</div>
+      <div style="flex:1">
+        <div style="font-weight:700">Neighborhood Hall</div>
+        <div class="muted small">Outdoor • 1.2 km</div>
+        <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+          <div class="pill">$6 / hr per person</div>
+          <div class="pill">4.0 ⭐</div>
+        </div>
+      </div>
+      <div>
+        <button class="outline-btn" style="width:auto" onclick="go('booking')">Select</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:26px;left:20px;right:20px;display:flex;gap:8px">
+    <button class="outline-btn" style="flex:1" onclick="go('session-detail')">Back</button>
+    <button class="btn" style="flex:1" onclick="go('booking-confirm')">Suggest & Book</button>
+  </div>
+</div>
+
+<!-- Booking Time Selection -->
+<div id="booking" class="screen">
+  <div class="topbar">
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="outline-btn" style="width:auto" onclick="go('venue-suggest')">←</button>
+      <div style="font-weight:600">BlueCourt — Select time</div>
+    </div>
+    <div class="muted small">Saturday • Indoor court #3</div>
+  </div>
+
+  <div style="margin-top:12px">
+    <div class="muted small">Choose slot</div>
+    <div class="time-grid">
+      <div class="slot">17:00 - 18:00</div>
+      <div class="slot">18:00 - 19:00</div>
+      <div class="slot selected">19:00 - 20:00</div>
+      <div class="slot">20:00 - 21:00</div>
+      <div class="slot">21:00 - 22:00</div>
+    </div>
+
+    <div style="margin-top:12px" class="card">
+      <div style="display:flex;justify-content:space-between;align-items:center">
+        <div>
+          <div class="muted small">Summary</div>
+          <div style="font-weight:700">Badminton • 19:00 - BlueCourt</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-weight:700">$32</div>
+          <div class="muted small">$8 / person (4)</div>
+        </div>
+      </div>
+
+      <div style="margin-top:10px;display:flex;gap:8px;align-items:center">
+        <input type="checkbox" id="split" checked style="width:auto" /> <label for="split" class="muted small">Split payment among players</label>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:28px;left:20px;right:20px;display:flex;gap:8px">
+    <button class="outline-btn" style="flex:1" onclick="go('venue-suggest')">Back</button>
+    <button class="btn" style="flex:1" onclick="go('booking-confirm')">Confirm & Lock</button>
+  </div>
+</div>
+
+<!-- Booking Confirmation -->
+<div id="booking-confirm" class="screen">
+  <div class="topbar">
+    <div style="display:flex;gap:8px;align-items:center">
+      <button class="outline-btn" style="width:auto" onclick="go('booking')">←</button>
+      <div style="font-weight:600">Booking Confirmed</div>
+    </div>
+    <div class="muted small">Payments pending from players</div>
+  </div>
+
+  <div style="margin-top:18px;text-align:center">
+    <div style="font-size:48px">✅</div>
+    <div style="font-weight:700;font-size:18px;margin-top:8px">Court booked: BlueCourt • 19:00</div>
+    <div class="muted small" style="margin-top:8px">Notifications sent to joined players. Waiting for payments.</div>
+  </div>
+
+  <div style="margin-top:16px" class="card">
+    <div style="display:flex;justify-content:space-between">
+      <div>
+        <div class="muted small">Payment status</div>
+        <div style="font-weight:700">2 of 4 paid</div>
+      </div>
+      <div>
+        <button class="outline-btn" style="width:auto">Request payment</button>
+      </div>
+    </div>
+  </div>
+
+  <div style="position:absolute;bottom:28px;left:20px;right:20px;display:flex;gap:8px">
+    <button class="outline-btn" style="flex:1" onclick="go('session-detail')">Back to session</button>
+    <button class="btn" style="flex:1" onclick="go('chat')">Open session chat</button>
+  </div>
+</div>
+

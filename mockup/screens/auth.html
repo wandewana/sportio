@@ -1,0 +1,57 @@
+<!-- Authentication Screens -->
+
+<!-- Login Screen -->
+<div id="login" class="screen active">
+  <div style="height:100%;display:flex;flex-direction:column;justify-content:center;padding:12px">
+    <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:32px">
+      <div class="logo" style="width:72px;height:72px;font-size:28px;margin-bottom:16px;box-shadow:0 0 40px rgba(6,182,212,0.3)">S</div>
+      <h2 style="margin:0">Welcome Back</h2>
+      <div class="muted small">Login to find your squad</div>
+    </div>
+
+    <div>
+      <input class="form-input" placeholder="Email address" type="email" value="alex@sportio.com" />
+      <input class="form-input" placeholder="Password" type="password" value="********" />
+      <div style="text-align:right;margin-bottom:24px">
+        <button class="text-btn">Forgot Password?</button>
+      </div>
+      <button class="btn" onclick="go('home')">Sign In</button>
+      <div style="text-align:center;margin-top:16px">
+        <span class="muted small">New here?</span> 
+        <button class="text-btn" style="color:var(--accent)" onclick="go('register')">Create Account</button>
+      </div>
+    </div>
+
+    <div style="margin-top:auto;text-align:center">
+      <div class="muted small">Or continue with</div>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:12px">
+        <button class="outline-btn" style="width:auto;flex:none">G</button>
+        <button class="outline-btn" style="width:auto;flex:none">🍎</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Register Screen -->
+<div id="register" class="screen">
+  <div class="topbar">
+    <button class="outline-btn" style="width:auto" onclick="go('login')">← Back</button>
+  </div>
+  
+  <div style="margin-top:24px;padding:0 4px">
+    <h2 style="margin:0 0 8px 0">Create Account</h2>
+    <div class="muted small" style="margin-bottom:24px">Join the community of local players.</div>
+
+    <input class="form-input" placeholder="Full Name" type="text" />
+    <input class="form-input" placeholder="Email address" type="email" />
+    <input class="form-input" placeholder="Password" type="password" />
+    <input class="form-input" placeholder="Confirm Password" type="password" />
+
+    <button class="btn" style="margin-top:12px" onclick="go('home')">Sign Up</button>
+    
+    <div style="margin-top:20px;text-align:center">
+      <span class="muted small">By signing up, you agree to our Terms of Service and Privacy Policy.</span>
+    </div>
+  </div>
+</div>
+
