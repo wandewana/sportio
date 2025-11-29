@@ -1,8 +1,8 @@
 spring:
   r2dbc:
-    url: r2dbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:sportio_test}
-    username: ${DB_USER:sportio_user}
-    password: ${DB_PASSWORD:password}
+    url: r2dbc:postgresql://localhost:5433/sportio_test
+    username: postgres
+    password: postgres
 
   data:
     redis:
@@ -10,6 +10,9 @@ spring:
       port: 6379
 
   flyway:
+    url: jdbc:postgresql://localhost:5433/sportio_test
+    user: postgres
+    password: postgres
     clean-disabled: false
     clean-on-validation-error: true
 

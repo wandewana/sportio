@@ -61,4 +61,4 @@ CREATE INDEX idx_session_players_session ON session_players(session_id);
 CREATE INDEX idx_session_players_user ON session_players(user_id);
 
 -- Create geospatial indexes for location-based queries
-CREATE INDEX idx_sessions_location ON sessions USING GIST (ST_MakePoint(longitude, latitude)::geography);
+CREATE INDEX idx_sessions_location ON sessions USING GIST (CAST(ST_MakePoint(longitude, latitude) AS geography));
