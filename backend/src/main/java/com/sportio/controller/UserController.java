@@ -20,12 +20,8 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/{id}")
-    public Mono<ResponseEntity<User>> getUserById(@PathVariable Long id) {
-        return userService.getUserById(id)
-                .map(ResponseEntity::ok)
-                .defaultIfEmpty(ResponseEntity.notFound().build());
-    }
+    // Note: GET /api/v1/users/{id} is now handled by ProfileController.getPublicProfile
+    // which returns UserPublicProfileDto (without sensitive fields like email)
 
     @GetMapping("/email/{email}")
     public Mono<ResponseEntity<User>> getUserByEmail(@PathVariable String email) {

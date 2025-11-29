@@ -83,14 +83,15 @@ class UserControllerIntegrationTest {
                 .build();
         User savedUser = userRepository.save(testUser).block();
 
-        // Call real API endpoint
+        // Call real API endpoint - returns public profile (email is excluded for privacy)
         webTestClient.get()
                 .uri("/api/v1/users/{id}", savedUser.getId())
                 .exchange()
                 .expectStatus().isOk()
                 .expectBody()
-                .jsonPath("$.email").isEqualTo("test2@example.com")
-                .jsonPath("$.fullName").isEqualTo("Test User 2");
+                .jsonPath("$.id").isEqualTo(savedUser.getId())
+                .jsonPath("$.fullName").isEqualTo("Test User 2")
+                .jsonPath("$.email").doesNotExist(); // Public profile does not expose email
     }
 
     @Test

@@ -39,4 +39,15 @@ public class UserService {
         log.info("Creating new user with email: {}", user.getEmail());
         return userRepository.save(user);
     }
+
+    /**
+     * Update an existing user.
+     *
+     * @param user the user entity with updated fields
+     * @return Mono containing the updated user
+     */
+    public Mono<User> updateUser(User user) {
+        log.info("Updating user with id: {}", user.getId());
+        return userRepository.save(user);
+    }
 }

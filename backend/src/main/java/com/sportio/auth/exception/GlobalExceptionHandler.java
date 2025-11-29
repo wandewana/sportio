@@ -1,5 +1,7 @@
 package com.sportio.auth.exception;
 
+import com.sportio.exception.UnauthorizedException;
+import com.sportio.exception.UserNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -44,19 +46,33 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(WebExchangeBindException.class)
     public Mono<ResponseEntity<Map<String, Object>>> handleValidationErrors(WebExchangeBindException ex) {
         log.warn("Validation error: {}", ex.getMessage());
-        
+
         String errors = ex.getBindingResult().getFieldErrors().stream()
                 .map(error -> error.getField() + ": " + error.getDefaultMessage())
                 .collect(Collectors.joining(", "));
 
         Map<String, Object> response = buildErrorResponse("validation_error", errors);
-        
+
         Map<String, String> fieldErrors = new HashMap<>();
-        ex.getBindingResult().getFieldErrors().forEach(error -> 
+        ex.getBindingResult().getFieldErrors().forEach(error ->
                 fieldErrors.put(error.getField(), error.getDefaultMessage()));
         response.put("fieldErrors", fieldErrors);
 
         return Mono.just(ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response));
+    }
+
+    @ExceptionHandler(UserNotFoundException.class)
+    public Mono<ResponseEntity<Map<String, Object>>> handleUserNotFound(UserNotFoundException ex) {
+        log.warn("User not found: {}", ex.getMessage());
+        return Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(buildErrorResponse("user_not_found", ex.getMessage())));
+    }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    public Mono<ResponseEntity<Map<String, Object>>> handleUnauthorized(UnauthorizedException ex) {
+        log.warn("Unauthorized access: {}", ex.getMessage());
+        return Mono.just(ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                .body(buildErrorResponse("unauthorized", ex.getMessage())));
     }
 
     @ExceptionHandler(Exception.class)
