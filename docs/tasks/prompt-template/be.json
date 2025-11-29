@@ -209,61 +209,126 @@
   "testing_MANDATORY_DO_NOT_SKIP": {
     "CRITICAL_INSTRUCTION": "YOU MUST CREATE TEST FILES. TESTS ARE NOT OPTIONAL. DO NOT SKIP THIS SECTION.",
     "DO_NOT_RUN_TESTS": "You do NOT need to run the tests. Just ensure the test files compile without errors.",
+    "testingPhilosophy": {
+      "PRIMARY_APPROACH": "INTEGRATION AND END-TO-END TESTING ONLY",
+      "RATIONALE": "Unit tests are NOT useful for this Spring WebFlux backend since most logic involves complex database queries and reactive streams. Testing isolated methods with mocked dependencies provides little value and does not catch real integration issues.",
+      "CRITICAL_RULES": [
+        "DO NOT write unit tests that mock repositories, services, or database layers",
+        "DO NOT mock internal application components (controllers, services, repositories)",
+        "DO NOT test methods in isolation - always test the complete request-response flow",
+        "ALL tests MUST use a real database (Testcontainers or embedded database)",
+        "ALL tests MUST call real API endpoints via WebTestClient or similar",
+        "ALL tests MUST verify the complete flow through actual application layers"
+      ]
+    },
     "testStrategy": {
-      "INSTRUCTION": "Describe what needs to be tested and how. For external integrations, use mocks.",
+      "INSTRUCTION": "All tests must be integration or end-to-end tests that verify complete flows through real application layers with real database.",
       "testTypes": [
         {
-          "type": "{{TEST_TYPE}}",
-          "description": "{{TEST_TYPE_DESCRIPTION}}",
+          "type": "INTEGRATION_TEST",
+          "description": "Primary test type - Tests complete request-response flow through real endpoints with real database",
+          "requirements": [
+            "Use @SpringBootTest with real application context",
+            "Use WebTestClient to call actual API endpoints",
+            "Use real database via Testcontainers or embedded database (H2/PostgreSQL)",
+            "Verify complete flow: Request -> Controller -> Service -> Repository -> Database -> Response",
+            "DO NOT mock any internal components"
+          ],
           "examples": [
-            "Unit tests - Test individual methods in isolation",
-            "Integration tests - Test API endpoints with database",
-            "Mock tests - Mock external 3rd party APIs (do not call real Stripe/Maps APIs in tests)"
+            "Test POST /api/entity creates record in real database",
+            "Test GET /api/entity/{id} retrieves from real database",
+            "Test business logic flows through real service layer"
+          ]
+        },
+        {
+          "type": "END_TO_END_TEST",
+          "description": "Full system tests that verify complete user scenarios",
+          "requirements": [
+            "Test complete user workflows across multiple endpoints",
+            "Verify state changes persist correctly in real database",
+            "Test reactive stream behavior with real data"
           ]
         }
-      ]
+      ],
+      "ONLY_ACCEPTABLE_MOCKING": {
+        "description": "The ONLY acceptable use of mocking is for EXTERNAL third-party APIs/services that are outside our application boundary",
+        "examples": [
+          "Mock Stripe API responses (payment processing)",
+          "Mock Google Maps API responses (geolocation)",
+          "Mock AWS S3 responses (file storage)",
+          "Mock SendGrid/Twilio responses (notifications)",
+          "Mock any external HTTP APIs outside our control"
+        ],
+        "FORBIDDEN_MOCKING": [
+          "DO NOT mock repositories or database queries",
+          "DO NOT mock internal services",
+          "DO NOT mock controllers",
+          "DO NOT mock internal reactive streams",
+          "DO NOT mock any component within our application boundary"
+        ]
+      }
     },
     "testFiles_REQUIRED": [
       {
         "path": "{{TEST_FILE_PATH_1}}",
-        "type": "{{TEST_TYPE}}",
+        "type": "INTEGRATION_TEST",
         "MUST_EXTEND": "{{BASE_TEST_CLASS}}",
-        "MUST_HAVE_ANNOTATIONS": ["{{ANNOTATION_1}}", "{{ANNOTATION_2}}"],
-        "MUST_INJECT": ["{{DEPENDENCY_1}}", "{{DEPENDENCY_2}}"],
+        "MUST_HAVE_ANNOTATIONS": ["@SpringBootTest", "@AutoConfigureWebTestClient", "{{ADDITIONAL_ANNOTATION}}"],
+        "MUST_INJECT": ["WebTestClient", "{{REPOSITORY_FOR_VERIFICATION}}", "{{ADDITIONAL_DEPENDENCY}}"],
+        "DATABASE_REQUIREMENTS": [
+          "Use @Testcontainers for PostgreSQL or appropriate database",
+          "OR use embedded database with same schema as production",
+          "Ensure database is clean before each test (@BeforeEach cleanup)",
+          "Verify database state after operations (query real database)"
+        ],
         "testScenarios_MINIMUM": [
-          "INSTRUCTION: List all test scenarios for this file. Be specific about:",
-          "- What is being tested",
-          "- Expected input",
-          "- Expected output",
-          "- Edge cases to cover",
+          "INSTRUCTION: List all test scenarios. Each test MUST:",
+          "- Call real API endpoint via WebTestClient",
+          "- Verify response status and body",
+          "- Verify database state changed correctly (query real database)",
+          "- Test complete reactive flow with real data",
           "Examples:",
-          "testMethodName_Scenario() - Description of what this test verifies"
+          "testCreateEntity_Success() - POST to real endpoint, verify 201, verify entity in database",
+          "testGetEntity_NotFound() - GET non-existent ID, verify 404 from real endpoint",
+          "testUpdateEntity_Success() - PUT to real endpoint, verify 200, verify database updated"
         ],
         "helperMethods": [
-          "INSTRUCTION: List helper methods needed for test setup/teardown",
+          "INSTRUCTION: List helper methods for test data setup in REAL database",
           "Examples:",
-          "private {{TYPE}} create{{Entity}}({{params}}) - helper to create test data",
-          "@BeforeEach public void setUp() - setup before each test",
-          "@AfterEach public void tearDown() - cleanup after each test"
+          "private {{TYPE}} insertTestData({{params}}) - insert real data into database",
+          "@BeforeEach public void setUp() - setup test data in real database",
+          "@AfterEach public void tearDown() - cleanup test data from real database",
+          "private void verifyDatabaseState() - query database to verify changes"
         ]
       }
     ],
     "testCoverage": {
-      "INSTRUCTION": "Specify what must be covered by tests",
+      "INSTRUCTION": "Specify what must be covered by integration/e2e tests with real database",
       "mustCover": [
-        "All happy path scenarios",
-        "All error scenarios (validation, not found, etc.)",
-        "All edge cases",
-        "All business rules",
-        "Mocking of external service responses (Success/Failure)",
+        "All API endpoints with real request-response flow",
+        "All database operations verified against real database",
+        "All happy path scenarios through complete application stack",
+        "All error scenarios (validation, not found, etc.) through real endpoints",
+        "All edge cases with real data in database",
+        "All business rules verified with real database state",
+        "Mocking of EXTERNAL third-party API responses only (Success/Failure)",
+        "Reactive stream behavior with real data",
         "{{ADDITIONAL_COVERAGE_REQUIREMENT}}"
       ]
     },
+    "ANTI_PATTERNS_TO_AVOID": [
+      "DO NOT create tests that mock repositories with Mockito",
+      "DO NOT create tests that mock services with @MockBean",
+      "DO NOT create tests that test controllers in isolation",
+      "DO NOT create tests that verify method calls on mocked dependencies",
+      "DO NOT use @Mock or @InjectMocks for internal components",
+      "DO NOT test business logic without going through real API endpoints"
+    ],
     "REFERENCE_EXAMPLES": {
-      "INSTRUCTION": "Provide paths to existing test files that can serve as examples",
+      "INSTRUCTION": "Provide paths to existing integration test files that can serve as examples",
       "examples": [
-        "{{EXAMPLE_TEST_PATH_1}}",
-        "{{EXAMPLE_TEST_PATH_2}}"
+        "{{EXAMPLE_INTEGRATION_TEST_PATH_1}}",
+        "{{EXAMPLE_INTEGRATION_TEST_PATH_2}}"
       ]
     }
   },
