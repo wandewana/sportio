@@ -4,8 +4,7 @@
       "document_name": "Sportio Backend System Design",
       "version": "1.0",
       "created_date": "2025-11-29",
-      "format": "AI-Agent Friendly JSON Specification",
-      "source_file": "SYSTEM_DESIGN.md"
+      "format": "AI-Agent Friendly JSON Specification"
     },
     "technology_stack": {
       "backend_framework": "Spring WebFlux (Reactive)",
