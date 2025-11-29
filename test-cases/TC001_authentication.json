@@ -1,0 +1,140 @@
+{
+  "module": "Authentication",
+  "description": "Test cases for user authentication including login and registration",
+  "test_cases": [
+    {
+      "id": "TC001-01",
+      "name": "Successful Login with Valid Credentials",
+      "priority": "High",
+      "preconditions": ["User account exists", "User is on login screen"],
+      "steps": [
+        "Enter valid email address in email field",
+        "Enter valid password in password field",
+        "Click 'Sign In' button"
+      ],
+      "expected_result": "User is redirected to Home screen showing nearby sessions",
+      "test_data": {
+        "email": "alex@sportio.com",
+        "password": "********"
+      }
+    },
+    {
+      "id": "TC001-02",
+      "name": "Login with Invalid Email Format",
+      "priority": "Medium",
+      "preconditions": ["User is on login screen"],
+      "steps": [
+        "Enter invalid email format (e.g., 'invalidemail')",
+        "Enter any password",
+        "Click 'Sign In' button"
+      ],
+      "expected_result": "Error message displayed indicating invalid email format"
+    },
+    {
+      "id": "TC001-03",
+      "name": "Login with Empty Credentials",
+      "priority": "High",
+      "preconditions": ["User is on login screen"],
+      "steps": [
+        "Leave email field empty",
+        "Leave password field empty",
+        "Click 'Sign In' button"
+      ],
+      "expected_result": "Validation error displayed for required fields"
+    },
+    {
+      "id": "TC001-04",
+      "name": "Login with Incorrect Password",
+      "priority": "High",
+      "preconditions": ["User account exists", "User is on login screen"],
+      "steps": [
+        "Enter valid registered email",
+        "Enter incorrect password",
+        "Click 'Sign In' button"
+      ],
+      "expected_result": "Error message displayed indicating incorrect credentials"
+    },
+    {
+      "id": "TC001-05",
+      "name": "Navigate to Registration from Login",
+      "priority": "Medium",
+      "preconditions": ["User is on login screen"],
+      "steps": [
+        "Click 'Create Account' link"
+      ],
+      "expected_result": "User is navigated to registration screen"
+    },
+    {
+      "id": "TC001-06",
+      "name": "Forgot Password Navigation",
+      "priority": "Medium",
+      "preconditions": ["User is on login screen"],
+      "steps": [
+        "Click 'Forgot Password?' link"
+      ],
+      "expected_result": "User is navigated to password recovery screen"
+    },
+    {
+      "id": "TC001-07",
+      "name": "Successful User Registration",
+      "priority": "High",
+      "preconditions": ["User is on registration screen"],
+      "steps": [
+        "Enter full name",
+        "Enter valid email address",
+        "Enter password meeting requirements",
+        "Enter matching confirm password",
+        "Click 'Sign Up' button"
+      ],
+      "expected_result": "Account created, user redirected to Home screen"
+    },
+    {
+      "id": "TC001-08",
+      "name": "Registration with Mismatched Passwords",
+      "priority": "High",
+      "preconditions": ["User is on registration screen"],
+      "steps": [
+        "Enter full name",
+        "Enter valid email",
+        "Enter password",
+        "Enter different password in confirm field",
+        "Click 'Sign Up' button"
+      ],
+      "expected_result": "Error message indicating passwords do not match"
+    },
+    {
+      "id": "TC001-09",
+      "name": "Registration with Existing Email",
+      "priority": "High",
+      "preconditions": ["User is on registration screen", "Email already registered"],
+      "steps": [
+        "Enter full name",
+        "Enter email that is already registered",
+        "Enter valid password and confirm",
+        "Click 'Sign Up' button"
+      ],
+      "expected_result": "Error message indicating email already exists"
+    },
+    {
+      "id": "TC001-10",
+      "name": "Navigate Back from Registration to Login",
+      "priority": "Low",
+      "preconditions": ["User is on registration screen"],
+      "steps": [
+        "Click '← Back' button"
+      ],
+      "expected_result": "User is navigated back to login screen"
+    },
+    {
+      "id": "TC001-11",
+      "name": "User Logout",
+      "priority": "High",
+      "preconditions": ["User is logged in", "User is on profile screen"],
+      "steps": [
+        "Click 'Log Out' button"
+      ],
+      "expected_result": "User session ended, redirected to login screen"
+    }
+  ]
+}
+

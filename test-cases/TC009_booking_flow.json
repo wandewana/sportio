@@ -1,0 +1,117 @@
+{
+  "module": "Booking Flow",
+  "description": "Test cases for time slot selection and booking confirmation",
+  "test_cases": [
+    {
+      "id": "TC009-01",
+      "name": "Display Booking Time Selection Screen",
+      "priority": "High",
+      "preconditions": ["User has selected a venue"],
+      "steps": [
+        "Navigate to Booking screen after venue selection"
+      ],
+      "expected_result": "Screen displays venue name, date, court info, and available time slots"
+    },
+    {
+      "id": "TC009-02",
+      "name": "Display Available Time Slots",
+      "priority": "High",
+      "preconditions": ["User is on Booking screen"],
+      "steps": [
+        "View time slot grid"
+      ],
+      "expected_result": "Available time slots displayed (17:00-18:00, 18:00-19:00, 19:00-20:00, 20:00-21:00, 21:00-22:00)"
+    },
+    {
+      "id": "TC009-03",
+      "name": "Default Time Slot Selected",
+      "priority": "Medium",
+      "preconditions": ["User is on Booking screen"],
+      "steps": [
+        "View pre-selected time slot"
+      ],
+      "expected_result": "19:00-20:00 slot is pre-selected (matching proposed session time)"
+    },
+    {
+      "id": "TC009-04",
+      "name": "Select Different Time Slot",
+      "priority": "High",
+      "preconditions": ["User is on Booking screen"],
+      "steps": [
+        "Click on a different time slot (e.g., '20:00 - 21:00')"
+      ],
+      "expected_result": "Selected slot highlighted, summary updates to reflect new time"
+    },
+    {
+      "id": "TC009-05",
+      "name": "Booking Summary Display",
+      "priority": "High",
+      "preconditions": ["User is on Booking screen"],
+      "steps": [
+        "View booking summary card"
+      ],
+      "expected_result": "Summary shows: sport type, time, venue name, total price, per-person breakdown"
+    },
+    {
+      "id": "TC009-06",
+      "name": "Total Price Calculation",
+      "priority": "High",
+      "preconditions": ["User is on Booking screen", "4 players, $8/person"],
+      "steps": [
+        "View total price"
+      ],
+      "expected_result": "Total price displays as $32 ($8 x 4 players)"
+    },
+    {
+      "id": "TC009-07",
+      "name": "Split Payment Option Default",
+      "priority": "High",
+      "preconditions": ["User is on Booking screen"],
+      "steps": [
+        "View split payment checkbox"
+      ],
+      "expected_result": "Split payment checkbox is checked by default"
+    },
+    {
+      "id": "TC009-08",
+      "name": "Toggle Split Payment Off",
+      "priority": "Medium",
+      "preconditions": ["User is on Booking screen"],
+      "steps": [
+        "Uncheck 'Split payment among players' checkbox"
+      ],
+      "expected_result": "Split payment disabled, full payment expected from host"
+    },
+    {
+      "id": "TC009-09",
+      "name": "Confirm and Lock Booking",
+      "priority": "High",
+      "preconditions": ["User is on Booking screen", "Time slot selected"],
+      "steps": [
+        "Click 'Confirm & Lock' button"
+      ],
+      "expected_result": "Booking confirmed, user navigated to Booking Confirmation screen"
+    },
+    {
+      "id": "TC009-10",
+      "name": "Navigate Back to Venue Selection",
+      "priority": "Medium",
+      "preconditions": ["User is on Booking screen"],
+      "steps": [
+        "Click 'Back' button"
+      ],
+      "expected_result": "User navigated back to Venue Suggestions screen"
+    },
+    {
+      "id": "TC009-11",
+      "name": "Unavailable Time Slot",
+      "priority": "Medium",
+      "preconditions": ["User is on Booking screen", "Some slots unavailable"],
+      "steps": [
+        "View unavailable time slots"
+      ],
+      "expected_result": "Unavailable slots visually disabled or marked as booked"
+    }
+  ]
+}
+

@@ -1,0 +1,137 @@
+{
+  "module": "Session Detail",
+  "description": "Test cases for viewing and interacting with session details",
+  "test_cases": [
+    {
+      "id": "TC006-01",
+      "name": "Display Session Detail Information",
+      "priority": "High",
+      "preconditions": ["Session exists", "User navigates to session detail"],
+      "steps": [
+        "Navigate to Session Detail screen"
+      ],
+      "expected_result": "Screen displays: sport type, time, players needed, visibility (public/private), host info"
+    },
+    {
+      "id": "TC006-02",
+      "name": "Display Host Information",
+      "priority": "High",
+      "preconditions": ["User is on Session Detail screen"],
+      "steps": [
+        "View host section"
+      ],
+      "expected_result": "Host name displayed with label 'Host'"
+    },
+    {
+      "id": "TC006-03",
+      "name": "Display Joined Players Avatars",
+      "priority": "High",
+      "preconditions": ["User is on Session Detail", "Players have joined"],
+      "steps": [
+        "View players row section"
+      ],
+      "expected_result": "Avatars of joined players displayed (e.g., AL, MK, SJ)"
+    },
+    {
+      "id": "TC006-04",
+      "name": "Display Session Status",
+      "priority": "High",
+      "preconditions": ["User is on Session Detail screen"],
+      "steps": [
+        "View status card"
+      ],
+      "expected_result": "Status shows 'Pending' with joined count (e.g., '2/4 joined')"
+    },
+    {
+      "id": "TC006-05",
+      "name": "Display Session Description",
+      "priority": "Medium",
+      "preconditions": ["User is on Session Detail screen"],
+      "steps": [
+        "View description section"
+      ],
+      "expected_result": "Session description text displayed (e.g., 'Friendly game. Bring your own shuttlecocks...')"
+    },
+    {
+      "id": "TC006-06",
+      "name": "Join Session",
+      "priority": "High",
+      "preconditions": ["User is on Session Detail", "User has not joined", "Spots available"],
+      "steps": [
+        "Click 'Join' button"
+      ],
+      "expected_result": "User navigated to Player Join confirmation screen"
+    },
+    {
+      "id": "TC006-07",
+      "name": "Maybe Interest Button",
+      "priority": "Medium",
+      "preconditions": ["User is on Session Detail"],
+      "steps": [
+        "Click 'Maybe' button"
+      ],
+      "expected_result": "User can express tentative interest, navigated to propose or interest tracking"
+    },
+    {
+      "id": "TC006-08",
+      "name": "Report Session/User",
+      "priority": "Medium",
+      "preconditions": ["User is on Session Detail"],
+      "steps": [
+        "Click 'Report' button"
+      ],
+      "expected_result": "User navigated to Report screen"
+    },
+    {
+      "id": "TC006-09",
+      "name": "Open Session Chat",
+      "priority": "High",
+      "preconditions": ["User is on Session Detail"],
+      "steps": [
+        "Click 'Chat' button"
+      ],
+      "expected_result": "User navigated to Session Chat screen"
+    },
+    {
+      "id": "TC006-10",
+      "name": "Back to Lobby",
+      "priority": "Medium",
+      "preconditions": ["User is on Session Detail"],
+      "steps": [
+        "Click 'Back to lobby' button"
+      ],
+      "expected_result": "User navigated to Session Lobby screen"
+    },
+    {
+      "id": "TC006-11",
+      "name": "Suggest Venue and Book (Host)",
+      "priority": "High",
+      "preconditions": ["User is host on Session Detail"],
+      "steps": [
+        "Click 'Suggest venue & Book' button"
+      ],
+      "expected_result": "User navigated to Venue Suggestions screen"
+    },
+    {
+      "id": "TC006-12",
+      "name": "Navigate Back to Home",
+      "priority": "Low",
+      "preconditions": ["User is on Session Detail"],
+      "steps": [
+        "Click '←' back button"
+      ],
+      "expected_result": "User navigated to Home screen"
+    },
+    {
+      "id": "TC006-13",
+      "name": "Join Session When Full",
+      "priority": "High",
+      "preconditions": ["User is on Session Detail", "Session is full"],
+      "steps": [
+        "Attempt to join session"
+      ],
+      "expected_result": "Join button disabled or error message indicating session is full"
+    }
+  ]
+}
+

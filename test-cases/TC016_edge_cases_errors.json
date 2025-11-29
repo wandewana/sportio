@@ -1,0 +1,167 @@
+{
+  "module": "Edge Cases and Error Scenarios",
+  "description": "Test cases for edge cases, error handling, and boundary conditions",
+  "test_cases": [
+    {
+      "id": "TC016-01",
+      "name": "Session Full - Cannot Join",
+      "priority": "High",
+      "preconditions": ["Session exists", "All spots filled"],
+      "steps": [
+        "Navigate to full session detail",
+        "Attempt to join"
+      ],
+      "expected_result": "Join button disabled or error message shown"
+    },
+    {
+      "id": "TC016-02",
+      "name": "Session Cancelled After Join",
+      "priority": "High",
+      "preconditions": ["User has joined a session", "Host cancels session"],
+      "steps": [
+        "Host cancels session",
+        "View notification",
+        "Navigate to session"
+      ],
+      "expected_result": "User notified of cancellation, session shows cancelled status"
+    },
+    {
+      "id": "TC016-03",
+      "name": "Network Disconnection During Booking",
+      "priority": "High",
+      "preconditions": ["User is completing booking", "Network disconnects"],
+      "steps": [
+        "Start booking process",
+        "Lose network connection mid-process",
+        "Click confirm"
+      ],
+      "expected_result": "Error message displayed, booking not partially completed"
+    },
+    {
+      "id": "TC016-04",
+      "name": "Venue Becomes Unavailable During Selection",
+      "priority": "High",
+      "preconditions": ["User is selecting time slot", "Slot becomes booked"],
+      "steps": [
+        "View available slots",
+        "Another user books the slot",
+        "Click to select now-unavailable slot"
+      ],
+      "expected_result": "Error message, slot marked unavailable, refresh options shown"
+    },
+    {
+      "id": "TC016-05",
+      "name": "Double Join Prevention",
+      "priority": "High",
+      "preconditions": ["User has already joined a session"],
+      "steps": [
+        "Navigate to same session",
+        "Attempt to join again"
+      ],
+      "expected_result": "Message indicates already joined, or Leave option shown instead"
+    },
+    {
+      "id": "TC016-06",
+      "name": "Location Services Disabled",
+      "priority": "High",
+      "preconditions": ["User has location services disabled"],
+      "steps": [
+        "Navigate to Home screen",
+        "View session discovery"
+      ],
+      "expected_result": "Prompt to enable location, or show all sessions without distance"
+    },
+    {
+      "id": "TC016-07",
+      "name": "No Sessions Within Radius",
+      "priority": "Medium",
+      "preconditions": ["User in area with no sessions"],
+      "steps": [
+        "Navigate to Home screen"
+      ],
+      "expected_result": "Empty state message encouraging user to propose session"
+    },
+    {
+      "id": "TC016-08",
+      "name": "Session Time Passed",
+      "priority": "High",
+      "preconditions": ["Session time has passed", "User tries to view"],
+      "steps": [
+        "Navigate to expired session"
+      ],
+      "expected_result": "Session marked as past/completed, join disabled"
+    },
+    {
+      "id": "TC016-09",
+      "name": "Payment Timeout",
+      "priority": "High",
+      "preconditions": ["User has pending payment", "Payment deadline passes"],
+      "steps": [
+        "Wait for payment deadline to expire"
+      ],
+      "expected_result": "User removed from session or notified of spot release"
+    },
+    {
+      "id": "TC016-10",
+      "name": "Host Leaves Own Session",
+      "priority": "High",
+      "preconditions": ["User is host of a session"],
+      "steps": [
+        "Attempt to leave own session"
+      ],
+      "expected_result": "Warning about session cancellation or host transfer required"
+    },
+    {
+      "id": "TC016-11",
+      "name": "Maximum Players Exceeded",
+      "priority": "Medium",
+      "preconditions": ["Session at max capacity"],
+      "steps": [
+        "Attempt to add more players via invite"
+      ],
+      "expected_result": "Error message indicating maximum reached"
+    },
+    {
+      "id": "TC016-12",
+      "name": "Special Characters in Chat",
+      "priority": "Medium",
+      "preconditions": ["User is in chat"],
+      "steps": [
+        "Send message with special characters and emojis"
+      ],
+      "expected_result": "Message displays correctly with all characters preserved"
+    },
+    {
+      "id": "TC016-13",
+      "name": "Session Search with No Results",
+      "priority": "Medium",
+      "preconditions": ["User is on Home screen"],
+      "steps": [
+        "Search for 'xyz123nonexistent'"
+      ],
+      "expected_result": "Empty results with helpful message"
+    },
+    {
+      "id": "TC016-14",
+      "name": "Concurrent Booking Conflict",
+      "priority": "Critical",
+      "preconditions": ["Two hosts try to book same slot"],
+      "steps": [
+        "Both hosts select same venue and time",
+        "Both click confirm simultaneously"
+      ],
+      "expected_result": "One booking succeeds, other receives conflict error"
+    },
+    {
+      "id": "TC016-15",
+      "name": "Session Token Expiry",
+      "priority": "High",
+      "preconditions": ["User session token expired"],
+      "steps": [
+        "Perform any authenticated action"
+      ],
+      "expected_result": "User redirected to login with appropriate message"
+    }
+  ]
+}
+

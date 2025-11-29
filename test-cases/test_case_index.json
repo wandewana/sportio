@@ -1,0 +1,119 @@
+{
+  "project": "Sportio Mobile App",
+  "version": "1.0",
+  "created_date": "2025-11-29",
+  "description": "Comprehensive test case suite for Sportio player-first sports session booking application",
+  "total_test_case_files": 17,
+  "test_modules": [
+    {
+      "file": "TC001_authentication.json",
+      "module": "Authentication",
+      "test_count": 11,
+      "coverage": ["Login", "Registration", "Logout", "Password Recovery"]
+    },
+    {
+      "file": "TC002_home_discovery.json",
+      "module": "Home and Session Discovery",
+      "test_count": 13,
+      "coverage": ["Session listing", "Search", "Filters", "Navigation"]
+    },
+    {
+      "file": "TC003_map_view.json",
+      "module": "Map View",
+      "test_count": 11,
+      "coverage": ["Map display", "Session pins", "Sport filters", "Navigation"]
+    },
+    {
+      "file": "TC004_propose_session.json",
+      "module": "Propose Session",
+      "test_count": 15,
+      "coverage": ["Sport selection", "Time selection", "Player count", "Session creation"]
+    },
+    {
+      "file": "TC005_session_lobby.json",
+      "module": "Session Lobby",
+      "test_count": 10,
+      "coverage": ["Player waiting", "Auto-match", "Invite", "Lock & Book"]
+    },
+    {
+      "file": "TC006_session_detail.json",
+      "module": "Session Detail",
+      "test_count": 13,
+      "coverage": ["Session info", "Join session", "Host actions", "Chat access"]
+    },
+    {
+      "file": "TC007_player_join.json",
+      "module": "Player Join Confirmation",
+      "test_count": 6,
+      "coverage": ["Join confirmation", "Status display", "Navigation"]
+    },
+    {
+      "file": "TC008_venue_selection.json",
+      "module": "Venue Selection",
+      "test_count": 10,
+      "coverage": ["Venue listing", "Venue details", "Selection", "Pricing"]
+    },
+    {
+      "file": "TC009_booking_flow.json",
+      "module": "Booking Flow",
+      "test_count": 11,
+      "coverage": ["Time slots", "Price calculation", "Split payment", "Confirmation"]
+    },
+    {
+      "file": "TC010_booking_confirmation.json",
+      "module": "Booking Confirmation",
+      "test_count": 9,
+      "coverage": ["Confirmation display", "Payment tracking", "Request payment"]
+    },
+    {
+      "file": "TC011_chat.json",
+      "module": "Session Chat",
+      "test_count": 10,
+      "coverage": ["Message display", "Send message", "Real-time updates"]
+    },
+    {
+      "file": "TC012_profile.json",
+      "module": "User Profile",
+      "test_count": 10,
+      "coverage": ["Profile display", "Statistics", "Edit profile", "Logout"]
+    },
+    {
+      "file": "TC013_notifications.json",
+      "module": "Notifications",
+      "test_count": 10,
+      "coverage": ["Payment reminders", "Slot opened", "Notification actions"]
+    },
+    {
+      "file": "TC014_report.json",
+      "module": "Report Session/User",
+      "test_count": 10,
+      "coverage": ["Report reasons", "Submit report", "Cancel"]
+    },
+    {
+      "file": "TC015_e2e_user_journeys.json",
+      "module": "End-to-End User Journeys",
+      "test_count": 8,
+      "coverage": ["Full user flows", "Multi-step journeys", "Integration scenarios"]
+    },
+    {
+      "file": "TC016_edge_cases_errors.json",
+      "module": "Edge Cases and Error Scenarios",
+      "test_count": 15,
+      "coverage": ["Error handling", "Boundary conditions", "Concurrent actions", "Network issues"]
+    },
+    {
+      "file": "TC017_navigation_flow.json",
+      "module": "Navigation and Screen Flow",
+      "test_count": 13,
+      "coverage": ["Back button", "Screen transitions", "Deep links"]
+    }
+  ],
+  "priority_summary": {
+    "critical": 4,
+    "high": 87,
+    "medium": 58,
+    "low": 16
+  },
+  "total_test_cases": 165
+}
+

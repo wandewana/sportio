@@ -1,0 +1,117 @@
+{
+  "module": "Map View",
+  "description": "Test cases for interactive map view and session location features",
+  "test_cases": [
+    {
+      "id": "TC003-01",
+      "name": "Display Map with Session Pins",
+      "priority": "High",
+      "preconditions": ["User is logged in", "Location enabled"],
+      "steps": [
+        "Navigate to Map View from Home screen"
+      ],
+      "expected_result": "Interactive map displays with session pins at their respective locations"
+    },
+    {
+      "id": "TC003-02",
+      "name": "Session Pin Displays Sport Icon",
+      "priority": "Medium",
+      "preconditions": ["User is on Map View"],
+      "steps": [
+        "View session pins on map"
+      ],
+      "expected_result": "Each pin displays the sport icon (🏸 badminton, ⚽ futsal, 🎾 tennis)"
+    },
+    {
+      "id": "TC003-03",
+      "name": "Click Session Pin to View Details",
+      "priority": "High",
+      "preconditions": ["User is on Map View", "Session pins visible"],
+      "steps": [
+        "Click on a session pin"
+      ],
+      "expected_result": "User navigated to session detail screen for that session"
+    },
+    {
+      "id": "TC003-04",
+      "name": "Filter Map by All Sports",
+      "priority": "Medium",
+      "preconditions": ["User is on Map View"],
+      "steps": [
+        "Click 'All Sports' filter pill"
+      ],
+      "expected_result": "Map shows pins for all sports sessions"
+    },
+    {
+      "id": "TC003-05",
+      "name": "Filter Map by Badminton",
+      "priority": "Medium",
+      "preconditions": ["User is on Map View"],
+      "steps": [
+        "Click 'Badminton' filter pill"
+      ],
+      "expected_result": "Map shows only badminton session pins"
+    },
+    {
+      "id": "TC003-06",
+      "name": "Filter Map by Futsal",
+      "priority": "Medium",
+      "preconditions": ["User is on Map View"],
+      "steps": [
+        "Click 'Futsal' filter pill"
+      ],
+      "expected_result": "Map shows only futsal session pins"
+    },
+    {
+      "id": "TC003-07",
+      "name": "Filter Map by Tennis",
+      "priority": "Medium",
+      "preconditions": ["User is on Map View"],
+      "steps": [
+        "Click 'Tennis' filter pill"
+      ],
+      "expected_result": "Map shows only tennis session pins"
+    },
+    {
+      "id": "TC003-08",
+      "name": "Switch to List View from Map",
+      "priority": "Medium",
+      "preconditions": ["User is on Map View"],
+      "steps": [
+        "Click 'List View' button"
+      ],
+      "expected_result": "User navigated back to Home screen with list view"
+    },
+    {
+      "id": "TC003-09",
+      "name": "Propose Session from Map View",
+      "priority": "Medium",
+      "preconditions": ["User is on Map View"],
+      "steps": [
+        "Click 'Propose Session' button"
+      ],
+      "expected_result": "User navigated to Propose Session screen"
+    },
+    {
+      "id": "TC003-10",
+      "name": "Navigate to Notifications from Map",
+      "priority": "Low",
+      "preconditions": ["User is on Map View"],
+      "steps": [
+        "Click notification bell icon"
+      ],
+      "expected_result": "User navigated to Notifications screen"
+    },
+    {
+      "id": "TC003-11",
+      "name": "Navigate to Profile from Map",
+      "priority": "Low",
+      "preconditions": ["User is on Map View"],
+      "steps": [
+        "Click profile icon"
+      ],
+      "expected_result": "User navigated to Profile screen"
+    }
+  ]
+}
+

@@ -1,0 +1,133 @@
+{
+  "module": "End-to-End User Journeys",
+  "description": "Complete user journey test cases covering full application workflows",
+  "test_cases": [
+    {
+      "id": "TC015-01",
+      "name": "E2E: New User Registration to First Session Join",
+      "priority": "Critical",
+      "preconditions": ["User has app installed", "No existing account"],
+      "steps": [
+        "Open app to login screen",
+        "Click 'Create Account'",
+        "Fill registration form with valid data",
+        "Click 'Sign Up'",
+        "Browse nearby sessions on Home screen",
+        "Click 'Join' on available session",
+        "Confirm join on Session Detail",
+        "View join confirmation"
+      ],
+      "expected_result": "New user successfully registered and joined first session"
+    },
+    {
+      "id": "TC015-02",
+      "name": "E2E: Host Creates Session and Books Venue",
+      "priority": "Critical",
+      "preconditions": ["User is logged in"],
+      "steps": [
+        "Navigate to Home screen",
+        "Click 'Propose Session'",
+        "Select sport (Badminton)",
+        "Select date/time",
+        "Select players needed (4)",
+        "Click 'Propose & Find Players'",
+        "Wait for players to join in Session Lobby",
+        "Click 'Lock & Book (when ready)'",
+        "Select venue (BlueCourt)",
+        "Select time slot (19:00-20:00)",
+        "Click 'Confirm & Lock'",
+        "View booking confirmation"
+      ],
+      "expected_result": "Session created, players joined, venue booked, confirmation displayed"
+    },
+    {
+      "id": "TC015-03",
+      "name": "E2E: Player Discovers and Joins Session via Map",
+      "priority": "High",
+      "preconditions": ["User is logged in", "Sessions exist nearby"],
+      "steps": [
+        "Navigate to Home screen",
+        "Click map icon to open Map View",
+        "Click on session pin",
+        "View Session Detail",
+        "Click 'Join'",
+        "View confirmation",
+        "Open session chat"
+      ],
+      "expected_result": "Player successfully joined session via map discovery"
+    },
+    {
+      "id": "TC015-04",
+      "name": "E2E: Complete Payment Flow",
+      "priority": "Critical",
+      "preconditions": ["Session booked", "User is joined player"],
+      "steps": [
+        "Receive booking notification",
+        "Navigate to Notifications",
+        "View payment reminder",
+        "Complete payment",
+        "Payment status updates"
+      ],
+      "expected_result": "Player payment processed, status updated to paid"
+    },
+    {
+      "id": "TC015-05",
+      "name": "E2E: Session Communication Flow",
+      "priority": "High",
+      "preconditions": ["User has joined a session"],
+      "steps": [
+        "Navigate to joined session",
+        "Open session chat",
+        "Send message",
+        "Receive reply from another player",
+        "Continue conversation"
+      ],
+      "expected_result": "Real-time communication working between session participants"
+    },
+    {
+      "id": "TC015-06",
+      "name": "E2E: Report and Block User",
+      "priority": "High",
+      "preconditions": ["User is in a session", "Issue with another player"],
+      "steps": [
+        "Navigate to Session Detail",
+        "Click 'Report'",
+        "Select reason (No-show)",
+        "Add details",
+        "Submit report"
+      ],
+      "expected_result": "Report submitted for review"
+    },
+    {
+      "id": "TC015-07",
+      "name": "E2E: Search and Filter Sessions",
+      "priority": "High",
+      "preconditions": ["User is logged in", "Multiple sessions available"],
+      "steps": [
+        "Navigate to Home screen",
+        "Enter 'badminton' in search",
+        "View filtered results",
+        "Switch to Map View",
+        "Apply 'Badminton' filter",
+        "View filtered pins"
+      ],
+      "expected_result": "Sessions filtered correctly in both list and map views"
+    },
+    {
+      "id": "TC015-08",
+      "name": "E2E: Profile Update and Logout",
+      "priority": "Medium",
+      "preconditions": ["User is logged in"],
+      "steps": [
+        "Navigate to Profile",
+        "Click 'Edit profile'",
+        "Update profile information",
+        "Click 'Save'",
+        "Click 'Log Out'",
+        "Verify redirected to login"
+      ],
+      "expected_result": "Profile updated and user logged out successfully"
+    }
+  ]
+}
+

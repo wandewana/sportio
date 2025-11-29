@@ -1,0 +1,110 @@
+{
+  "module": "Report Session/User",
+  "description": "Test cases for reporting sessions or users for safety",
+  "test_cases": [
+    {
+      "id": "TC014-01",
+      "name": "Display Report Screen",
+      "priority": "High",
+      "preconditions": ["User navigates to Report from Session Detail"],
+      "steps": [
+        "Click 'Report' button on Session Detail"
+      ],
+      "expected_result": "Report screen displays with header 'Report session / user' and 'Help us keep Sportio safe'"
+    },
+    {
+      "id": "TC014-02",
+      "name": "Display Report Reasons",
+      "priority": "High",
+      "preconditions": ["User is on Report screen"],
+      "steps": [
+        "View report reason options"
+      ],
+      "expected_result": "Three reasons displayed: 'Inappropriate behavior', 'No-show', 'Spam'"
+    },
+    {
+      "id": "TC014-03",
+      "name": "Select Report Reason - Inappropriate Behavior",
+      "priority": "High",
+      "preconditions": ["User is on Report screen"],
+      "steps": [
+        "Click 'Inappropriate behavior' option"
+      ],
+      "expected_result": "Option selected and highlighted"
+    },
+    {
+      "id": "TC014-04",
+      "name": "Select Report Reason - No-show",
+      "priority": "High",
+      "preconditions": ["User is on Report screen"],
+      "steps": [
+        "Click 'No-show' option"
+      ],
+      "expected_result": "Option selected and highlighted"
+    },
+    {
+      "id": "TC014-05",
+      "name": "Select Report Reason - Spam",
+      "priority": "High",
+      "preconditions": ["User is on Report screen"],
+      "steps": [
+        "Click 'Spam' option"
+      ],
+      "expected_result": "Option selected and highlighted"
+    },
+    {
+      "id": "TC014-06",
+      "name": "Enter Additional Details",
+      "priority": "Medium",
+      "preconditions": ["User is on Report screen"],
+      "steps": [
+        "Type additional details in textarea"
+      ],
+      "expected_result": "Text entered in details textarea"
+    },
+    {
+      "id": "TC014-07",
+      "name": "Submit Report Successfully",
+      "priority": "High",
+      "preconditions": ["User is on Report screen", "Reason selected"],
+      "steps": [
+        "Select a reason",
+        "Optionally add details",
+        "Click 'Submit' button"
+      ],
+      "expected_result": "Report submitted, confirmation displayed, user navigated away"
+    },
+    {
+      "id": "TC014-08",
+      "name": "Submit Report Without Reason",
+      "priority": "High",
+      "preconditions": ["User is on Report screen"],
+      "steps": [
+        "Leave reason unselected",
+        "Click 'Submit' button"
+      ],
+      "expected_result": "Validation error indicating reason is required"
+    },
+    {
+      "id": "TC014-09",
+      "name": "Cancel Report",
+      "priority": "Medium",
+      "preconditions": ["User is on Report screen"],
+      "steps": [
+        "Click 'Cancel' button"
+      ],
+      "expected_result": "User navigated back to Session Detail without submitting report"
+    },
+    {
+      "id": "TC014-10",
+      "name": "Navigate Back to Session Detail",
+      "priority": "Low",
+      "preconditions": ["User is on Report screen"],
+      "steps": [
+        "Click '←' back button"
+      ],
+      "expected_result": "User navigated back to Session Detail screen"
+    }
+  ]
+}
+

@@ -1,0 +1,140 @@
+{
+  "module": "Home and Session Discovery",
+  "description": "Test cases for home screen functionality and session discovery features",
+  "test_cases": [
+    {
+      "id": "TC002-01",
+      "name": "Display Nearby Sessions on Home Screen",
+      "priority": "High",
+      "preconditions": ["User is logged in", "Location services enabled"],
+      "steps": [
+        "Navigate to Home screen"
+      ],
+      "expected_result": "Home screen displays nearby sessions with location indicator showing radius (e.g., 2 km radius) and result count"
+    },
+    {
+      "id": "TC002-02",
+      "name": "Session Card Display Validation",
+      "priority": "High",
+      "preconditions": ["User is on Home screen", "Sessions available nearby"],
+      "steps": [
+        "View session cards in the list"
+      ],
+      "expected_result": "Each session card displays: sport icon, title, spots available, date/time, player count, skill level pill, venue type pill, distance"
+    },
+    {
+      "id": "TC002-03",
+      "name": "Search Sessions by Keyword",
+      "priority": "High",
+      "preconditions": ["User is on Home screen"],
+      "steps": [
+        "Click on search field",
+        "Enter search term (e.g., 'badminton')",
+        "View results"
+      ],
+      "expected_result": "Session list filtered to show only matching sessions"
+    },
+    {
+      "id": "TC002-04",
+      "name": "Search Sessions by Player Name",
+      "priority": "Medium",
+      "preconditions": ["User is on Home screen"],
+      "steps": [
+        "Enter player name in search field"
+      ],
+      "expected_result": "Sessions hosted by or including that player are displayed"
+    },
+    {
+      "id": "TC002-05",
+      "name": "Search with No Results",
+      "priority": "Medium",
+      "preconditions": ["User is on Home screen"],
+      "steps": [
+        "Enter search term with no matching sessions"
+      ],
+      "expected_result": "Empty state message displayed indicating no sessions found"
+    },
+    {
+      "id": "TC002-06",
+      "name": "Join Session from Home Screen",
+      "priority": "High",
+      "preconditions": ["User is on Home screen", "Session has available spots"],
+      "steps": [
+        "Find session with 'Join' button",
+        "Click 'Join' button"
+      ],
+      "expected_result": "User navigated to session detail screen"
+    },
+    {
+      "id": "TC002-07",
+      "name": "View Session Details from Home",
+      "priority": "High",
+      "preconditions": ["User is on Home screen"],
+      "steps": [
+        "Click 'View' button on a session card"
+      ],
+      "expected_result": "User navigated to session detail screen"
+    },
+    {
+      "id": "TC002-08",
+      "name": "Express Interest - I'll Play",
+      "priority": "Medium",
+      "preconditions": ["User is on Home screen", "Session seeking partner visible"],
+      "steps": [
+        "Click 'I'll Play' button on session card"
+      ],
+      "expected_result": "User navigated to propose session or join flow"
+    },
+    {
+      "id": "TC002-09",
+      "name": "Navigate to Propose Session",
+      "priority": "High",
+      "preconditions": ["User is on Home screen"],
+      "steps": [
+        "Click 'Propose Session' button"
+      ],
+      "expected_result": "User navigated to Propose Session screen"
+    },
+    {
+      "id": "TC002-10",
+      "name": "Navigate to Map View",
+      "priority": "Medium",
+      "preconditions": ["User is on Home screen"],
+      "steps": [
+        "Click map icon button"
+      ],
+      "expected_result": "User navigated to Map View screen showing sessions on map"
+    },
+    {
+      "id": "TC002-11",
+      "name": "Navigate to Notifications",
+      "priority": "Medium",
+      "preconditions": ["User is on Home screen"],
+      "steps": [
+        "Click notification bell icon"
+      ],
+      "expected_result": "User navigated to Notifications screen"
+    },
+    {
+      "id": "TC002-12",
+      "name": "Navigate to Profile",
+      "priority": "Medium",
+      "preconditions": ["User is on Home screen"],
+      "steps": [
+        "Click profile icon"
+      ],
+      "expected_result": "User navigated to Profile screen"
+    },
+    {
+      "id": "TC002-13",
+      "name": "Sessions Display Distance Correctly",
+      "priority": "Medium",
+      "preconditions": ["User is on Home screen", "Location enabled"],
+      "steps": [
+        "View session cards"
+      ],
+      "expected_result": "Each session shows accurate distance from user (e.g., 0.55 km, 1.2 km)"
+    }
+  ]
+}
+

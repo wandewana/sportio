@@ -1,0 +1,107 @@
+{
+  "module": "Session Lobby (Wait)",
+  "description": "Test cases for session lobby where host waits for players to join",
+  "test_cases": [
+    {
+      "id": "TC005-01",
+      "name": "Display Session Lobby After Proposing",
+      "priority": "High",
+      "preconditions": ["User has proposed a session"],
+      "steps": [
+        "Complete propose session flow"
+      ],
+      "expected_result": "Session Lobby screen displays with session name, time, and player count (0 of X joined)"
+    },
+    {
+      "id": "TC005-02",
+      "name": "Display Host Information",
+      "priority": "High",
+      "preconditions": ["User is on Session Lobby"],
+      "steps": [
+        "View host card section"
+      ],
+      "expected_result": "Host card displays avatar, name, skill level, and games played"
+    },
+    {
+      "id": "TC005-03",
+      "name": "Invite Players Button",
+      "priority": "High",
+      "preconditions": ["User is on Session Lobby as host"],
+      "steps": [
+        "Click 'Invite' button"
+      ],
+      "expected_result": "Invite modal or screen opens allowing host to invite players"
+    },
+    {
+      "id": "TC005-04",
+      "name": "Auto-Match Information Display",
+      "priority": "Medium",
+      "preconditions": ["User is on Session Lobby"],
+      "steps": [
+        "View auto-match information text"
+      ],
+      "expected_result": "Auto-match description displayed: 'Sportio will recommend players nearby who are free during this time'"
+    },
+    {
+      "id": "TC005-05",
+      "name": "Player Joins Session - Counter Updates",
+      "priority": "High",
+      "preconditions": ["User is on Session Lobby", "Another player joins"],
+      "steps": [
+        "Wait for player to join session"
+      ],
+      "expected_result": "Player count updates (e.g., '1 of 4 players joined')"
+    },
+    {
+      "id": "TC005-06",
+      "name": "Join Session as Player",
+      "priority": "High",
+      "preconditions": ["User is viewing Session Lobby", "User is not the host"],
+      "steps": [
+        "Click 'I'm joining' button"
+      ],
+      "expected_result": "User added to session, navigated to session detail"
+    },
+    {
+      "id": "TC005-07",
+      "name": "View Session Details from Lobby",
+      "priority": "Medium",
+      "preconditions": ["User is on Session Lobby"],
+      "steps": [
+        "Click 'View session' button"
+      ],
+      "expected_result": "User navigated to Session Detail screen"
+    },
+    {
+      "id": "TC005-08",
+      "name": "Lock and Book When Ready",
+      "priority": "High",
+      "preconditions": ["User is host on Session Lobby", "Minimum players joined"],
+      "steps": [
+        "Click 'Lock & Book (when ready)' button"
+      ],
+      "expected_result": "User navigated to Venue Suggestions screen"
+    },
+    {
+      "id": "TC005-09",
+      "name": "Lock and Book Button Disabled When Insufficient Players",
+      "priority": "High",
+      "preconditions": ["User is host on Session Lobby", "Minimum players NOT reached"],
+      "steps": [
+        "View 'Lock & Book' button state"
+      ],
+      "expected_result": "Button is disabled or shows message about minimum players required"
+    },
+    {
+      "id": "TC005-10",
+      "name": "Navigate Back to Home from Lobby",
+      "priority": "Medium",
+      "preconditions": ["User is on Session Lobby"],
+      "steps": [
+        "Click '←' back button"
+      ],
+      "expected_result": "User navigated to Home screen"
+    }
+  ]
+}
+

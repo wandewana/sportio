@@ -1,0 +1,107 @@
+{
+  "module": "Notifications",
+  "description": "Test cases for notification center and alerts",
+  "test_cases": [
+    {
+      "id": "TC013-01",
+      "name": "Display Notifications Screen",
+      "priority": "High",
+      "preconditions": ["User is logged in"],
+      "steps": [
+        "Navigate to Notifications screen"
+      ],
+      "expected_result": "Notifications screen displays with header 'Notifications' and 'Important updates' subtitle"
+    },
+    {
+      "id": "TC013-02",
+      "name": "Display Payment Reminder Notification",
+      "priority": "High",
+      "preconditions": ["User is on Notifications screen", "Payment reminders exist"],
+      "steps": [
+        "View payment reminder notification"
+      ],
+      "expected_result": "Payment reminder card shows title and details (e.g., '2 players still need to pay for Badminton 19:00')"
+    },
+    {
+      "id": "TC013-03",
+      "name": "Display Slot Opened Notification",
+      "priority": "High",
+      "preconditions": ["User is on Notifications screen", "Slot opened nearby"],
+      "steps": [
+        "View slot opened notification"
+      ],
+      "expected_result": "Notification shows venue, time, and distance (e.g., 'A slot opened at BlueCourt 20:00 — 0.8 km away')"
+    },
+    {
+      "id": "TC013-04",
+      "name": "Empty Notifications State",
+      "priority": "Medium",
+      "preconditions": ["User is on Notifications screen", "No notifications"],
+      "steps": [
+        "View notifications when empty"
+      ],
+      "expected_result": "Empty state message displayed indicating no new notifications"
+    },
+    {
+      "id": "TC013-05",
+      "name": "Click Payment Reminder Notification",
+      "priority": "Medium",
+      "preconditions": ["User is on Notifications screen", "Payment reminder visible"],
+      "steps": [
+        "Click on payment reminder notification"
+      ],
+      "expected_result": "User navigated to relevant booking or payment screen"
+    },
+    {
+      "id": "TC013-06",
+      "name": "Click Slot Opened Notification",
+      "priority": "Medium",
+      "preconditions": ["User is on Notifications screen", "Slot notification visible"],
+      "steps": [
+        "Click on slot opened notification"
+      ],
+      "expected_result": "User navigated to session or venue details"
+    },
+    {
+      "id": "TC013-07",
+      "name": "Navigate Back to Home",
+      "priority": "Low",
+      "preconditions": ["User is on Notifications screen"],
+      "steps": [
+        "Click '←' back button"
+      ],
+      "expected_result": "User navigated back to Home screen"
+    },
+    {
+      "id": "TC013-08",
+      "name": "Notification List Ordering",
+      "priority": "Medium",
+      "preconditions": ["User is on Notifications screen", "Multiple notifications"],
+      "steps": [
+        "View notification order"
+      ],
+      "expected_result": "Notifications displayed in reverse chronological order (newest first)"
+    },
+    {
+      "id": "TC013-09",
+      "name": "Receive New Notification",
+      "priority": "High",
+      "preconditions": ["User is logged in", "Action triggers notification"],
+      "steps": [
+        "Trigger notification-worthy event (e.g., player joins session)"
+      ],
+      "expected_result": "New notification appears in Notifications screen"
+    },
+    {
+      "id": "TC013-10",
+      "name": "Notification Badge on Home",
+      "priority": "Medium",
+      "preconditions": ["User is on Home screen", "Unread notifications exist"],
+      "steps": [
+        "View notification bell icon"
+      ],
+      "expected_result": "Badge or indicator shows unread notification count"
+    }
+  ]
+}
+

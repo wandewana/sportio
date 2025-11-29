@@ -1,0 +1,97 @@
+{
+  "module": "Booking Confirmation",
+  "description": "Test cases for booking confirmation and payment tracking",
+  "test_cases": [
+    {
+      "id": "TC010-01",
+      "name": "Display Booking Confirmation Screen",
+      "priority": "High",
+      "preconditions": ["User has confirmed booking"],
+      "steps": [
+        "Complete booking confirmation"
+      ],
+      "expected_result": "Confirmation screen displays with checkmark (✅), venue name, and time"
+    },
+    {
+      "id": "TC010-02",
+      "name": "Confirmation Message Display",
+      "priority": "High",
+      "preconditions": ["User is on Booking Confirmation screen"],
+      "steps": [
+        "View confirmation details"
+      ],
+      "expected_result": "Message shows 'Court booked: [Venue] • [Time]' and 'Notifications sent to joined players. Waiting for payments.'"
+    },
+    {
+      "id": "TC010-03",
+      "name": "Payment Status Display",
+      "priority": "High",
+      "preconditions": ["User is on Booking Confirmation screen"],
+      "steps": [
+        "View payment status card"
+      ],
+      "expected_result": "Payment status shows 'X of Y paid' (e.g., '2 of 4 paid')"
+    },
+    {
+      "id": "TC010-04",
+      "name": "Request Payment Button",
+      "priority": "High",
+      "preconditions": ["User is on Booking Confirmation screen", "Payments pending"],
+      "steps": [
+        "Click 'Request payment' button"
+      ],
+      "expected_result": "Payment request sent to unpaid players, confirmation or notification displayed"
+    },
+    {
+      "id": "TC010-05",
+      "name": "Navigate to Session Detail",
+      "priority": "Medium",
+      "preconditions": ["User is on Booking Confirmation screen"],
+      "steps": [
+        "Click 'Back to session' button"
+      ],
+      "expected_result": "User navigated to Session Detail screen"
+    },
+    {
+      "id": "TC010-06",
+      "name": "Open Session Chat from Confirmation",
+      "priority": "High",
+      "preconditions": ["User is on Booking Confirmation screen"],
+      "steps": [
+        "Click 'Open session chat' button"
+      ],
+      "expected_result": "User navigated to Session Chat screen"
+    },
+    {
+      "id": "TC010-07",
+      "name": "Navigate Back to Booking",
+      "priority": "Low",
+      "preconditions": ["User is on Booking Confirmation screen"],
+      "steps": [
+        "Click '←' back button"
+      ],
+      "expected_result": "User navigated back to Booking time selection screen"
+    },
+    {
+      "id": "TC010-08",
+      "name": "All Players Paid Status",
+      "priority": "High",
+      "preconditions": ["User is on Booking Confirmation", "All players have paid"],
+      "steps": [
+        "View payment status when complete"
+      ],
+      "expected_result": "Payment status shows '4 of 4 paid' or 'All payments received'"
+    },
+    {
+      "id": "TC010-09",
+      "name": "Notifications Sent to Players",
+      "priority": "High",
+      "preconditions": ["Booking has been confirmed"],
+      "steps": [
+        "Verify player notifications"
+      ],
+      "expected_result": "All joined players receive notification about booking confirmation"
+    }
+  ]
+}
+

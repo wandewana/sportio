@@ -1,0 +1,165 @@
+{
+  "module": "Propose Session",
+  "description": "Test cases for creating and proposing new sports sessions",
+  "test_cases": [
+    {
+      "id": "TC004-01",
+      "name": "Access Propose Session Screen",
+      "priority": "High",
+      "preconditions": ["User is logged in", "User is on Home screen"],
+      "steps": [
+        "Click 'Propose Session' button"
+      ],
+      "expected_result": "Propose Session screen displayed with sport selection, time, and player count options"
+    },
+    {
+      "id": "TC004-02",
+      "name": "Select Sport Type - Badminton",
+      "priority": "High",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click 'Badminton' pill"
+      ],
+      "expected_result": "Badminton is selected and visually highlighted"
+    },
+    {
+      "id": "TC004-03",
+      "name": "Select Sport Type - Tennis",
+      "priority": "Medium",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click 'Tennis' pill"
+      ],
+      "expected_result": "Tennis is selected and visually highlighted"
+    },
+    {
+      "id": "TC004-04",
+      "name": "Select Sport Type - Futsal",
+      "priority": "Medium",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click 'Futsal' pill"
+      ],
+      "expected_result": "Futsal is selected and visually highlighted"
+    },
+    {
+      "id": "TC004-05",
+      "name": "Select Sport Type - Ping Pong",
+      "priority": "Medium",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click 'Ping Pong' pill"
+      ],
+      "expected_result": "Ping Pong is selected and visually highlighted"
+    },
+    {
+      "id": "TC004-06",
+      "name": "Select Date and Time Window",
+      "priority": "High",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click on date/time input field",
+        "Select preferred date and time window"
+      ],
+      "expected_result": "Date picker/time selector opens, selected time displayed in field"
+    },
+    {
+      "id": "TC004-07",
+      "name": "Select Players Needed - 2 Players",
+      "priority": "High",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click '2' in players needed section"
+      ],
+      "expected_result": "'2' is selected and highlighted"
+    },
+    {
+      "id": "TC004-08",
+      "name": "Select Players Needed - 4 Players (Default)",
+      "priority": "High",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Verify default selection"
+      ],
+      "expected_result": "'4' is pre-selected as default"
+    },
+    {
+      "id": "TC004-09",
+      "name": "Select Players Needed - 6 Players",
+      "priority": "Medium",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click '6' in players needed section"
+      ],
+      "expected_result": "'6' is selected and highlighted"
+    },
+    {
+      "id": "TC004-10",
+      "name": "Select Players Needed - 8 Players",
+      "priority": "Medium",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click '8' in players needed section"
+      ],
+      "expected_result": "'8' is selected and highlighted"
+    },
+    {
+      "id": "TC004-11",
+      "name": "Successfully Propose Session",
+      "priority": "High",
+      "preconditions": ["User is on Propose Session screen", "All required fields filled"],
+      "steps": [
+        "Select a sport",
+        "Select date/time",
+        "Select players needed",
+        "Click 'Propose & Find Players' button"
+      ],
+      "expected_result": "Session created, user navigated to Session Lobby (session-wait) screen"
+    },
+    {
+      "id": "TC004-12",
+      "name": "Cancel Propose Session",
+      "priority": "Medium",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click 'Cancel' button"
+      ],
+      "expected_result": "User navigated back to Home screen without creating session"
+    },
+    {
+      "id": "TC004-13",
+      "name": "Navigate Back from Propose Session",
+      "priority": "Low",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Click '←' back button"
+      ],
+      "expected_result": "User navigated back to Home screen"
+    },
+    {
+      "id": "TC004-14",
+      "name": "Propose Session Without Sport Selection",
+      "priority": "High",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Leave sport unselected",
+        "Fill other fields",
+        "Click 'Propose & Find Players'"
+      ],
+      "expected_result": "Validation error indicating sport selection required"
+    },
+    {
+      "id": "TC004-15",
+      "name": "Propose Session Without Time Selection",
+      "priority": "High",
+      "preconditions": ["User is on Propose Session screen"],
+      "steps": [
+        "Select sport and players",
+        "Leave time empty",
+        "Click 'Propose & Find Players'"
+      ],
+      "expected_result": "Validation error indicating time selection required"
+    }
+  ]
+}
+

@@ -1,0 +1,67 @@
+{
+  "module": "Player Join Confirmation",
+  "description": "Test cases for player joining a session and confirmation flow",
+  "test_cases": [
+    {
+      "id": "TC007-01",
+      "name": "Display Join Confirmation Screen",
+      "priority": "High",
+      "preconditions": ["User has clicked Join on a session"],
+      "steps": [
+        "Complete join action"
+      ],
+      "expected_result": "Confirmation screen displays with celebration emoji (🎉) and 'You've joined this session' message"
+    },
+    {
+      "id": "TC007-02",
+      "name": "Display Waiting Status",
+      "priority": "High",
+      "preconditions": ["User is on Player Join confirmation screen"],
+      "steps": [
+        "View status message"
+      ],
+      "expected_result": "Message displays: 'Waiting for host to lock & book' and 'Host will book when minimum players are met'"
+    },
+    {
+      "id": "TC007-03",
+      "name": "Open Chat from Confirmation",
+      "priority": "High",
+      "preconditions": ["User is on Player Join confirmation screen"],
+      "steps": [
+        "Click 'Open chat' button"
+      ],
+      "expected_result": "User navigated to Session Chat screen"
+    },
+    {
+      "id": "TC007-04",
+      "name": "Navigate Back to Home",
+      "priority": "Medium",
+      "preconditions": ["User is on Player Join confirmation screen"],
+      "steps": [
+        "Click 'Back' button"
+      ],
+      "expected_result": "User navigated to Home screen"
+    },
+    {
+      "id": "TC007-05",
+      "name": "Navigate Back to Session Detail",
+      "priority": "Medium",
+      "preconditions": ["User is on Player Join confirmation screen"],
+      "steps": [
+        "Click '←' back button in top bar"
+      ],
+      "expected_result": "User navigated to Session Detail screen"
+    },
+    {
+      "id": "TC007-06",
+      "name": "Receive Notification When Booking Confirmed",
+      "priority": "High",
+      "preconditions": ["User has joined session", "Host completes booking"],
+      "steps": [
+        "Host confirms venue and booking"
+      ],
+      "expected_result": "Joined player receives notification about booking confirmation"
+    }
+  ]
+}
+

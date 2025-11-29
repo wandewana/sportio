@@ -1,0 +1,110 @@
+{
+  "module": "Session Chat",
+  "description": "Test cases for session chat and messaging functionality",
+  "test_cases": [
+    {
+      "id": "TC011-01",
+      "name": "Display Chat Screen",
+      "priority": "High",
+      "preconditions": ["User has joined a session", "User navigates to chat"],
+      "steps": [
+        "Navigate to Session Chat screen"
+      ],
+      "expected_result": "Chat screen displays with header showing 'Session Chat' and session info (sport + time)"
+    },
+    {
+      "id": "TC011-02",
+      "name": "Display Existing Messages",
+      "priority": "High",
+      "preconditions": ["User is on Chat screen", "Messages exist in chat"],
+      "steps": [
+        "View message history"
+      ],
+      "expected_result": "Existing messages displayed in chronological order"
+    },
+    {
+      "id": "TC011-03",
+      "name": "Differentiate User Messages",
+      "priority": "High",
+      "preconditions": ["User is on Chat screen", "Multiple messages exist"],
+      "steps": [
+        "View own messages vs others' messages"
+      ],
+      "expected_result": "Own messages appear on right with different styling, others' on left"
+    },
+    {
+      "id": "TC011-04",
+      "name": "Send Text Message",
+      "priority": "High",
+      "preconditions": ["User is on Chat screen"],
+      "steps": [
+        "Type message in input field",
+        "Click 'Send' button"
+      ],
+      "expected_result": "Message sent and appears in chat history on right side"
+    },
+    {
+      "id": "TC011-05",
+      "name": "Empty Message Prevention",
+      "priority": "Medium",
+      "preconditions": ["User is on Chat screen"],
+      "steps": [
+        "Leave message field empty",
+        "Click 'Send' button"
+      ],
+      "expected_result": "Send button disabled or no action taken for empty message"
+    },
+    {
+      "id": "TC011-06",
+      "name": "Receive Message in Real-Time",
+      "priority": "High",
+      "preconditions": ["User is on Chat screen", "Another player sends message"],
+      "steps": [
+        "Wait for incoming message"
+      ],
+      "expected_result": "New message appears in chat without page refresh"
+    },
+    {
+      "id": "TC011-07",
+      "name": "Scroll Through Message History",
+      "priority": "Medium",
+      "preconditions": ["User is on Chat screen", "Many messages exist"],
+      "steps": [
+        "Scroll up through message history"
+      ],
+      "expected_result": "Older messages visible when scrolling up"
+    },
+    {
+      "id": "TC011-08",
+      "name": "Navigate Back to Session Detail",
+      "priority": "Medium",
+      "preconditions": ["User is on Chat screen"],
+      "steps": [
+        "Click '←' back button"
+      ],
+      "expected_result": "User navigated back to Session Detail screen"
+    },
+    {
+      "id": "TC011-09",
+      "name": "Message Input Field Placeholder",
+      "priority": "Low",
+      "preconditions": ["User is on Chat screen"],
+      "steps": [
+        "View empty input field"
+      ],
+      "expected_result": "Placeholder text 'Write a message...' displayed"
+    },
+    {
+      "id": "TC011-10",
+      "name": "Long Message Handling",
+      "priority": "Medium",
+      "preconditions": ["User is on Chat screen"],
+      "steps": [
+        "Type very long message",
+        "Send message"
+      ],
+      "expected_result": "Long message wrapped properly within message bubble"
+    }
+  ]
+}
+

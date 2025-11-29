@@ -1,0 +1,139 @@
+{
+  "module": "Navigation and Screen Flow",
+  "description": "Test cases for navigation between screens and UI flow validation",
+  "test_cases": [
+    {
+      "id": "TC017-01",
+      "name": "Login to Home Navigation",
+      "priority": "High",
+      "preconditions": ["User on Login screen"],
+      "steps": [
+        "Complete successful login"
+      ],
+      "expected_result": "User navigated to Home screen"
+    },
+    {
+      "id": "TC017-02",
+      "name": "Back Button - Propose to Home",
+      "priority": "Medium",
+      "preconditions": ["User on Propose Session screen"],
+      "steps": [
+        "Click back button"
+      ],
+      "expected_result": "User navigated to Home screen"
+    },
+    {
+      "id": "TC017-03",
+      "name": "Back Button - Session Detail to Home",
+      "priority": "Medium",
+      "preconditions": ["User on Session Detail screen"],
+      "steps": [
+        "Click back button"
+      ],
+      "expected_result": "User navigated to Home screen"
+    },
+    {
+      "id": "TC017-04",
+      "name": "Back Button - Venue to Session Detail",
+      "priority": "Medium",
+      "preconditions": ["User on Venue Suggestions screen"],
+      "steps": [
+        "Click back button"
+      ],
+      "expected_result": "User navigated to Session Detail screen"
+    },
+    {
+      "id": "TC017-05",
+      "name": "Back Button - Booking to Venue",
+      "priority": "Medium",
+      "preconditions": ["User on Booking screen"],
+      "steps": [
+        "Click back button"
+      ],
+      "expected_result": "User navigated to Venue Suggestions screen"
+    },
+    {
+      "id": "TC017-06",
+      "name": "Back Button - Chat to Session Detail",
+      "priority": "Medium",
+      "preconditions": ["User on Chat screen"],
+      "steps": [
+        "Click back button"
+      ],
+      "expected_result": "User navigated to Session Detail screen"
+    },
+    {
+      "id": "TC017-07",
+      "name": "Back Button - Profile to Home",
+      "priority": "Medium",
+      "preconditions": ["User on Profile screen"],
+      "steps": [
+        "Click back button"
+      ],
+      "expected_result": "User navigated to Home screen"
+    },
+    {
+      "id": "TC017-08",
+      "name": "Back Button - Notifications to Home",
+      "priority": "Medium",
+      "preconditions": ["User on Notifications screen"],
+      "steps": [
+        "Click back button"
+      ],
+      "expected_result": "User navigated to Home screen"
+    },
+    {
+      "id": "TC017-09",
+      "name": "Back Button - Report to Session Detail",
+      "priority": "Medium",
+      "preconditions": ["User on Report screen"],
+      "steps": [
+        "Click back button"
+      ],
+      "expected_result": "User navigated to Session Detail screen"
+    },
+    {
+      "id": "TC017-10",
+      "name": "Back Button - Map to Home",
+      "priority": "Medium",
+      "preconditions": ["User on Map View screen"],
+      "steps": [
+        "Click List View button"
+      ],
+      "expected_result": "User navigated to Home screen"
+    },
+    {
+      "id": "TC017-11",
+      "name": "Deep Link Navigation - Session Detail",
+      "priority": "Medium",
+      "preconditions": ["User receives deep link to session"],
+      "steps": [
+        "Click deep link"
+      ],
+      "expected_result": "App opens to Session Detail screen for linked session"
+    },
+    {
+      "id": "TC017-12",
+      "name": "Screen Transition Animation",
+      "priority": "Low",
+      "preconditions": ["User navigates between screens"],
+      "steps": [
+        "Navigate from Home to Session Detail"
+      ],
+      "expected_result": "Smooth transition animation between screens"
+    },
+    {
+      "id": "TC017-13",
+      "name": "Scroll Position Preservation",
+      "priority": "Low",
+      "preconditions": ["User scrolls on Home, navigates away and back"],
+      "steps": [
+        "Scroll down session list",
+        "Navigate to Session Detail",
+        "Navigate back to Home"
+      ],
+      "expected_result": "Scroll position preserved on return"
+    }
+  ]
+}
+

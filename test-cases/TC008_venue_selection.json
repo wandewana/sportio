@@ -1,0 +1,107 @@
+{
+  "module": "Venue Selection",
+  "description": "Test cases for selecting a venue for the session",
+  "test_cases": [
+    {
+      "id": "TC008-01",
+      "name": "Display Venue Suggestions",
+      "priority": "High",
+      "preconditions": ["Host navigates to venue selection"],
+      "steps": [
+        "Navigate to Venue Suggestions screen"
+      ],
+      "expected_result": "Screen displays recommended venues with header 'Choose a venue' and 'Recommended for X players'"
+    },
+    {
+      "id": "TC008-02",
+      "name": "Venue Card Information Display",
+      "priority": "High",
+      "preconditions": ["User is on Venue Suggestions screen"],
+      "steps": [
+        "View venue cards"
+      ],
+      "expected_result": "Each venue card shows: icon, name, type (indoor/outdoor), distance, price per person, rating"
+    },
+    {
+      "id": "TC008-03",
+      "name": "Select Primary Venue",
+      "priority": "High",
+      "preconditions": ["User is on Venue Suggestions screen"],
+      "steps": [
+        "Click 'Select' button on BlueCourt Sports Center"
+      ],
+      "expected_result": "User navigated to Booking time selection screen for selected venue"
+    },
+    {
+      "id": "TC008-04",
+      "name": "Select Alternative Venue",
+      "priority": "Medium",
+      "preconditions": ["User is on Venue Suggestions screen"],
+      "steps": [
+        "Click 'Select' button on Neighborhood Hall"
+      ],
+      "expected_result": "User navigated to Booking time selection screen for selected venue"
+    },
+    {
+      "id": "TC008-05",
+      "name": "Venue Distance Display",
+      "priority": "Medium",
+      "preconditions": ["User is on Venue Suggestions screen"],
+      "steps": [
+        "View venue distances"
+      ],
+      "expected_result": "Distances displayed accurately (e.g., '0.8 km away', '1.2 km')"
+    },
+    {
+      "id": "TC008-06",
+      "name": "Venue Pricing Display",
+      "priority": "High",
+      "preconditions": ["User is on Venue Suggestions screen"],
+      "steps": [
+        "View venue pricing pills"
+      ],
+      "expected_result": "Per-person pricing displayed (e.g., '$8 / hr per person', '$6 / hr per person')"
+    },
+    {
+      "id": "TC008-07",
+      "name": "Venue Rating Display",
+      "priority": "Medium",
+      "preconditions": ["User is on Venue Suggestions screen"],
+      "steps": [
+        "View venue ratings"
+      ],
+      "expected_result": "Ratings displayed with stars (e.g., '4.5 ⭐', '4.0 ⭐')"
+    },
+    {
+      "id": "TC008-08",
+      "name": "Quick Suggest and Book",
+      "priority": "Medium",
+      "preconditions": ["User is on Venue Suggestions screen"],
+      "steps": [
+        "Click 'Suggest & Book' button"
+      ],
+      "expected_result": "Venue suggested and user navigated to booking confirmation"
+    },
+    {
+      "id": "TC008-09",
+      "name": "Navigate Back to Session Detail",
+      "priority": "Low",
+      "preconditions": ["User is on Venue Suggestions screen"],
+      "steps": [
+        "Click 'Back' button or '←'"
+      ],
+      "expected_result": "User navigated back to Session Detail screen"
+    },
+    {
+      "id": "TC008-10",
+      "name": "No Venues Available",
+      "priority": "Medium",
+      "preconditions": ["User is on Venue Suggestions screen", "No venues in area"],
+      "steps": [
+        "View venue list when empty"
+      ],
+      "expected_result": "Empty state message displayed indicating no venues available"
+    }
+  ]
+}
+

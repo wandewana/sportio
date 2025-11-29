@@ -1,0 +1,108 @@
+{
+  "module": "User Profile",
+  "description": "Test cases for user profile viewing and editing",
+  "test_cases": [
+    {
+      "id": "TC012-01",
+      "name": "Display Profile Screen",
+      "priority": "High",
+      "preconditions": ["User is logged in"],
+      "steps": [
+        "Navigate to Profile screen"
+      ],
+      "expected_result": "Profile screen displays with user avatar, name, skill level, and stats"
+    },
+    {
+      "id": "TC012-02",
+      "name": "Display User Avatar and Name",
+      "priority": "High",
+      "preconditions": ["User is on Profile screen"],
+      "steps": [
+        "View profile hero section"
+      ],
+      "expected_result": "Avatar with initials (e.g., 'AB') and full name displayed"
+    },
+    {
+      "id": "TC012-03",
+      "name": "Display Skill Level",
+      "priority": "Medium",
+      "preconditions": ["User is on Profile screen"],
+      "steps": [
+        "View skill level indicator"
+      ],
+      "expected_result": "Skill level displayed (e.g., 'Intermediate') with games count (e.g., '120 games')"
+    },
+    {
+      "id": "TC012-04",
+      "name": "Display Statistics Grid",
+      "priority": "High",
+      "preconditions": ["User is on Profile screen"],
+      "steps": [
+        "View stats grid section"
+      ],
+      "expected_result": "Stats displayed: Bookings count (32), Avg rating (4.6), Friends count (12)"
+    },
+    {
+      "id": "TC012-05",
+      "name": "Edit Profile Button",
+      "priority": "Medium",
+      "preconditions": ["User is on Profile screen"],
+      "steps": [
+        "Click 'Edit profile' button"
+      ],
+      "expected_result": "Edit mode enabled or user navigated to edit profile screen"
+    },
+    {
+      "id": "TC012-06",
+      "name": "Save Profile Changes",
+      "priority": "High",
+      "preconditions": ["User is on Profile screen"],
+      "steps": [
+        "Make profile changes",
+        "Click 'Save' button"
+      ],
+      "expected_result": "Changes saved successfully, confirmation displayed"
+    },
+    {
+      "id": "TC012-07",
+      "name": "Close Profile Without Changes",
+      "priority": "Low",
+      "preconditions": ["User is on Profile screen"],
+      "steps": [
+        "Click 'Close' button"
+      ],
+      "expected_result": "User navigated back to Home screen"
+    },
+    {
+      "id": "TC012-08",
+      "name": "Log Out from Profile",
+      "priority": "High",
+      "preconditions": ["User is on Profile screen"],
+      "steps": [
+        "Click 'Log Out' button"
+      ],
+      "expected_result": "User logged out, session cleared, redirected to Login screen"
+    },
+    {
+      "id": "TC012-09",
+      "name": "Navigate Back to Home",
+      "priority": "Low",
+      "preconditions": ["User is on Profile screen"],
+      "steps": [
+        "Click '←' back button"
+      ],
+      "expected_result": "User navigated back to Home screen"
+    },
+    {
+      "id": "TC012-10",
+      "name": "Profile Header Information",
+      "priority": "Medium",
+      "preconditions": ["User is on Profile screen"],
+      "steps": [
+        "View header section"
+      ],
+      "expected_result": "Header shows 'My Profile' title and 'Edit your skills & bookings' subtitle"
+    }
+  ]
+}
+
