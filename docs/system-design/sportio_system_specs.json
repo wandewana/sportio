@@ -919,6 +919,72 @@
         "testing": "Test migrations on local database before deployment",
         "rollback_strategy": "Create rollback scripts for complex migrations"
       }
+    },
+    "testing_strategy": {
+      "philosophy": {
+        "primary_approach": "Integration and End-to-End Testing Only",
+        "rationale": "Unit tests are not useful for this Spring WebFlux backend since most logic involves complex database queries and reactive streams. Testing isolated methods with mocked dependencies provides little value and does not catch real integration issues."
+      },
+      "test_database": {
+        "configuration": "application-test.yml",
+        "profile": "test",
+        "activation": "@ActiveProfiles('test')",
+        "description": "Dedicated PostgreSQL database for testing with same schema as production"
+      },
+      "test_types": {
+        "integration_tests": {
+          "description": "Primary test type - Tests complete request-response flow through real endpoints with real database",
+          "requirements": [
+            "Use @SpringBootTest with real application context",
+            "Use WebTestClient to call actual API endpoints",
+            "Use dedicated test database configured in application-test.yml",
+            "Verify complete flow: Request -> Controller -> Service -> Repository -> Database -> Response"
+          ]
+        },
+        "end_to_end_tests": {
+          "description": "Full system tests that verify complete user scenarios",
+          "requirements": [
+            "Test complete user workflows across multiple endpoints",
+            "Verify state changes persist correctly in real database",
+            "Test reactive stream behavior with real data"
+          ]
+        }
+      },
+      "mocking_policy": {
+        "allowed_mocking": {
+          "description": "ONLY external third-party APIs outside our application boundary",
+          "services": [
+            "Stripe API (payment processing)",
+            "SendGrid (email)",
+            "FCM/APNs (push notifications)",
+            "Any external HTTP APIs outside our control"
+          ]
+        },
+        "forbidden_mocking": [
+          "Repositories (UserRepository, SessionRepository, etc.)",
+          "Internal Services (AuthService, SessionService, etc.)",
+          "Controllers",
+          "Database queries and R2DBC operations",
+          "Internal reactive streams",
+          "Any component within our application boundary"
+        ]
+      },
+      "test_patterns": {
+        "required": [
+          "Call real API endpoints via WebTestClient",
+          "Verify response status and body",
+          "Verify database state changed correctly by querying real database",
+          "Clean database before each test (@BeforeEach or @Sql scripts)",
+          "Use @ActiveProfiles('test') to load test configuration"
+        ],
+        "anti_patterns": [
+          "DO NOT mock repositories with Mockito",
+          "DO NOT mock services with @MockBean (except external APIs)",
+          "DO NOT test controllers in isolation",
+          "DO NOT use @Mock or @InjectMocks for internal components",
+          "DO NOT test business logic without going through real API endpoints"
+        ]
+      }
     }
   }
 }
