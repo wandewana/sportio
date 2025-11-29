@@ -856,6 +856,69 @@
         "description": "Report requires reason selection",
         "implementation": "Validate reasonId != null"
       }
-    ]
+    ],
+    "database_migration_strategy": {
+      "approach": "Database-First with Flyway",
+      "migration_tool": "Flyway",
+      "migration_location": "src/main/resources/db/migration",
+      "migration_pattern": "V{version}__{description}.sql",
+      "migration_sequence": [
+        {
+          "version": "001",
+          "description": "Initial_schema_creation",
+          "tables": ["users", "sessions"],
+          "purpose": "Core user and session management"
+        },
+        {
+          "version": "002",
+          "description": "Add_venues_and_booking_tables",
+          "tables": ["venues", "bookings"],
+          "purpose": "Venue management and booking system"
+        },
+        {
+          "version": "003",
+          "description": "Add_session_players_and_payments",
+          "tables": ["session_players", "payments"],
+          "purpose": "Player participation and payment tracking"
+        },
+        {
+          "version": "004",
+          "description": "Add_venue_slots_and_geospatial_indexes",
+          "tables": ["venue_slots"],
+          "extensions": ["postgis"],
+          "purpose": "Time slot management and geospatial capabilities"
+        },
+        {
+          "version": "005",
+          "description": "Add_chat_messages_and_notifications",
+          "tables": ["messages", "notifications"],
+          "purpose": "Real-time chat and notification system"
+        },
+        {
+          "version": "006",
+          "description": "Add_reports_and_remaining_tables",
+          "tables": ["reports", "devices", "refresh_tokens", "notification_prefs"],
+          "purpose": "Reporting system and authentication enhancements"
+        },
+        {
+          "version": "007",
+          "description": "Add_indexes_for_performance",
+          "purpose": "Performance optimization with geospatial and query indexes"
+        }
+      ],
+      "flyway_configuration": {
+        "locations": ["classpath:db/migration"],
+        "baseline_on_migrate": true,
+        "validate_on_migrate": true,
+        "clean_disabled": true,
+        "out_of_order": false
+      },
+      "development_workflow": {
+        "schema_changes": "Create new migration file for each schema change",
+        "naming_convention": "V{version}__{description}.sql",
+        "testing": "Test migrations on local database before deployment",
+        "rollback_strategy": "Create rollback scripts for complex migrations"
+      }
+    }
   }
 }
