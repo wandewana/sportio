@@ -4,6 +4,7 @@ const screens = [
   { id: 'login', label: 'Login' },
   { id: 'register', label: 'Register' },
   { id: 'home', label: 'Home - Sessions' },
+  { id: 'map', label: 'Map View' },
   { id: 'propose', label: 'Propose Session' },
   { id: 'session-wait', label: 'Session Lobby' },
   { id: 'session-detail', label: 'Session Detail' },
