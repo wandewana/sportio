@@ -1,0 +1,152 @@
+{
+  "module": "Profile",
+  "description": "User profile, stats, match history, and settings",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me",
+      "description": "Get current user's profile",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "user": {
+            "id": "usr_abc123",
+            "email": "alex@sportio.com",
+            "full_name": "Alex B",
+            "avatar_initials": "AB",
+            "avatar_url": null,
+            "skill_level": "Intermediate",
+            "skill_level_display": "Intermediate",
+            "games_played": 120,
+            "games_played_display": "120 games",
+            "member_since": "2024-01-15",
+            "bio": "Love playing badminton and tennis on weekends!"
+          },
+          "stats": {
+            "total_sessions": 120,
+            "sessions_hosted": 45,
+            "sessions_joined": 75,
+            "favorite_sport": "badminton",
+            "favorite_sport_icon": "🏸",
+            "total_hours_played": 180
+          },
+          "recent_matches": [
+            {
+              "id": "sess_old001",
+              "sport_type": "badminton",
+              "sport_icon": "🏸",
+              "date": "2025-11-25",
+              "venue": "BlueCourt",
+              "result": "Won"
+            },
+            {
+              "id": "sess_old002",
+              "sport_type": "tennis",
+              "sport_icon": "🎾",
+              "date": "2025-11-20",
+              "venue": "City Tennis Club",
+              "result": "Lost"
+            }
+          ]
+        }
+      },
+      "error_responses": [
+        { "status": 401, "body": { "error": "unauthorized", "message": "Authentication required" } }
+      ]
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/users/me",
+      "description": "Update user profile",
+      "request": {
+        "headers": { "Authorization": "Bearer ...", "Content-Type": "application/json" },
+        "body": {
+          "full_name": "Alex Brown",
+          "skill_level": "Advanced",
+          "bio": "Competitive badminton player"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "user": {
+            "id": "usr_abc123",
+            "full_name": "Alex Brown",
+            "skill_level": "Advanced",
+            "bio": "Competitive badminton player"
+          },
+          "message": "Profile updated successfully"
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "invalid_skill_level", "message": "Invalid skill level" } }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/{user_id}",
+      "description": "Get another user's public profile",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "user_id": "usr_def456" }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "user": {
+            "id": "usr_def456",
+            "full_name": "Mike K",
+            "avatar_initials": "MK",
+            "skill_level": "Beginner",
+            "games_played": 15
+          },
+          "stats": {
+            "total_sessions": 15,
+            "favorite_sport": "badminton",
+            "favorite_sport_icon": "🏸"
+          }
+        }
+      },
+      "error_responses": [
+        { "status": 404, "body": { "error": "user_not_found", "message": "User not found" } }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me/sessions",
+      "description": "Get user's upcoming and past sessions",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "query_params": {
+          "status": "upcoming",
+          "limit": 10
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "sessions": [
+            {
+              "id": "sess_001",
+              "sport_type": "badminton",
+              "sport_icon": "🏸",
+              "date": "2025-11-30",
+              "time": "19:00",
+              "venue": "BlueCourt",
+              "status": "confirmed",
+              "is_host": true
+            }
+          ]
+        }
+      },
+      "error_responses": []
+    }
+  ],
+  "websocket_events": [],
+  "push_notifications": [],
+  "third_party_integrations": []
+}
+

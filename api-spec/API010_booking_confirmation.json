@@ -1,0 +1,141 @@
+{
+  "module": "Booking Confirmation",
+  "description": "Payment tracking, booking status, and countdown to session",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/bookings/{booking_id}",
+      "description": "Get booking details and payment status",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "booking_id": "book_001" }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "booking": {
+            "id": "book_001",
+            "session_id": "sess_001",
+            "sport_type": "badminton",
+            "sport_icon": "🏸",
+            "title": "Court Booked",
+            "status": "confirmed",
+            "status_display": "✅ Court Booked"
+          },
+          "venue": {
+            "id": "ven_001",
+            "name": "BlueCourt",
+            "court": "Indoor court #3",
+            "address": "123 Sports Avenue"
+          },
+          "schedule": {
+            "date": "2025-11-30",
+            "time": "19:00",
+            "end_time": "20:00",
+            "date_display": "Saturday",
+            "time_display": "19:00 - 20:00"
+          },
+          "pricing": {
+            "total_cost": 32,
+            "cost_per_person": 8,
+            "currency": "USD",
+            "display_total": "$32 total",
+            "display_per_person": "$8 / person"
+          },
+          "payment": {
+            "split_enabled": true,
+            "players": [
+              { "id": "usr_abc123", "name": "Alex L", "avatar_initials": "AL", "paid": true, "is_host": true },
+              { "id": "usr_def456", "name": "Mike K", "avatar_initials": "MK", "paid": true, "is_host": false },
+              { "id": "usr_ghi789", "name": "Sarah J", "avatar_initials": "SJ", "paid": false, "is_host": false },
+              { "id": "usr_jkl012", "name": "Chris M", "avatar_initials": "CM", "paid": false, "is_host": false }
+            ],
+            "paid_count": 2,
+            "total_players": 4,
+            "all_paid": false
+          },
+          "countdown": {
+            "starts_in_hours": 8,
+            "display": "Starts in 8 hours"
+          }
+        }
+      },
+      "error_responses": [
+        { "status": 404, "body": { "error": "booking_not_found", "message": "Booking not found" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/bookings/{booking_id}/pay",
+      "description": "Submit payment for user's share",
+      "request": {
+        "headers": { "Authorization": "Bearer ...", "Content-Type": "application/json" },
+        "path_params": { "booking_id": "book_001" },
+        "body": {
+          "payment_method_id": "pm_visa_4242",
+          "amount": 8
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "payment_id": "pay_001",
+          "status": "success",
+          "amount": 8,
+          "message": "Payment successful"
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "already_paid", "message": "You have already paid for this booking" } },
+        { "status": 402, "body": { "error": "payment_failed", "message": "Payment failed. Please try another payment method." } }
+      ]
+    }
+  ],
+  "websocket_events": [
+    {
+      "event": "booking:payment_received",
+      "direction": "subscribe",
+      "payload": {
+        "booking_id": "book_001",
+        "player_id": "usr_ghi789",
+        "player_name": "Sarah J",
+        "paid_count": 3,
+        "all_paid": false
+      },
+      "description": "Real-time update when a player completes payment"
+    },
+    {
+      "event": "booking:all_paid",
+      "direction": "subscribe",
+      "payload": {
+        "booking_id": "book_001",
+        "paid_count": 4,
+        "all_paid": true,
+        "message": "All players have paid!"
+      },
+      "description": "All players have completed payment"
+    }
+  ],
+  "push_notifications": [
+    {
+      "trigger": "Reminder before session",
+      "title": "Session in 1 hour! ⏰",
+      "body": "Badminton at BlueCourt, 19:00. See you there!",
+      "data": { "deeplink": "sportio://booking/book_001" }
+    },
+    {
+      "trigger": "Payment pending reminder",
+      "title": "Payment pending",
+      "body": "Please complete your $8 payment for tonight's session",
+      "data": { "deeplink": "sportio://booking/book_001/pay" }
+    }
+  ],
+  "third_party_integrations": [
+    {
+      "service": "Stripe",
+      "purpose": "Process split payments",
+      "data_needed": ["payment_method_id", "amount", "currency", "user_id"]
+    }
+  ]
+}
+

@@ -1,0 +1,182 @@
+{
+  "module": "Notifications",
+  "description": "Push notifications, in-app notifications, and notification preferences",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/notifications",
+      "description": "Get user's notification list",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "query_params": {
+          "limit": 20,
+          "offset": 0,
+          "unread_only": false
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "unread_count": 3,
+          "notifications": [
+            {
+              "id": "notif_001",
+              "type": "session_invite",
+              "icon": "🏸",
+              "title": "Session Invite",
+              "body": "Alex B invited you to Badminton at 19:00",
+              "timestamp": "2025-11-29T10:00:00Z",
+              "timestamp_display": "2 hours ago",
+              "read": false,
+              "action": {
+                "type": "deeplink",
+                "url": "sportio://session/sess_001"
+              }
+            },
+            {
+              "id": "notif_002",
+              "type": "payment_reminder",
+              "icon": "💳",
+              "title": "Payment Pending",
+              "body": "Complete your $8 payment for tomorrow's session",
+              "timestamp": "2025-11-29T09:00:00Z",
+              "timestamp_display": "3 hours ago",
+              "read": false,
+              "action": {
+                "type": "deeplink",
+                "url": "sportio://booking/book_001/pay"
+              }
+            },
+            {
+              "id": "notif_003",
+              "type": "player_joined",
+              "icon": "👤",
+              "title": "New Player Joined",
+              "body": "Mike K joined your session",
+              "timestamp": "2025-11-28T15:00:00Z",
+              "timestamp_display": "Yesterday",
+              "read": true,
+              "action": {
+                "type": "deeplink",
+                "url": "sportio://session/sess_001/lobby"
+              }
+            }
+          ]
+        }
+      },
+      "error_responses": []
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/notifications/{notification_id}/read",
+      "description": "Mark a notification as read",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "notification_id": "notif_001" }
+      },
+      "response": {
+        "status": 200,
+        "body": { "message": "Notification marked as read" }
+      },
+      "error_responses": []
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/notifications/read-all",
+      "description": "Mark all notifications as read",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." }
+      },
+      "response": {
+        "status": 200,
+        "body": { "message": "All notifications marked as read", "count": 3 }
+      },
+      "error_responses": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/devices/register",
+      "description": "Register device for push notifications",
+      "request": {
+        "headers": { "Authorization": "Bearer ...", "Content-Type": "application/json" },
+        "body": {
+          "device_token": "fcm_token_abc123...",
+          "platform": "ios",
+          "app_version": "1.0.0"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": { "message": "Device registered successfully", "device_id": "dev_001" }
+      },
+      "error_responses": []
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/users/me/notification-settings",
+      "description": "Get notification preferences",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "settings": {
+            "push_enabled": true,
+            "session_invites": true,
+            "player_joined": true,
+            "chat_messages": true,
+            "payment_reminders": true,
+            "session_reminders": true,
+            "marketing": false
+          }
+        }
+      },
+      "error_responses": []
+    },
+    {
+      "method": "PUT",
+      "path": "/api/v1/users/me/notification-settings",
+      "description": "Update notification preferences",
+      "request": {
+        "headers": { "Authorization": "Bearer ...", "Content-Type": "application/json" },
+        "body": {
+          "chat_messages": false,
+          "marketing": false
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": { "message": "Settings updated successfully" }
+      },
+      "error_responses": []
+    }
+  ],
+  "websocket_events": [
+    {
+      "event": "notification:new",
+      "direction": "subscribe",
+      "payload": {
+        "id": "notif_004",
+        "type": "session_invite",
+        "title": "Session Invite",
+        "body": "Sarah J invited you to Tennis at 08:00"
+      },
+      "description": "New notification received while app is open"
+    }
+  ],
+  "push_notifications": [],
+  "third_party_integrations": [
+    {
+      "service": "Firebase Cloud Messaging (FCM)",
+      "purpose": "Send push notifications to Android and iOS devices",
+      "data_needed": ["device_token", "platform", "notification_payload"]
+    },
+    {
+      "service": "Apple Push Notification Service (APNs)",
+      "purpose": "Send push notifications to iOS devices",
+      "data_needed": ["device_token", "notification_payload"]
+    }
+  ]
+}
+

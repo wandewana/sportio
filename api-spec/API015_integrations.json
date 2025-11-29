@@ -1,0 +1,141 @@
+{
+  "module": "Third-Party Integrations",
+  "description": "External services required for full app functionality",
+  "rest_endpoints": [],
+  "websocket_events": [],
+  "push_notifications": [],
+  "third_party_integrations": [
+    {
+      "service": "Google Maps SDK",
+      "purpose": "Map display and venue location",
+      "features": [
+        "Interactive map with custom session pins",
+        "Venue location display",
+        "Directions to venue",
+        "Distance calculation"
+      ],
+      "data_needed": ["api_key", "lat", "lng", "map_style_config"],
+      "endpoints_used_by": ["API003_map_view", "API008_venue_selection"]
+    },
+    {
+      "service": "Geolocation API (Browser/Device)",
+      "purpose": "Get user's current location",
+      "features": [
+        "Detect user location for nearby sessions",
+        "Auto-center map on user location",
+        "Calculate distance to venues"
+      ],
+      "data_needed": ["user_permission"],
+      "endpoints_used_by": ["API002_home_discovery", "API003_map_view"]
+    },
+    {
+      "service": "Stripe",
+      "purpose": "Payment processing",
+      "features": [
+        "Split payment between players",
+        "Secure card storage",
+        "Payment method management",
+        "Refund processing"
+      ],
+      "data_needed": ["publishable_key", "secret_key", "webhook_secret"],
+      "api_endpoints": [
+        {
+          "method": "POST",
+          "path": "/api/v1/payments/create-intent",
+          "description": "Create Stripe payment intent",
+          "request": {
+            "body": { "amount": 800, "currency": "usd", "booking_id": "book_001" }
+          },
+          "response": {
+            "body": { "client_secret": "pi_xxx_secret_xxx", "payment_intent_id": "pi_xxx" }
+          }
+        },
+        {
+          "method": "GET",
+          "path": "/api/v1/users/me/payment-methods",
+          "description": "Get user's saved payment methods",
+          "response": {
+            "body": {
+              "payment_methods": [
+                { "id": "pm_001", "type": "card", "last4": "4242", "brand": "visa", "exp_month": 12, "exp_year": 2026, "is_default": true }
+              ]
+            }
+          }
+        },
+        {
+          "method": "POST",
+          "path": "/api/v1/users/me/payment-methods",
+          "description": "Add new payment method",
+          "request": { "body": { "payment_method_id": "pm_xxx_from_stripe" } },
+          "response": { "body": { "message": "Payment method added" } }
+        }
+      ],
+      "webhooks": [
+        { "event": "payment_intent.succeeded", "action": "Mark user as paid for booking" },
+        { "event": "payment_intent.payment_failed", "action": "Notify user of failed payment" },
+        { "event": "charge.refunded", "action": "Update booking refund status" }
+      ],
+      "endpoints_used_by": ["API010_booking_confirmation"]
+    },
+    {
+      "service": "Firebase Cloud Messaging (FCM)",
+      "purpose": "Push notifications for Android",
+      "features": [
+        "Session invites",
+        "Player joined notifications",
+        "Booking confirmations",
+        "Chat message alerts",
+        "Payment reminders"
+      ],
+      "data_needed": ["server_key", "device_token"],
+      "endpoints_used_by": ["API013_notifications"]
+    },
+    {
+      "service": "Apple Push Notification Service (APNs)",
+      "purpose": "Push notifications for iOS",
+      "features": ["Same as FCM for iOS devices"],
+      "data_needed": ["apns_key", "team_id", "bundle_id", "device_token"],
+      "endpoints_used_by": ["API013_notifications"]
+    },
+    {
+      "service": "SendGrid / Email Service",
+      "purpose": "Transactional emails",
+      "features": [
+        "Welcome email on registration",
+        "Password reset emails",
+        "Booking confirmation emails",
+        "Session reminder emails"
+      ],
+      "data_needed": ["api_key", "from_email", "templates"],
+      "email_templates": [
+        { "id": "welcome", "subject": "Welcome to Sportio!" },
+        { "id": "password_reset", "subject": "Reset your password" },
+        { "id": "booking_confirmed", "subject": "Your court is booked!" },
+        { "id": "session_reminder", "subject": "Session tomorrow at {time}" }
+      ],
+      "endpoints_used_by": ["API001_authentication", "API010_booking_confirmation"]
+    },
+    {
+      "service": "WebSocket Server",
+      "purpose": "Real-time updates",
+      "features": [
+        "Live chat messaging",
+        "Player join/leave notifications",
+        "Booking status updates",
+        "Map pin updates"
+      ],
+      "connection": {
+        "url": "wss://api.sportio.com/ws",
+        "auth": "Bearer token in connection handshake",
+        "reconnect_strategy": "Exponential backoff"
+      },
+      "channels": [
+        { "name": "session:{session_id}", "events": ["player_joined", "player_left", "status_changed"] },
+        { "name": "chat:{session_id}", "events": ["message", "typing"] },
+        { "name": "booking:{booking_id}", "events": ["payment_received", "all_paid"] },
+        { "name": "user:{user_id}", "events": ["notification"] }
+      ]
+    }
+  ]
+}
+

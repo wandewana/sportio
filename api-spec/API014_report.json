@@ -1,0 +1,93 @@
+{
+  "module": "Report",
+  "description": "Report inappropriate users or content",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/reports/reasons",
+      "description": "Get available report reasons",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "reasons": [
+            { "id": "no_show", "label": "No show", "description": "Player didn't show up for session" },
+            { "id": "inappropriate_behavior", "label": "Inappropriate behavior", "description": "Offensive or disruptive conduct" },
+            { "id": "fake_profile", "label": "Fake profile", "description": "Suspected fake or spam account" },
+            { "id": "harassment", "label": "Harassment", "description": "Threatening or harassing behavior" },
+            { "id": "spam", "label": "Spam", "description": "Spamming messages or sessions" },
+            { "id": "other", "label": "Other", "description": "Other issue not listed above" }
+          ]
+        }
+      },
+      "error_responses": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/reports",
+      "description": "Submit a report against a user or session",
+      "request": {
+        "headers": { "Authorization": "Bearer ...", "Content-Type": "application/json" },
+        "body": {
+          "reported_user_id": "usr_def456",
+          "session_id": "sess_001",
+          "reason_id": "no_show",
+          "description": "Player confirmed but did not show up to the badminton session."
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "report_id": "rpt_001",
+          "status": "submitted",
+          "message": "Report submitted. Our team will review it shortly.",
+          "created_at": "2025-11-29T12:00:00Z"
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "missing_reason", "message": "Report reason is required" } },
+        { "status": 400, "body": { "error": "missing_user", "message": "Reported user is required" } },
+        { "status": 400, "body": { "error": "self_report", "message": "You cannot report yourself" } },
+        { "status": 409, "body": { "error": "duplicate_report", "message": "You have already reported this user for this session" } }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/reports/mine",
+      "description": "Get user's submitted reports",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "query_params": { "limit": 10, "offset": 0 }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "reports": [
+            {
+              "id": "rpt_001",
+              "reported_user": { "id": "usr_def456", "name": "Mike K" },
+              "reason": "No show",
+              "status": "under_review",
+              "status_display": "Under Review",
+              "submitted_at": "2025-11-29T12:00:00Z"
+            }
+          ]
+        }
+      },
+      "error_responses": []
+    }
+  ],
+  "websocket_events": [],
+  "push_notifications": [
+    {
+      "trigger": "Report resolution",
+      "title": "Report Update",
+      "body": "Your report has been reviewed. Thank you for helping keep Sportio safe.",
+      "data": { "deeplink": "sportio://reports/rpt_001" }
+    }
+  ],
+  "third_party_integrations": []
+}
+

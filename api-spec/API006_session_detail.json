@@ -1,0 +1,126 @@
+{
+  "module": "Session Detail",
+  "description": "View session details, join session, and access session features",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/{session_id}",
+      "description": "Get full session details",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "session_id": "sess_001" }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "session": {
+            "id": "sess_001",
+            "sport_type": "badminton",
+            "sport_icon": "🏸",
+            "title": "Badminton",
+            "time": "19:00",
+            "date": "2025-11-30",
+            "players_needed": 4,
+            "players_joined": 2,
+            "spots_left": 2,
+            "status": "pending",
+            "visibility": "public",
+            "description": "Friendly game. Bring your own shuttlecocks. Indoor court #3. Beginners welcome."
+          },
+          "host": {
+            "id": "usr_abc123",
+            "name": "Alex B",
+            "avatar_initials": "AB"
+          },
+          "players": [
+            { "id": "usr_abc123", "name": "Alex L", "avatar_initials": "AL", "is_host": true },
+            { "id": "usr_def456", "name": "Mike K", "avatar_initials": "MK", "is_host": false },
+            { "id": "usr_ghi789", "name": "Sarah J", "avatar_initials": "SJ", "is_host": false }
+          ],
+          "user_status": {
+            "is_host": false,
+            "has_joined": false,
+            "can_join": true,
+            "can_book_venue": false
+          },
+          "venue": null,
+          "booking": null
+        }
+      },
+      "error_responses": [
+        { "status": 404, "body": { "error": "session_not_found", "message": "Session not found" } },
+        { "status": 410, "body": { "error": "session_cancelled", "message": "This session has been cancelled" } },
+        { "status": 410, "body": { "error": "session_expired", "message": "This session has already ended" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/sessions/{session_id}/join",
+      "description": "Join a session as a player",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "session_id": "sess_001" }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "message": "You've joined this session",
+          "session_id": "sess_001",
+          "status": "waiting_for_booking",
+          "info": "Host will book when minimum players are met."
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "session_full", "message": "Session is full" } },
+        { "status": 400, "body": { "error": "already_joined", "message": "You have already joined this session" } },
+        { "status": 410, "body": { "error": "session_expired", "message": "This session has already started" } }
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/api/v1/sessions/{session_id}/leave",
+      "description": "Leave a session",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "session_id": "sess_001" }
+      },
+      "response": {
+        "status": 200,
+        "body": { "message": "You have left the session" }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "is_host", "message": "Host cannot leave. Cancel session or transfer host." } },
+        { "status": 400, "body": { "error": "booking_confirmed", "message": "Cannot leave after booking is confirmed" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/sessions/{session_id}/maybe",
+      "description": "Express tentative interest in a session",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "session_id": "sess_001" }
+      },
+      "response": {
+        "status": 200,
+        "body": { "message": "Interest noted", "status": "maybe" }
+      },
+      "error_responses": []
+    }
+  ],
+  "websocket_events": [
+    {
+      "event": "session:status_changed",
+      "direction": "subscribe",
+      "payload": {
+        "session_id": "sess_001",
+        "status": "booked",
+        "venue": { "name": "BlueCourt Sports Center", "time": "19:00" }
+      },
+      "description": "Session status changed (pending → booked → completed)"
+    }
+  ],
+  "push_notifications": [],
+  "third_party_integrations": []
+}
+

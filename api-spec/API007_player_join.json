@@ -1,0 +1,94 @@
+{
+  "module": "Player Join Confirmation",
+  "description": "Join confirmation screen and waiting status for joined players",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/{session_id}/my-status",
+      "description": "Get current user's status in a session after joining",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "session_id": "sess_001" }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "session_id": "sess_001",
+          "sport_type": "badminton",
+          "sport_icon": "🏸",
+          "title": "Badminton",
+          "time": "19:00",
+          "user_status": {
+            "has_joined": true,
+            "joined_at": "2025-11-29T10:30:00Z",
+            "is_host": false,
+            "payment_status": "pending",
+            "payment_amount": null
+          },
+          "session_status": {
+            "status": "waiting_for_booking",
+            "message": "Waiting for host to lock & book",
+            "detail": "Host will book when minimum players are met.",
+            "players_joined": 3,
+            "players_needed": 4,
+            "min_players_met": true
+          },
+          "booking": null
+        }
+      },
+      "error_responses": [
+        { "status": 404, "body": { "error": "not_joined", "message": "You have not joined this session" } }
+      ]
+    }
+  ],
+  "websocket_events": [
+    {
+      "event": "session:booking_confirmed",
+      "direction": "subscribe",
+      "payload": {
+        "session_id": "sess_001",
+        "booking": {
+          "venue_name": "BlueCourt Sports Center",
+          "venue_address": "123 Sports Ave",
+          "court": "Indoor court #3",
+          "date": "2025-11-30",
+          "time": "19:00",
+          "duration_hours": 1,
+          "total_cost": 32,
+          "cost_per_person": 8,
+          "payment_due_by": "2025-11-30T17:00:00Z"
+        }
+      },
+      "description": "Host has confirmed venue booking - players should pay"
+    },
+    {
+      "event": "session:cancelled",
+      "direction": "subscribe",
+      "payload": {
+        "session_id": "sess_001",
+        "reason": "Host cancelled the session",
+        "refund_status": "not_applicable"
+      },
+      "description": "Session was cancelled by host"
+    }
+  ],
+  "push_notifications": [
+    {
+      "trigger": "Host confirms booking",
+      "title": "Booking Confirmed! 🎉",
+      "body": "BlueCourt Sports Center booked for 19:00. Please complete payment.",
+      "data": { 
+        "deeplink": "sportio://session/sess_001/payment",
+        "session_id": "sess_001"
+      }
+    },
+    {
+      "trigger": "Session cancelled",
+      "title": "Session Cancelled",
+      "body": "The Badminton session at 19:00 has been cancelled",
+      "data": { "deeplink": "sportio://home" }
+    }
+  ],
+  "third_party_integrations": []
+}
+

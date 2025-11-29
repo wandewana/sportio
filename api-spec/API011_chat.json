@@ -1,0 +1,148 @@
+{
+  "module": "Chat",
+  "description": "Real-time messaging within session groups",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/{session_id}/messages",
+      "description": "Get chat message history for a session",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "session_id": "sess_001" },
+        "query_params": {
+          "limit": 50,
+          "before": "msg_050"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "session_id": "sess_001",
+          "sport_icon": "🏸",
+          "title": "Badminton • Group Chat",
+          "has_more": true,
+          "messages": [
+            {
+              "id": "msg_001",
+              "sender": {
+                "id": "usr_abc123",
+                "name": "Alex B",
+                "avatar_initials": "AB",
+                "is_current_user": false
+              },
+              "text": "Hey everyone! Looking forward to the game tomorrow.",
+              "timestamp": "2025-11-29T10:00:00Z",
+              "timestamp_display": "10:00 AM",
+              "is_system": false
+            },
+            {
+              "id": "msg_002",
+              "sender": {
+                "id": "usr_def456",
+                "name": "Mike K",
+                "avatar_initials": "MK",
+                "is_current_user": true
+              },
+              "text": "Me too! Should I bring extra shuttlecocks?",
+              "timestamp": "2025-11-29T10:05:00Z",
+              "timestamp_display": "10:05 AM",
+              "is_system": false
+            },
+            {
+              "id": "msg_003",
+              "sender": null,
+              "text": "Sarah J joined the session",
+              "timestamp": "2025-11-29T10:10:00Z",
+              "timestamp_display": "10:10 AM",
+              "is_system": true
+            }
+          ]
+        }
+      },
+      "error_responses": [
+        { "status": 403, "body": { "error": "not_member", "message": "You are not a member of this session" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/sessions/{session_id}/messages",
+      "description": "Send a message to the session chat",
+      "request": {
+        "headers": { "Authorization": "Bearer ...", "Content-Type": "application/json" },
+        "path_params": { "session_id": "sess_001" },
+        "body": { "text": "Sounds good! See you all there." }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "message": {
+            "id": "msg_004",
+            "sender": {
+              "id": "usr_ghi789",
+              "name": "Sarah J",
+              "avatar_initials": "SJ"
+            },
+            "text": "Sounds good! See you all there.",
+            "timestamp": "2025-11-29T10:15:00Z",
+            "timestamp_display": "10:15 AM"
+          }
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "empty_message", "message": "Message cannot be empty" } },
+        { "status": 403, "body": { "error": "not_member", "message": "You are not a member of this session" } }
+      ]
+    }
+  ],
+  "websocket_events": [
+    {
+      "event": "chat:message",
+      "direction": "subscribe",
+      "payload": {
+        "session_id": "sess_001",
+        "message": {
+          "id": "msg_005",
+          "sender": {
+            "id": "usr_abc123",
+            "name": "Alex B",
+            "avatar_initials": "AB"
+          },
+          "text": "I'll bring the shuttlecocks!",
+          "timestamp": "2025-11-29T10:20:00Z",
+          "timestamp_display": "10:20 AM"
+        }
+      },
+      "description": "New message received in chat"
+    },
+    {
+      "event": "chat:typing",
+      "direction": "subscribe",
+      "payload": {
+        "session_id": "sess_001",
+        "user_id": "usr_abc123",
+        "user_name": "Alex B",
+        "is_typing": true
+      },
+      "description": "User is typing indicator"
+    },
+    {
+      "event": "chat:send_typing",
+      "direction": "emit",
+      "payload": {
+        "session_id": "sess_001",
+        "is_typing": true
+      },
+      "description": "Emit typing status to other users"
+    }
+  ],
+  "push_notifications": [
+    {
+      "trigger": "New chat message while app is backgrounded",
+      "title": "Badminton Chat",
+      "body": "Alex B: I'll bring the shuttlecocks!",
+      "data": { "deeplink": "sportio://session/sess_001/chat" }
+    }
+  ],
+  "third_party_integrations": []
+}
+

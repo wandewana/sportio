@@ -1,0 +1,126 @@
+{
+  "module": "Map View",
+  "description": "Interactive map view with session pins and sport filters",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/map",
+      "description": "Get sessions with coordinates for map display",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "query_params": {
+          "lat": 1.3521,
+          "lng": 103.8198,
+          "radius_km": 5,
+          "sport_type": null,
+          "bounds": {
+            "north": 1.36,
+            "south": 1.34,
+            "east": 103.83,
+            "west": 103.81
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "center": { "lat": 1.3521, "lng": 103.8198 },
+          "pins": [
+            {
+              "session_id": "sess_001",
+              "sport_type": "badminton",
+              "sport_icon": "🏸",
+              "lat": 1.3525,
+              "lng": 103.8205,
+              "title": "Casual Badminton",
+              "spots_left": 2,
+              "time": "19:00"
+            },
+            {
+              "session_id": "sess_002",
+              "sport_type": "futsal",
+              "sport_icon": "⚽",
+              "lat": 1.3540,
+              "lng": 103.8220,
+              "title": "Pickup Futsal",
+              "spots_left": 5,
+              "time": "20:30"
+            },
+            {
+              "session_id": "sess_003",
+              "sport_type": "tennis",
+              "sport_icon": "🎾",
+              "lat": 1.3510,
+              "lng": 103.8180,
+              "title": "Tennis Doubles",
+              "spots_left": 1,
+              "time": "08:00"
+            }
+          ]
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "invalid_bounds", "message": "Invalid map bounds" } },
+        { "status": 401, "body": { "error": "unauthorized", "message": "Authentication required" } }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/map/filters",
+      "description": "Get available sport filters for map view",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "filters": [
+            { "id": "all", "label": "All Sports", "icon": null },
+            { "id": "badminton", "label": "Badminton", "icon": "🏸" },
+            { "id": "futsal", "label": "Futsal", "icon": "⚽" },
+            { "id": "tennis", "label": "Tennis", "icon": "🎾" },
+            { "id": "pingpong", "label": "Ping Pong", "icon": "🏓" }
+          ]
+        }
+      },
+      "error_responses": []
+    }
+  ],
+  "websocket_events": [
+    {
+      "event": "map:session_added",
+      "direction": "subscribe",
+      "payload": {
+        "session_id": "sess_004",
+        "sport_type": "badminton",
+        "sport_icon": "🏸",
+        "lat": 1.3530,
+        "lng": 103.8210,
+        "title": "New Badminton Session",
+        "spots_left": 4,
+        "time": "21:00"
+      },
+      "description": "New session created in visible map area"
+    },
+    {
+      "event": "map:session_removed",
+      "direction": "subscribe",
+      "payload": { "session_id": "sess_001" },
+      "description": "Session filled or cancelled"
+    }
+  ],
+  "push_notifications": [],
+  "third_party_integrations": [
+    {
+      "service": "Google Maps SDK",
+      "purpose": "Render interactive map with custom pins",
+      "data_needed": ["api_key", "map_style_config"]
+    },
+    {
+      "service": "Geolocation API",
+      "purpose": "Center map on user location",
+      "data_needed": ["latitude", "longitude"]
+    }
+  ]
+}
+

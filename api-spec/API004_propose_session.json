@@ -1,0 +1,96 @@
+{
+  "module": "Propose Session",
+  "description": "Create and propose new sports sessions",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/config",
+      "description": "Get configuration options for session creation (sports, player counts)",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "sports": [
+            { "id": "badminton", "label": "Badminton", "icon": "🏸", "default_players": 4 },
+            { "id": "tennis", "label": "Tennis", "icon": "🎾", "default_players": 4 },
+            { "id": "futsal", "label": "Futsal", "icon": "⚽", "default_players": 10 },
+            { "id": "pingpong", "label": "Ping Pong", "icon": "🏓", "default_players": 2 }
+          ],
+          "player_options": [2, 4, 6, 8, 10, 12, 14],
+          "max_future_days": 14
+        }
+      },
+      "error_responses": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/sessions",
+      "description": "Create a new session proposal",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer ...",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "sport_type": "badminton",
+          "date": "2025-11-30",
+          "time_start": "19:00",
+          "time_end": "20:00",
+          "players_needed": 4,
+          "skill_level": "Intermediate",
+          "description": "Friendly game. Beginners welcome.",
+          "visibility": "public"
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "session": {
+            "id": "sess_new001",
+            "sport_type": "badminton",
+            "sport_icon": "🏸",
+            "title": "Badminton",
+            "date": "2025-11-30",
+            "time": "19:00",
+            "players_needed": 4,
+            "players_joined": 1,
+            "spots_left": 3,
+            "skill_level": "Intermediate",
+            "description": "Friendly game. Beginners welcome.",
+            "visibility": "public",
+            "status": "pending",
+            "host": {
+              "id": "usr_abc123",
+              "name": "Alex B",
+              "avatar_initials": "AB",
+              "skill_level": "Intermediate",
+              "games_played": 120
+            },
+            "players": [
+              {
+                "id": "usr_abc123",
+                "name": "Alex B",
+                "avatar_initials": "AB",
+                "is_host": true
+              }
+            ],
+            "created_at": "2025-11-29T10:00:00Z"
+          }
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "missing_sport", "message": "Sport selection is required" } },
+        { "status": 400, "body": { "error": "missing_time", "message": "Date and time selection is required" } },
+        { "status": 400, "body": { "error": "invalid_date", "message": "Session date must be in the future" } },
+        { "status": 400, "body": { "error": "invalid_players", "message": "Invalid player count" } },
+        { "status": 401, "body": { "error": "unauthorized", "message": "Authentication required" } }
+      ]
+    }
+  ],
+  "websocket_events": [],
+  "push_notifications": [],
+  "third_party_integrations": []
+}
+

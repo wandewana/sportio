@@ -1,0 +1,152 @@
+{
+  "module": "Home and Session Discovery",
+  "description": "Session discovery, search, and filtering on the home screen",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/nearby",
+      "description": "Get nearby sessions based on user location",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "query_params": {
+          "lat": 1.3521,
+          "lng": 103.8198,
+          "radius_km": 2,
+          "limit": 20,
+          "offset": 0
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "total_results": 12,
+          "radius_km": 2,
+          "sessions": [
+            {
+              "id": "sess_001",
+              "sport_type": "badminton",
+              "sport_icon": "🏸",
+              "title": "Casual Badminton",
+              "spots_left": 2,
+              "total_players_needed": 4,
+              "players_joined": 2,
+              "date": "2025-11-30",
+              "time": "19:00",
+              "date_display": "Tomorrow",
+              "time_display": "19:00",
+              "skill_level": "Intermediate",
+              "venue_type": "Indoor",
+              "distance_km": 0.55,
+              "host": {
+                "id": "usr_abc123",
+                "name": "Alex B",
+                "avatar_initials": "AB"
+              },
+              "status": "open",
+              "can_join": true
+            },
+            {
+              "id": "sess_002",
+              "sport_type": "futsal",
+              "sport_icon": "⚽",
+              "title": "Pickup Futsal",
+              "spots_left": 5,
+              "total_players_needed": 14,
+              "players_joined": 9,
+              "date": "2025-11-29",
+              "time": "20:30",
+              "date_display": "Today",
+              "time_display": "20:30",
+              "skill_level": "All levels",
+              "venue_type": "Indoor",
+              "distance_km": 1.2,
+              "host": {
+                "id": "usr_def456",
+                "name": "Mike K",
+                "avatar_initials": "MK"
+              },
+              "status": "open",
+              "can_join": true
+            },
+            {
+              "id": "sess_003",
+              "sport_type": "tennis",
+              "sport_icon": "🎾",
+              "title": "Tennis Doubles",
+              "spots_left": 1,
+              "total_players_needed": 4,
+              "players_joined": 3,
+              "date": "2025-11-30",
+              "time": "08:00",
+              "date_display": "Sat",
+              "time_display": "08:00",
+              "skill_level": "Intermediate",
+              "venue_type": "Outdoor",
+              "distance_km": 0.4,
+              "host": {
+                "id": "usr_ghi789",
+                "name": "Sarah J",
+                "avatar_initials": "SJ"
+              },
+              "status": "needs_partner",
+              "can_join": true
+            }
+          ]
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "invalid_coordinates", "message": "Invalid latitude or longitude" } },
+        { "status": 401, "body": { "error": "unauthorized", "message": "Authentication required" } }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/search",
+      "description": "Search sessions by keyword (sports, players, venues)",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "query_params": {
+          "q": "badminton",
+          "lat": 1.3521,
+          "lng": 103.8198,
+          "radius_km": 5,
+          "limit": 20,
+          "offset": 0
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "query": "badminton",
+          "total_results": 3,
+          "sessions": []
+        }
+      },
+      "error_responses": [
+        { "status": 200, "body": { "query": "xyz123nonexistent", "total_results": 0, "sessions": [], "message": "No sessions found matching your search" } }
+      ]
+    }
+  ],
+  "websocket_events": [
+    {
+      "event": "session:updated",
+      "direction": "subscribe",
+      "payload": {
+        "session_id": "sess_001",
+        "spots_left": 1,
+        "players_joined": 3,
+        "status": "open"
+      },
+      "description": "Real-time update when session player count changes"
+    }
+  ],
+  "push_notifications": [],
+  "third_party_integrations": [
+    {
+      "service": "Geolocation API",
+      "purpose": "Get user's current location for nearby search",
+      "data_needed": ["latitude", "longitude"]
+    }
+  ]
+}
+

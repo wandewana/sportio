@@ -1,0 +1,137 @@
+{
+  "module": "Authentication",
+  "description": "User authentication including login, registration, logout, and password recovery",
+  "rest_endpoints": [
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/login",
+      "description": "Authenticate user with email and password",
+      "request": {
+        "headers": { "Content-Type": "application/json" },
+        "body": {
+          "email": "alex@sportio.com",
+          "password": "********"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "user": {
+            "id": "usr_abc123",
+            "email": "alex@sportio.com",
+            "full_name": "Alex B",
+            "avatar_initials": "AB",
+            "skill_level": "Intermediate",
+            "games_played": 120
+          },
+          "access_token": "eyJhbGciOiJIUzI1NiIs...",
+          "refresh_token": "eyJhbGciOiJIUzI1NiIs...",
+          "expires_in": 3600
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "invalid_email_format", "message": "Invalid email format" } },
+        { "status": 400, "body": { "error": "missing_fields", "message": "Email and password are required" } },
+        { "status": 401, "body": { "error": "invalid_credentials", "message": "Incorrect email or password" } },
+        { "status": 429, "body": { "error": "too_many_attempts", "message": "Too many login attempts. Try again later" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/register",
+      "description": "Create new user account",
+      "request": {
+        "headers": { "Content-Type": "application/json" },
+        "body": {
+          "full_name": "Alex B",
+          "email": "alex@sportio.com",
+          "password": "SecurePass123",
+          "confirm_password": "SecurePass123"
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "user": {
+            "id": "usr_abc123",
+            "email": "alex@sportio.com",
+            "full_name": "Alex B",
+            "avatar_initials": "AB",
+            "skill_level": "Beginner",
+            "games_played": 0
+          },
+          "access_token": "eyJhbGciOiJIUzI1NiIs...",
+          "refresh_token": "eyJhbGciOiJIUzI1NiIs...",
+          "expires_in": 3600
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "missing_fields", "message": "All fields are required" } },
+        { "status": 400, "body": { "error": "invalid_email_format", "message": "Invalid email format" } },
+        { "status": 400, "body": { "error": "password_mismatch", "message": "Passwords do not match" } },
+        { "status": 400, "body": { "error": "weak_password", "message": "Password must be at least 8 characters" } },
+        { "status": 409, "body": { "error": "email_exists", "message": "Email already registered" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/logout",
+      "description": "End user session and invalidate tokens",
+      "request": {
+        "headers": {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIs..."
+        },
+        "body": {
+          "refresh_token": "eyJhbGciOiJIUzI1NiIs..."
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": { "message": "Logged out successfully" }
+      },
+      "error_responses": [
+        { "status": 401, "body": { "error": "invalid_token", "message": "Invalid or expired token" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/forgot-password",
+      "description": "Request password reset email",
+      "request": {
+        "headers": { "Content-Type": "application/json" },
+        "body": { "email": "alex@sportio.com" }
+      },
+      "response": {
+        "status": 200,
+        "body": { "message": "Password reset email sent" }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "invalid_email_format", "message": "Invalid email format" } },
+        { "status": 404, "body": { "error": "email_not_found", "message": "No account found with this email" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/auth/refresh",
+      "description": "Refresh access token using refresh token",
+      "request": {
+        "headers": { "Content-Type": "application/json" },
+        "body": { "refresh_token": "eyJhbGciOiJIUzI1NiIs..." }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "access_token": "eyJhbGciOiJIUzI1NiIs...",
+          "expires_in": 3600
+        }
+      },
+      "error_responses": [
+        { "status": 401, "body": { "error": "invalid_refresh_token", "message": "Invalid or expired refresh token" } }
+      ]
+    }
+  ],
+  "websocket_events": [],
+  "push_notifications": [],
+  "third_party_integrations": []
+}
+

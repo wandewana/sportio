@@ -1,0 +1,133 @@
+{
+  "module": "Booking Flow",
+  "description": "Time slot selection, price calculation, and booking confirmation",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/venues/{venue_id}/slots",
+      "description": "Get available time slots for a venue on a specific date",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "venue_id": "ven_001" },
+        "query_params": {
+          "date": "2025-11-30",
+          "sport_type": "badminton",
+          "duration_hours": 1
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "venue_id": "ven_001",
+          "venue_name": "BlueCourt",
+          "date": "2025-11-30",
+          "date_display": "Saturday",
+          "court_info": "Indoor court #3",
+          "slots": [
+            { "time": "17:00", "end_time": "18:00", "label": "17:00 - 18:00", "available": true },
+            { "time": "18:00", "end_time": "19:00", "label": "18:00 - 19:00", "available": true },
+            { "time": "19:00", "end_time": "20:00", "label": "19:00 - 20:00", "available": true, "recommended": true },
+            { "time": "20:00", "end_time": "21:00", "label": "20:00 - 21:00", "available": true },
+            { "time": "21:00", "end_time": "22:00", "label": "21:00 - 22:00", "available": true }
+          ]
+        }
+      },
+      "error_responses": [
+        { "status": 404, "body": { "error": "venue_not_found", "message": "Venue not found" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/sessions/{session_id}/calculate-price",
+      "description": "Calculate booking price based on venue and players",
+      "request": {
+        "headers": { "Authorization": "Bearer ...", "Content-Type": "application/json" },
+        "path_params": { "session_id": "sess_001" },
+        "body": {
+          "venue_id": "ven_001",
+          "time_slot": "19:00",
+          "duration_hours": 1
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "summary": {
+            "sport": "Badminton",
+            "time": "19:00",
+            "venue_name": "BlueCourt",
+            "display": "Badminton • 19:00 - BlueCourt"
+          },
+          "pricing": {
+            "total_cost": 32,
+            "cost_per_person": 8,
+            "players_count": 4,
+            "currency": "USD",
+            "display_total": "$32",
+            "display_per_person": "$8 / person (4)"
+          },
+          "split_payment_available": true
+        }
+      },
+      "error_responses": []
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/sessions/{session_id}/book",
+      "description": "Confirm and lock the booking",
+      "request": {
+        "headers": { "Authorization": "Bearer ...", "Content-Type": "application/json" },
+        "path_params": { "session_id": "sess_001" },
+        "body": {
+          "venue_id": "ven_001",
+          "time_slot": "19:00",
+          "duration_hours": 1,
+          "split_payment": true
+        }
+      },
+      "response": {
+        "status": 201,
+        "body": {
+          "booking": {
+            "id": "book_001",
+            "session_id": "sess_001",
+            "venue_id": "ven_001",
+            "venue_name": "BlueCourt Sports Center",
+            "court": "Indoor court #3",
+            "date": "2025-11-30",
+            "time": "19:00",
+            "duration_hours": 1,
+            "total_cost": 32,
+            "cost_per_person": 8,
+            "split_payment": true,
+            "status": "confirmed",
+            "created_at": "2025-11-29T11:00:00Z"
+          },
+          "message": "Court booked: BlueCourt • 19:00",
+          "notification_sent": true
+        }
+      },
+      "error_responses": [
+        { "status": 409, "body": { "error": "slot_taken", "message": "This time slot was just booked by another user. Please select a different slot." } },
+        { "status": 400, "body": { "error": "slot_unavailable", "message": "Selected time slot is no longer available" } },
+        { "status": 403, "body": { "error": "not_host", "message": "Only session host can confirm booking" } }
+      ]
+    }
+  ],
+  "websocket_events": [
+    {
+      "event": "slot:taken",
+      "direction": "subscribe",
+      "payload": {
+        "venue_id": "ven_001",
+        "date": "2025-11-30",
+        "time_slot": "19:00",
+        "available": false
+      },
+      "description": "Time slot became unavailable while user was viewing"
+    }
+  ],
+  "push_notifications": [],
+  "third_party_integrations": []
+}
+

@@ -1,0 +1,129 @@
+{
+  "module": "Venue Selection",
+  "description": "Browse and select venue for session booking",
+  "rest_endpoints": [
+    {
+      "method": "GET",
+      "path": "/api/v1/sessions/{session_id}/venues",
+      "description": "Get recommended venues for a session",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "session_id": "sess_001" },
+        "query_params": {
+          "lat": 1.3521,
+          "lng": 103.8198,
+          "sort_by": "distance"
+        }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "session_id": "sess_001",
+          "players_count": 4,
+          "recommendation_label": "Recommended for 4 players",
+          "venues": [
+            {
+              "id": "ven_001",
+              "name": "BlueCourt Sports Center",
+              "venue_icon": "🏟️",
+              "type": "Indoor",
+              "type_label": "Indoor courts",
+              "distance_km": 0.8,
+              "distance_label": "0.8 km away",
+              "price_per_hour_per_person": 8,
+              "price_label": "$8 / hr per person",
+              "rating": 4.5,
+              "rating_label": "4.5 ⭐",
+              "is_recommended": true,
+              "available_slots": ["17:00", "18:00", "19:00", "20:00", "21:00"]
+            },
+            {
+              "id": "ven_002",
+              "name": "Neighborhood Hall",
+              "venue_icon": "🏟️",
+              "type": "Outdoor",
+              "type_label": "Outdoor",
+              "distance_km": 1.2,
+              "distance_label": "1.2 km",
+              "price_per_hour_per_person": 6,
+              "price_label": "$6 / hr per person",
+              "rating": 4.0,
+              "rating_label": "4.0 ⭐",
+              "is_recommended": false,
+              "available_slots": ["17:00", "18:00", "19:00"]
+            }
+          ]
+        }
+      },
+      "error_responses": [
+        { "status": 403, "body": { "error": "not_host", "message": "Only session host can select venue" } },
+        { "status": 400, "body": { "error": "insufficient_players", "message": "Minimum players not reached for booking" } },
+        { "status": 200, "body": { "session_id": "sess_001", "venues": [], "message": "No venues available in your area" } }
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/api/v1/venues/{venue_id}",
+      "description": "Get detailed venue information",
+      "request": {
+        "headers": { "Authorization": "Bearer ..." },
+        "path_params": { "venue_id": "ven_001" }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "id": "ven_001",
+          "name": "BlueCourt Sports Center",
+          "description": "Premium indoor sports facility",
+          "address": "123 Sports Avenue, City",
+          "lat": 1.3530,
+          "lng": 103.8210,
+          "type": "Indoor",
+          "amenities": ["Parking", "Showers", "Lockers", "Cafe"],
+          "sports_available": ["badminton", "tennis", "futsal"],
+          "rating": 4.5,
+          "review_count": 128,
+          "photos": ["https://cdn.sportio.com/venues/ven_001/1.jpg"],
+          "operating_hours": { "open": "06:00", "close": "23:00" },
+          "price_per_hour_per_person": 8,
+          "contact_phone": "+65 1234 5678"
+        }
+      },
+      "error_responses": [
+        { "status": 404, "body": { "error": "venue_not_found", "message": "Venue not found" } }
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/api/v1/sessions/{session_id}/select-venue",
+      "description": "Select a venue for the session (before time slot)",
+      "request": {
+        "headers": { "Authorization": "Bearer ...", "Content-Type": "application/json" },
+        "path_params": { "session_id": "sess_001" },
+        "body": { "venue_id": "ven_001" }
+      },
+      "response": {
+        "status": 200,
+        "body": {
+          "session_id": "sess_001",
+          "venue_id": "ven_001",
+          "venue_name": "BlueCourt Sports Center",
+          "message": "Venue selected. Please choose a time slot."
+        }
+      },
+      "error_responses": [
+        { "status": 400, "body": { "error": "venue_unavailable", "message": "Venue has no available slots" } }
+      ]
+    }
+  ],
+  "websocket_events": [],
+  "push_notifications": [],
+  "third_party_integrations": [
+    {
+      "service": "Google Maps SDK",
+      "purpose": "Show venue location on map",
+      "data_needed": ["venue_lat", "venue_lng"]
+    }
+  ]
+}
+
