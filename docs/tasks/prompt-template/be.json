@@ -1,0 +1,393 @@
+{
+  "task": "{{TASK_TITLE}}",
+  "taskType": "{{TASK_TYPE}}",
+  "CRITICAL_REQUIREMENT": "YOU MUST CREATE BOTH IMPLEMENTATION FILES AND TEST FILES. TESTS ARE NOT OPTIONAL. DO NOT SUBMIT WITHOUT TESTS.",
+  "context": {
+    "project": "{{PROJECT_NAME}}",
+    "stack": {
+      "framework": "{{FRAMEWORK}}",
+      "database": "{{DATABASE}}",
+      "paradigm": "{{PARADIGM}}"
+    },
+    "taskDescription": "{{TASK_DESCRIPTION}}"
+  },
+  "externalIntegrations": {
+    "INSTRUCTION": "If this task involves 3rd party services (Stripe, Maps, AWS, etc.), fill this section. If purely internal, remove this section.",
+    "services": [
+      {
+        "name": "{{SERVICE_NAME}} (e.g., Stripe, Google Maps)",
+        "sdkVersion": "{{SDK_VERSION}} (e.g., com.stripe:stripe-java:24.0.0)",
+        "documentationLink": "{{DOC_LINK}}"
+      }
+    ],
+    "authMechanism": {
+      "type": "{{AUTH_TYPE}} (e.g., API Key, OAuth2, Service Account)",
+      "securityWarning": "DO NOT PASTE ACTUAL SECRETS HERE. Only list the variable names/keys required."
+    }
+  },
+  "environmentConfiguration": {
+    "INSTRUCTION": "List NEW environment variables or config properties required for this task. DO NOT INCLUDE REAL VALUES.",
+    "newVariables": [
+      {
+        "key": "{{CONFIG_KEY}} (e.g., STRIPE_SECRET_KEY, GOOGLE_MAPS_API_KEY)",
+        "description": "Description of what this key enables",
+        "requiredInFiles": ["env.example", "application.yml", "deployment.yaml", "CI/CD secrets"]
+      }
+    ]
+  },
+  "preExistingResources": {
+    "INSTRUCTION": "List all existing files, classes, tables, or resources that already exist and should NOT be modified or recreated",
+    "existingFiles": [
+      "{{EXISTING_FILE_PATH_1}}",
+      "{{EXISTING_FILE_PATH_2}}"
+    ],
+    "existingClasses": [
+      "{{EXISTING_CLASS_1}}",
+      "{{EXISTING_CLASS_2}}"
+    ],
+    "relevantContext": {
+      "INSTRUCTION": "Provide any relevant context about existing code, database schema, business rules, etc."
+    }
+  },
+  "filesToCreate": {
+    "INSTRUCTION": "List all files that need to be created for this task. Structure depends on task type.",
+    "files": [
+      {
+        "path": "{{FILE_PATH_1}}",
+        "type": "{{FILE_TYPE}}",
+        "description": "{{FILE_DESCRIPTION}}",
+        "annotations": ["INSTRUCTION: List required annotations if applicable"],
+        "dependencies": ["INSTRUCTION: List dependencies/imports if applicable"],
+        "specifications": {
+          "INSTRUCTION": "Provide detailed specifications for this file. Examples:",
+          "forController": {
+            "endpoints": [
+              {
+                "method": "{{HTTP_METHOD}}",
+                "path": "{{ENDPOINT_PATH}}",
+                "description": "{{ENDPOINT_DESCRIPTION}}",
+                "requestBody": "{{REQUEST_TYPE}}",
+                "responseBody": "{{RESPONSE_TYPE}}",
+                "statusCodes": ["200 OK", "404 Not Found", "400 Bad Request"]
+              }
+            ]
+          },
+          "forService": {
+            "methods": [
+              {
+                "signature": "{{METHOD_SIGNATURE}}",
+                "description": "{{METHOD_DESCRIPTION}}",
+                "parameters": ["{{PARAM_1}}", "{{PARAM_2}}"],
+                "returnType": "{{RETURN_TYPE}}",
+                "businessLogic": "{{BUSINESS_LOGIC_DESCRIPTION}}"
+              }
+            ]
+          },
+          "forDTO": {
+            "fields": ["INSTRUCTION: List all fields with types and validation"],
+            "annotations": ["@Data", "@Builder"]
+          },
+          "forEnum": {
+            "values": ["VALUE1", "VALUE2", "VALUE3"]
+          },
+          "forUtil": {
+            "methods": ["INSTRUCTION: List utility methods to implement"]
+          },
+          "forConfig": {
+            "description": "Configuration class for external integrations",
+            "properties": ["INSTRUCTION: List @Value or @ConfigurationProperties fields binding to environmentConfiguration"],
+            "beans": ["INSTRUCTION: List beans to be created (e.g., StripeClient, S3Client)"]
+          }
+        }
+      }
+    ]
+  },
+  "filesToModify": {
+    "INSTRUCTION": "List all existing files that need to be modified. CRITICAL: Include build files (pom.xml, package.json) if adding new dependencies.",
+    "files": [
+      {
+        "path": "{{EXISTING_FILE_PATH}}",
+        "modificationType": "{{MODIFICATION_TYPE}}",
+        "changes": [
+          {
+            "location": "{{CLASS_NAME}}.{{METHOD_NAME}} or 'dependencies block'",
+            "changeType": "{{ADD|MODIFY|REMOVE}}",
+            "description": "{{CHANGE_DESCRIPTION}}",
+            "newCode": "INSTRUCTION: Provide exact code to add/modify (e.g., implementation 'com.stripe:stripe-java:24.0.0')"
+          }
+        ]
+      }
+    ]
+  },
+  "functionalRequirements": {
+    "INSTRUCTION": "Describe what the implementation should do functionally. Be specific about business rules, validation, edge cases.",
+    "requirements": [
+      {
+        "id": "REQ-1",
+        "description": "{{REQUIREMENT_DESCRIPTION}}",
+        "acceptanceCriteria": [
+          "{{CRITERIA_1}}",
+          "{{CRITERIA_2}}"
+        ],
+        "examples": [
+          {
+            "scenario": "{{SCENARIO_DESCRIPTION}}",
+            "input": "{{INPUT_EXAMPLE}}",
+            "expectedOutput": "{{OUTPUT_EXAMPLE}}"
+          }
+        ]
+      }
+    ],
+    "businessRules": [
+      "INSTRUCTION: List all business rules that must be enforced. Examples:",
+      "- Validation rules (e.g., 'email must be unique')",
+      "- State transitions (e.g., 'order can only be cancelled if status is PENDING')",
+      "- Calculations (e.g., 'total = sum of all items + tax')",
+      "- Constraints (e.g., 'maximum 10 items per order')"
+    ],
+    "edgeCases": [
+      "INSTRUCTION: List edge cases to handle. Examples:",
+      "- Empty lists",
+      "- Null values",
+      "- Duplicate entries",
+      "- Concurrent modifications",
+      "- Invalid state transitions",
+      "- Third-party API downtime/timeouts"
+    ]
+  },
+  "technicalRequirements": {
+    "INSTRUCTION": "Specify technical constraints, patterns, and best practices to follow",
+    "architecture": {
+      "INSTRUCTION": "Describe architectural patterns to follow. Examples:",
+      "patterns": ["{{PATTERN_1}}", "{{PATTERN_2}}"],
+      "examples": [
+        "If reactive: use Mono<T> for single results, Flux<T> for multiple",
+        "If REST: follow RESTful conventions",
+        "If event-driven: publish events for state changes"
+      ]
+    },
+    "errorHandling": {
+      "INSTRUCTION": "Specify how errors should be handled",
+      "strategies": [
+        "{{ERROR_HANDLING_STRATEGY_1}}",
+        "{{ERROR_HANDLING_STRATEGY_2}}"
+      ],
+      "examples": [
+        "Throw ResourceNotFoundException for not found",
+        "Return 400 for validation errors",
+        "Return 500 for unexpected errors",
+        "Wrap external SDK exceptions in custom domain exceptions"
+      ]
+    },
+    "logging": {
+      "INSTRUCTION": "Specify logging requirements",
+      "levels": {
+        "INFO": ["{{INFO_LOG_EXAMPLE}}"],
+        "ERROR": ["{{ERROR_LOG_EXAMPLE}}"],
+        "DEBUG": ["{{DEBUG_LOG_EXAMPLE}}"]
+      }
+    },
+    "security": {
+      "INSTRUCTION": "Specify security requirements.",
+      "requirements": [
+        "NEVER log sensitive API keys or secrets",
+        "Use Environment Variables for all credentials",
+        "{{SECURITY_REQUIREMENT_1}}"
+      ]
+    },
+    "codeStandards": {
+      "INSTRUCTION": "List code standards and best practices to follow",
+      "standards": [
+        "Use @Slf4j for logging",
+        "Use @RequiredArgsConstructor for dependency injection",
+        "Follow existing code style in the project",
+        "Add JavaDoc for public methods",
+        "{{ADDITIONAL_STANDARD}}"
+      ]
+    }
+  },
+  "testing_MANDATORY_DO_NOT_SKIP": {
+    "CRITICAL_INSTRUCTION": "YOU MUST CREATE TEST FILES. TESTS ARE NOT OPTIONAL. DO NOT SKIP THIS SECTION.",
+    "DO_NOT_RUN_TESTS": "You do NOT need to run the tests. Just ensure the test files compile without errors.",
+    "testStrategy": {
+      "INSTRUCTION": "Describe what needs to be tested and how. For external integrations, use mocks.",
+      "testTypes": [
+        {
+          "type": "{{TEST_TYPE}}",
+          "description": "{{TEST_TYPE_DESCRIPTION}}",
+          "examples": [
+            "Unit tests - Test individual methods in isolation",
+            "Integration tests - Test API endpoints with database",
+            "Mock tests - Mock external 3rd party APIs (do not call real Stripe/Maps APIs in tests)"
+          ]
+        }
+      ]
+    },
+    "testFiles_REQUIRED": [
+      {
+        "path": "{{TEST_FILE_PATH_1}}",
+        "type": "{{TEST_TYPE}}",
+        "MUST_EXTEND": "{{BASE_TEST_CLASS}}",
+        "MUST_HAVE_ANNOTATIONS": ["{{ANNOTATION_1}}", "{{ANNOTATION_2}}"],
+        "MUST_INJECT": ["{{DEPENDENCY_1}}", "{{DEPENDENCY_2}}"],
+        "testScenarios_MINIMUM": [
+          "INSTRUCTION: List all test scenarios for this file. Be specific about:",
+          "- What is being tested",
+          "- Expected input",
+          "- Expected output",
+          "- Edge cases to cover",
+          "Examples:",
+          "testMethodName_Scenario() - Description of what this test verifies"
+        ],
+        "helperMethods": [
+          "INSTRUCTION: List helper methods needed for test setup/teardown",
+          "Examples:",
+          "private {{TYPE}} create{{Entity}}({{params}}) - helper to create test data",
+          "@BeforeEach public void setUp() - setup before each test",
+          "@AfterEach public void tearDown() - cleanup after each test"
+        ]
+      }
+    ],
+    "testCoverage": {
+      "INSTRUCTION": "Specify what must be covered by tests",
+      "mustCover": [
+        "All happy path scenarios",
+        "All error scenarios (validation, not found, etc.)",
+        "All edge cases",
+        "All business rules",
+        "Mocking of external service responses (Success/Failure)",
+        "{{ADDITIONAL_COVERAGE_REQUIREMENT}}"
+      ]
+    },
+    "REFERENCE_EXAMPLES": {
+      "INSTRUCTION": "Provide paths to existing test files that can serve as examples",
+      "examples": [
+        "{{EXAMPLE_TEST_PATH_1}}",
+        "{{EXAMPLE_TEST_PATH_2}}"
+      ]
+    }
+  },
+  "deliverablesChecklist": {
+    "MANDATORY_ORDER": "{{CREATION_ORDER}}",
+    "VERIFICATION_REQUIRED": "After creating each file, verify it compiles without errors. Do not proceed to next file if current file has compilation errors.",
+    "implementationFiles_REQUIRED": [
+      "INSTRUCTION: List all implementation files that must be created",
+      "{{FILE_NAME_1}} (REQUIRED - must compile)",
+      "{{FILE_NAME_2}} (REQUIRED - must compile)"
+    ],
+    "testFiles_REQUIRED_DO_NOT_SKIP": [
+      "INSTRUCTION: List all test files that must be created",
+      "{{TEST_FILE_NAME_1}} (REQUIRED - must compile)",
+      "{{TEST_FILE_NAME_2}} (REQUIRED - must compile)"
+    ],
+    "modifiedFiles": [
+      "INSTRUCTION: List all existing files that will be modified. If none, remove this section.",
+      "{{MODIFIED_FILE_1}} (changes verified)",
+      "{{MODIFIED_FILE_2}} (changes verified)"
+    ],
+    "quality_REQUIRED": [
+      "INSTRUCTION: List quality requirements that must be met",
+      "No compiler warnings or errors",
+      "All files compile successfully",
+      "Code follows project conventions",
+      "Logging implemented where appropriate",
+      "Error handling implemented",
+      "No secrets hardcoded",
+      "{{ADDITIONAL_QUALITY_REQUIREMENT}}"
+    ],
+    "FINAL_CHECK": "Before submitting, verify: {{EXPECTED_FILE_COUNT}} total files created/modified. If count != {{EXPECTED_FILE_COUNT}}, you are missing files."
+  },
+  "successCriteria": [
+    "CRITICAL: All {{EXPECTED_FILE_COUNT}} files created/modified",
+    "CRITICAL: All files compile without errors",
+    "CRITICAL: All test files exist and compile",
+    "CRITICAL: All functional requirements met",
+    "All business rules enforced",
+    "All edge cases handled",
+    "Error handling implemented correctly",
+    "Logging implemented appropriately",
+    "Code follows project standards",
+    "No compiler warnings",
+    "No hardcoded credentials",
+    "{{ADDITIONAL_SUCCESS_CRITERION}}"
+  ],
+  "FAILURE_CONDITIONS": [
+    "FAIL: If test files are not created",
+    "FAIL: If any file has compilation errors",
+    "FAIL: If file count != {{EXPECTED_FILE_COUNT}}",
+    "FAIL: If functional requirements not met",
+    "FAIL: If business rules not enforced",
+    "FAIL: If secrets/API keys are hardcoded in the source",
+    "{{ADDITIONAL_FAILURE_CONDITION}}"
+  ],
+  "fileStructure": {
+    "INSTRUCTION": "List all files involved in this task - both existing and to be created/modified",
+    "toCreate": [
+      "{{FILE_PATH_1}} (CREATE)",
+      "{{FILE_PATH_2}} (CREATE)"
+    ],
+    "toModify": [
+      "INSTRUCTION: List files to modify. If none, remove this section.",
+      "{{FILE_PATH_3}} (MODIFY)",
+      "{{FILE_PATH_4}} (MODIFY)"
+    ],
+    "existing": [
+      "INSTRUCTION: List existing files that provide context but won't be changed",
+      "{{FILE_PATH_5}} (EXISTS - reference only)",
+      "{{FILE_PATH_6}} (EXISTS - reference only)"
+    ]
+  },
+  "PLACEHOLDER_REFERENCE": {
+    "INSTRUCTION": "Replace all {{PLACEHOLDER}} values when creating actual prompts.",
+    "taskIdentification": {
+      "TASK_TITLE": "Short title of the task",
+      "TASK_TYPE": "Type of task (e.g., 'EXTERNAL_INTEGRATION', 'NEW_FEATURE')",
+      "TASK_DESCRIPTION": "Detailed description"
+    },
+    "externalContext": {
+      "SERVICE_NAME": "Name of 3rd party service",
+      "SDK_VERSION": "Maven/Gradle coordinate or NPM version",
+      "DOC_LINK": "Link to documentation",
+      "AUTH_TYPE": "How authentication works",
+      "CONFIG_KEY": "Name of the environment variable (e.g. STRIPE_KEY)"
+    },
+    "files": {
+      "FILE_PATH_1": "Full path to file",
+      "FILE_TYPE": "Type of file (e.g., 'Controller', 'Service', 'Config')",
+      "FILE_DESCRIPTION": "What this file does",
+      "EXISTING_FILE_PATH": "Path to existing file"
+    },
+    "requirements": {
+      "REQUIREMENT_DESCRIPTION": "Description of a requirement",
+      "SCENARIO_DESCRIPTION": "Description of a test scenario"
+    },
+    "deliverables": {
+      "EXPECTED_FILE_COUNT": "Total number of files",
+      "CREATION_ORDER": "Order in which files should be created"
+    }
+  },
+  "USAGE_EXAMPLES": {
+    "INSTRUCTION": "Here are examples of how to use this template for different task types",
+    "examples": [
+      {
+        "taskType": "EXTERNAL_INTEGRATION",
+        "description": "Integrating a 3rd party SDK (Maps, Payment, Storage)",
+        "keyPlaceholders": ["SDK_VERSION", "CONFIG_KEY", "AUTH_TYPE"],
+        "typicalFileCount": "4-5 (1 Config + 1 Service + 1 Build File + Tests)",
+        "criticalReminder": "Ensure API keys are mapped to environment variables, not hardcoded."
+      },
+      {
+        "taskType": "CRUD_IMPLEMENTATION",
+        "description": "Implementing a complete CRUD API for a new entity",
+        "keyPlaceholders": ["MODULE_NAME", "ENTITY_NAME", "API_BASE_PATH"],
+        "typicalFileCount": "7-9 (5-7 implementation + 2 test)"
+      },
+      {
+        "taskType": "ADD_FILTERING",
+        "description": "Adding filtering and sorting to an existing endpoint",
+        "keyPlaceholders": ["ENDPOINT_PATH", "FILTER_PARAMS"],
+        "typicalFileCount": "2-3 (1 modified + 1-2 test)"
+      }
+    ]
+  }
+}

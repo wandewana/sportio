@@ -1,0 +1,205 @@
+{
+  "task": "{{TASK_TITLE}}",
+  "taskType": "{{TASK_TYPE}}",
+  "platformTarget": "{{PLATFORM}}",
+  "CRITICAL_REQUIREMENT": "YOU MUST CREATE IMPLEMENTATION FILES (Logic + View + Styles) AND TEST FILES. DO NOT SUBMIT WITHOUT TESTS.",
+  "context": {
+    "project": "{{PROJECT_NAME}}",
+    "stack": {
+      "framework": "{{FRAMEWORK}} (e.g., Angular, NativeScript, React)",
+      "language": "{{LANGUAGE}} (e.g., TypeScript, Dart)",
+      "stateManagement": "{{STATE_LIB}} (e.g., NgRx, Akita, Redux)",
+      "styling": "{{STYLING_SYSTEM}} (e.g., SCSS, Tailwind, NativeScript CSS)"
+    },
+    "taskDescription": "{{TASK_DESCRIPTION}}"
+  },
+  "uiContext": {
+    "INSTRUCTION": "Define the visual and design context.",
+    "designSystem": "{{DESIGN_SYSTEM}} (e.g., Material Design, Custom, Native components)",
+    "assets": [
+      "{{ASSET_1}} (e.g., 'logo.png' in assets/images)",
+      "{{ICON_1}} (e.g., 'fas-user' font icon)"
+    ],
+    "globalStyles": [
+      "{{GLOBAL_CLASS_1}} (e.g., .primary-btn)",
+      "{{VAR_1}} (e.g., --color-accent)"
+    ]
+  },
+  "externalIntegrations": {
+    "INSTRUCTION": "For 3rd party SDKs (Maps, Firebase) or Device Hardware (Camera, GPS). Remove if not applicable.",
+    "services": [
+      {
+        "name": "{{SERVICE_NAME}}",
+        "sdkVersion": "{{SDK_VERSION}}",
+        "permissions": ["{{PERMISSION_1}} (e.g., android.permission.CAMERA)"]
+      }
+    ],
+    "config": {
+      "keys": ["{{API_KEY_NAME}}"]
+    }
+  },
+  "filesToCreate": {
+    "INSTRUCTION": "List all files. For Angular/NativeScript, separate Template, Style, and Logic if using separate files.",
+    "files": [
+      {
+        "path": "{{FILE_PATH}}",
+        "type": "{{FILE_TYPE}} (e.g., Component, Pipe, Directive, Hook, Page)",
+        "description": "{{FILE_DESCRIPTION}}",
+        "specifications": {
+          "INSTRUCTION": "Select the relevant specification type below:",
+          "forComponent": {
+            "selector": "{{SELECTOR_NAME}} (e.g., app-user-card)",
+            "inputs_props": [
+              "{{PROP_NAME}}: {{TYPE}} (Required? Default?) - Description"
+            ],
+            "outputs_events": [
+              "{{EVENT_NAME}}: EventEmitter<{{TYPE}}> - When it fires"
+            ],
+            "slots_contentProjection": [
+              "{{SLOT_NAME}} - Description of projected content"
+            ],
+            "viewStructure": [
+              "INSTRUCTION: hierarchical description of the UI tree",
+              "Header (Avatar + Name)",
+              "Body (Description text)",
+              "Footer (Action buttons)"
+            ]
+          },
+          "forLogic_Service": {
+            "state": ["{{STATE_VAR}}: {{TYPE}}"],
+            "methods": [
+              "{{METHOD_SIG}} - {{DESCRIPTION}}"
+            ],
+            "observables": [
+              "{{OBSERVABLE_NAME}}$ - Stream description"
+            ]
+          },
+          "forRoute": {
+            "path": "{{URL_PATH}}",
+            "guards": ["{{GUARD_NAME}}"],
+            "resolvers": ["{{RESOLVER_NAME}}"]
+          }
+        }
+      }
+    ]
+  },
+  "filesToModify": {
+    "INSTRUCTION": "List existing files to modify (e.g., AppRoutingModule, Parent Component, Global Styles).",
+    "files": [
+      {
+        "path": "{{EXISTING_FILE_PATH}}",
+        "modificationType": "REGISTER_COMPONENT / ADD_ROUTE / UPDATE_STYLES",
+        "changes": [
+          {
+            "location": "{{LOCATION_MARKER}}",
+            "newCode": "{{CODE_SNIPPET}}"
+          }
+        ]
+      }
+    ]
+  },
+  "functionalRequirements": {
+    "INSTRUCTION": "Define UI behavior and logic.",
+    "userInteractions": [
+      {
+        "action": "{{USER_ACTION}} (e.g., User taps 'Save')",
+        "result": "{{SYSTEM_RESPONSE}} (e.g., Form validates, Loader shows, API called)"
+      },
+      {
+        "action": "{{USER_ACTION_2}}",
+        "result": "{{SYSTEM_RESPONSE_2}}"
+      }
+    ],
+    "stateBehavior": [
+      "INSTRUCTION: How data changes over time",
+      "On init: Fetch data from {{API_ENDPOINT}}",
+      "On error: Set errorState to true, show Toast"
+    ],
+    "navigation": [
+      "From here -> Go to {{DESTINATION_ROUTE}} on success",
+      "Pass parameter {{PARAM}} via navigation extras"
+    ]
+  },
+  "technicalRequirements": {
+    "INSTRUCTION": "Constraints for UI/UX and Platform.",
+    "responsiveness_adaptability": {
+      "webBreakpoints": ["Mobile", "Tablet", "Desktop"],
+      "mobileOrientation": ["Portrait", "Landscape"],
+      "behavior": "Stack columns on mobile, grid on desktop"
+    },
+    "accessibility_a11y": {
+      "standard": "WCAG 2.1 AA / Native Accessibility",
+      "requirements": [
+        "All images must have alt text",
+        "Interactive elements need min-height 44px (Mobile)",
+        "Focus management on modal open/close"
+      ]
+    },
+    "i18n": {
+      "enabled": "{{TRUE/FALSE}}",
+      "instruction": "Use translation pipes/functions for all visible text. Keys: '{{KEY_PREFIX}}.*'"
+    },
+    "styling": {
+      "approach": "{{CSS_APPROACH}} (e.g., Scoped CSS, Tailwind classes)",
+      "theme": "Use variables from variables.scss / Tailwind config"
+    }
+  },
+  "testing_MANDATORY": {
+    "CRITICAL_INSTRUCTION": "Create Unit/Component tests. Mocks are required for external services.",
+    "testStrategy": {
+      "type": "{{TEST_TYPE}} (e.g., TestBed, Spectator, Jest, Cypress)",
+      "mustCover": [
+        "Component Rendering (does it crash?)",
+        "Input binding (do props update view?)",
+        "Output emission (do clicks fire events?)",
+        "Conditional rendering (*ngIf behavior)",
+        "Mock Service integration"
+      ]
+    },
+    "testFiles": [
+      {
+        "path": "{{TEST_FILE_PATH}}",
+        "scenarios": [
+          "should create",
+          "should display user name when input is set",
+          "should emit save event on button click"
+        ]
+      }
+    ]
+  },
+  "deliverablesChecklist": {
+    "files": [
+      "{{IMPL_FILE_1}}",
+      "{{IMPL_FILE_2}}",
+      "{{TEST_FILE}}"
+    ],
+    "quality_checks": [
+      "No linting errors",
+      "Strict type checking enabled",
+      "No hardcoded strings (use i18n or constants)",
+      "Mobile: Verified against SafeArea/Notch constraints"
+    ]
+  },
+  "USAGE_EXAMPLES": {
+    "examples": [
+      {
+        "taskType": "ANGULAR_COMPONENT",
+        "platform": "Web",
+        "description": "Smart Container Component",
+        "keyPlaceholders": ["INPUTS", "OBSERVABLES", "TESTBED"]
+      },
+      {
+        "taskType": "NATIVESCRIPT_PAGE",
+        "platform": "Mobile (iOS/Android)",
+        "description": "Login Screen with Biometrics",
+        "keyPlaceholders": ["XML_NAMESPACE", "DEVICE_PERMISSIONS", "GESTURES"]
+      },
+      {
+        "taskType": "UI_LIBRARY",
+        "platform": "Cross-Platform",
+        "description": "Reusable Button with Variants",
+        "keyPlaceholders": ["SLOTS", "STYLING_THEME", "A11Y"]
+      }
+    ]
+  }
+}
