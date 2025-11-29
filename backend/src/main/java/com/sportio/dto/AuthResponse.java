@@ -1,4 +1,4 @@
-package com.sportio.auth.dto;
+package com.sportio.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

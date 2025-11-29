@@ -1,13 +1,13 @@
-package com.sportio.auth.service;
+package com.sportio.service;
 
-import com.sportio.auth.dto.AuthResponse;
-import com.sportio.auth.dto.LoginRequest;
-import com.sportio.auth.dto.RegisterRequest;
-import com.sportio.auth.dto.UserDto;
-import com.sportio.auth.exception.EmailAlreadyExistsException;
-import com.sportio.auth.exception.InvalidCredentialsException;
-import com.sportio.auth.exception.PasswordMismatchException;
-import com.sportio.auth.util.JwtUtil;
+import com.sportio.dto.AuthResponse;
+import com.sportio.dto.LoginRequest;
+import com.sportio.dto.RegisterRequest;
+import com.sportio.dto.UserDto;
+import com.sportio.exception.EmailAlreadyExistsException;
+import com.sportio.exception.InvalidCredentialsException;
+import com.sportio.exception.PasswordMismatchException;
+import com.sportio.util.JwtUtil;
 import com.sportio.entity.User;
 import com.sportio.repository.UserRepository;
 import lombok.RequiredArgsConstructor;

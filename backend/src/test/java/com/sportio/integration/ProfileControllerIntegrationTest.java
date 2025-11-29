@@ -1,6 +1,6 @@
 package com.sportio.integration;
 
-import com.sportio.auth.util.JwtUtil;
+import com.sportio.util.JwtUtil;
 import com.sportio.dto.UserUpdateRequest;
 import com.sportio.entity.Session;
 import com.sportio.entity.SessionPlayer;

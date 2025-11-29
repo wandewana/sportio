@@ -1,6 +1,6 @@
 package com.sportio.config;
 
-import com.sportio.auth.util.JwtUtil;
+import com.sportio.util.JwtUtil;
 import com.sportio.entity.User;
 import com.sportio.repository.UserRepository;
 import io.jsonwebtoken.JwtException;

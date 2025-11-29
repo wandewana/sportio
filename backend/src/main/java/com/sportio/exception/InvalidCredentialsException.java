@@ -1,4 +1,4 @@
-package com.sportio.auth.exception;
+package com.sportio.exception;
 
 /**
  * Exception thrown when login credentials are invalid.

@@ -1,4 +1,4 @@
-package com.sportio.auth.util;
+package com.sportio.util;
 
 import com.sportio.entity.User;
 import io.jsonwebtoken.Claims;

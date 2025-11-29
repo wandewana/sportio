@@ -1,9 +1,9 @@
-package com.sportio.auth.controller;
+package com.sportio.controller;
 
-import com.sportio.auth.dto.AuthResponse;
-import com.sportio.auth.dto.LoginRequest;
-import com.sportio.auth.dto.RegisterRequest;
-import com.sportio.auth.service.AuthService;
+import com.sportio.dto.AuthResponse;
+import com.sportio.dto.LoginRequest;
+import com.sportio.dto.RegisterRequest;
+import com.sportio.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

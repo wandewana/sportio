@@ -1,7 +1,7 @@
 package com.sportio.integration;
 
-import com.sportio.auth.dto.LoginRequest;
-import com.sportio.auth.dto.RegisterRequest;
+import com.sportio.dto.LoginRequest;
+import com.sportio.dto.RegisterRequest;
 import com.sportio.entity.User;
 import com.sportio.repository.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
