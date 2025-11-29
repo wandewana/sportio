@@ -1,0 +1,10 @@
+<!-- Card Container -->
+<StackLayout
+  class="card"
+  [class.horizontal]="horizontal"
+  [class.padding-sm]="padding === 'sm'"
+  [class.padding-md]="padding === 'md'"
+  [class.padding-lg]="padding === 'lg'">
+  <ng-content></ng-content>
+</StackLayout>
+

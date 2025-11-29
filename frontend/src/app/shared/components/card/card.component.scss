@@ -1,0 +1,30 @@
+/**
+ * Card Styles
+ * 
+ * Based on mockup .card class
+ */
+@import '../../../../styles/variables';
+
+.card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+  border-radius: $border-radius-md;
+  border-width: 1;
+  border-color: $color-border-light;
+  
+  &.horizontal {
+    orientation: horizontal;
+  }
+  
+  &.padding-sm {
+    padding: $spacing-sm;
+  }
+  
+  &.padding-md {
+    padding: $card-padding;
+  }
+  
+  &.padding-lg {
+    padding: $spacing-lg;
+  }
+}
+

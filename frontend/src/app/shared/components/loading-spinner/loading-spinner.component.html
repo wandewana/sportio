@@ -1,0 +1,16 @@
+<!-- Loading Spinner -->
+<StackLayout class="loading-container">
+  <ActivityIndicator 
+    [busy]="true" 
+    class="activity-indicator"
+    [class.size-small]="size === 'small'"
+    [class.size-medium]="size === 'medium'"
+    [class.size-large]="size === 'large'">
+  </ActivityIndicator>
+  <Label 
+    *ngIf="message" 
+    class="loading-message muted" 
+    [text]="message">
+  </Label>
+</StackLayout>
+

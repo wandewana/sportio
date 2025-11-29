@@ -1,0 +1,21 @@
+/**
+ * Secondary Button Styles
+ * 
+ * Based on mockup .outline-btn class
+ */
+@import '../../../../styles/variables';
+
+.secondary-btn {
+  background-color: transparent;
+  color: $color-text-primary;
+  font-size: $font-size-caption;
+  padding: 10 $spacing-md;
+  border-radius: $border-radius-sm;
+  border-width: 1;
+  border-color: $color-border;
+  
+  &.disabled {
+    opacity: 0.5;
+  }
+}
+

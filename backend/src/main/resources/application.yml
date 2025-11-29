@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: sportio-backend
+
+  r2dbc:
+    url: r2dbc:postgresql://${DB_HOST:localhost}:5432/${DB_NAME:sportio_dev}
+    username: ${DB_USER:sportio_user}
+    password: ${DB_PASSWORD:password}
+    pool:
+      initial-size: 10
+      max-size: 50
+      max-idle-time: 30m
+
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: 6379
+      lettuce:
+        pool:
+          max-active: 20
+          max-idle: 10
+          min-idle: 5
+
+  security:
+    jwt:
+      secret: ${JWT_SECRET:your-jwt-secret-key-here-minimum-256-bits}
+      access-token-expiration: 900000
+      refresh-token-expiration: 604800000
+
+  flyway:
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+    clean-disabled: true
+    out-of-order: false
+
+server:
+  port: 8080
+
+logging:
+  level:
+    com.sportio: DEBUG
+    org.springframework.security: DEBUG
+    org.springframework.data.r2dbc: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+geo:
+  default-radius-km: 10
+  max-radius-km: 50
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

@@ -1,0 +1,170 @@
+/**
+ * Sportio Main Stylesheet
+ * 
+ * Global styles and NativeScript base configuration.
+ * Imports design system variables and applies base styling.
+ */
+@import 'variables';
+@import 'mixins';
+
+// =============================================================================
+// BASE STYLES
+// =============================================================================
+
+// Global app styling
+Page {
+  background-color: $color-background;
+  color: $color-text-primary;
+}
+
+// Default font
+.ns-root {
+  font-family: $font-family-base;
+  font-size: $font-size-body;
+  color: $color-text-primary;
+}
+
+// =============================================================================
+// TYPOGRAPHY CLASSES
+// =============================================================================
+
+.h1 {
+  @include heading-1;
+}
+
+.h2 {
+  @include heading-2;
+}
+
+.h3 {
+  @include heading-3;
+}
+
+.body {
+  @include body-text;
+}
+
+.caption {
+  @include caption-text;
+}
+
+.small {
+  @include small-text;
+}
+
+.muted {
+  color: $color-text-secondary;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-bold {
+  font-weight: $font-weight-bold;
+}
+
+.text-semibold {
+  font-weight: $font-weight-semibold;
+}
+
+// =============================================================================
+// COLOR CLASSES
+// =============================================================================
+
+.text-primary {
+  color: $color-primary;
+}
+
+.text-success {
+  color: $color-success;
+}
+
+.text-warning {
+  color: $color-warning;
+}
+
+.text-error {
+  color: $color-error;
+}
+
+// =============================================================================
+// SPACING UTILITIES
+// =============================================================================
+
+.m-0 { margin: 0; }
+.m-xs { margin: $spacing-xs; }
+.m-sm { margin: $spacing-sm; }
+.m-md { margin: $spacing-md; }
+.m-lg { margin: $spacing-lg; }
+.m-xl { margin: $spacing-xl; }
+
+.mt-sm { margin-top: $spacing-sm; }
+.mt-md { margin-top: $spacing-md; }
+.mt-lg { margin-top: $spacing-lg; }
+.mt-xl { margin-top: $spacing-xl; }
+
+.mb-sm { margin-bottom: $spacing-sm; }
+.mb-md { margin-bottom: $spacing-md; }
+.mb-lg { margin-bottom: $spacing-lg; }
+.mb-xl { margin-bottom: $spacing-xl; }
+
+.p-0 { padding: 0; }
+.p-sm { padding: $spacing-sm; }
+.p-md { padding: $spacing-md; }
+.p-lg { padding: $spacing-lg; }
+.p-xl { padding: $spacing-xl; }
+
+// =============================================================================
+// LAYOUT UTILITIES
+// =============================================================================
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.gap-sm {
+  gap: $spacing-sm;
+}
+
+.gap-md {
+  gap: $spacing-md;
+}
+
+.gap-lg {
+  gap: $spacing-lg;
+}
+
+// =============================================================================
+// COMPONENT CLASSES
+// =============================================================================
+
+.card {
+  @include card-base;
+}
+
+.pill {
+  background: $color-glass;
+  padding: 6 8;
+  border-radius: $border-radius-full;
+  font-size: $font-size-small;
+}
+

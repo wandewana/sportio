@@ -1,0 +1,36 @@
+/**
+ * Loading Spinner Styles
+ */
+@import '../../../../styles/variables';
+
+.loading-container {
+  horizontal-align: center;
+  vertical-align: center;
+  
+  .activity-indicator {
+    color: $color-primary;
+    
+    &.size-small {
+      width: 24;
+      height: 24;
+    }
+    
+    &.size-medium {
+      width: 40;
+      height: 40;
+    }
+    
+    &.size-large {
+      width: 56;
+      height: 56;
+    }
+  }
+  
+  .loading-message {
+    margin-top: $spacing-sm;
+    font-size: $font-size-caption;
+    color: $color-text-secondary;
+    text-align: center;
+  }
+}
+
