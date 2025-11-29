@@ -1,0 +1,251 @@
+{
+  "project": "Sportio",
+  "module": "UI/Frontend",
+  "description": "Mobile app screens, components, navigation, and user interactions",
+  "tasks": [
+    {
+      "id": "FE001",
+      "title": "Authentication Flow Screens",
+      "description": "Implement login, registration, and password reset screens",
+      "acceptance_criteria": [
+        "Login screen with email/password fields works",
+        "Registration form with validation functions",
+        "Password reset flow is complete",
+        "Error handling for authentication failures works",
+        "Loading states during authentication are displayed"
+      ],
+      "dependencies": [],
+      "mockup_screens": ["login", "register", "forgot-password", "reset-password"],
+      "api_endpoints": ["API001_authentication"],
+      "test_cases": ["TC001", "TC002", "TC003", "TC004"],
+      "components": ["LoginForm", "RegistrationForm", "PasswordResetForm"],
+      "estimated_complexity": "medium"
+    },
+    {
+      "id": "FE002",
+      "title": "Home and Discovery Screen",
+      "description": "Implement main home screen with session discovery",
+      "acceptance_criteria": [
+        "Session cards display all required information",
+        "Filtering by sport type works",
+        "Search functionality functions properly",
+        "Pull-to-refresh updates session list",
+        "Empty states are properly handled"
+      ],
+      "dependencies": ["FE001"],
+      "mockup_screens": ["home", "session-discovery"],
+      "api_endpoints": ["API002_home_discovery"],
+      "test_cases": ["TC005", "TC006"],
+      "components": ["SessionCard", "SportFilter", "SearchBar", "SessionList"],
+      "estimated_complexity": "medium"
+    },
+    {
+      "id": "FE003",
+      "title": "Map View Screen",
+      "description": "Implement interactive map with session pins",
+      "acceptance_criteria": [
+        "Google Maps integration displays sessions as pins",
+        "Pin tap shows session details",
+        "User location is displayed on map",
+        "Map controls (zoom, pan) work properly",
+        "Session clustering for nearby sessions functions"
+      ],
+      "dependencies": ["FE002"],
+      "mockup_screens": ["map-view"],
+      "api_endpoints": ["API003_map_view"],
+      "test_cases": ["TC010", "TC011"],
+      "components": ["MapView", "SessionPin", "LocationMarker"],
+      "third_party_integrations": ["Google Maps SDK"],
+      "estimated_complexity": "high"
+    },
+    {
+      "id": "FE004",
+      "title": "Session Creation Flow",
+      "description": "Implement session creation and proposal screens",
+      "acceptance_criteria": [
+        "Session creation form with all required fields works",
+        "Sport type selection functions properly",
+        "Date and time pickers work correctly",
+        "Player limit selection functions",
+        "Form validation provides clear error messages"
+      ],
+      "dependencies": ["FE002"],
+      "mockup_screens": ["propose-session", "session-details"],
+      "api_endpoints": ["API004_session_creation"],
+      "test_cases": ["TC007"],
+      "components": ["SessionForm", "SportPicker", "DateTimePicker", "PlayerLimitSelector"],
+      "estimated_complexity": "medium"
+    },
+    {
+      "id": "FE005",
+      "title": "Session Lobby Screen",
+      "description": "Implement session details and player management",
+      "acceptance_criteria": [
+        "Session details display all information correctly",
+        "Player list shows joined players with avatars",
+        "Join/leave buttons function properly",
+        "Host controls (edit, cancel) work",
+        "Player count updates in real-time"
+      ],
+      "dependencies": ["FE004"],
+      "mockup_screens": ["session-lobby"],
+      "api_endpoints": ["API005_session_lobby"],
+      "test_cases": ["TC008", "TC009"],
+      "components": ["SessionLobby", "PlayerList", "SessionActions"],
+      "estimated_complexity": "medium"
+    },
+    {
+      "id": "FE006",
+      "title": "Venue Selection Flow",
+      "description": "Implement venue search and selection screens",
+      "acceptance_criteria": [
+        "Venue search with filters works",
+        "Venue cards display all required information",
+        "Map integration for venue location works",
+        "Venue selection confirmation functions",
+        "Distance and pricing information is displayed"
+      ],
+      "dependencies": ["FE005"],
+      "mockup_screens": ["venue-search", "venue-details"],
+      "api_endpoints": ["API008_venue_selection"],
+      "test_cases": ["TC012"],
+      "components": ["VenueSearch", "VenueCard", "VenueMap"],
+      "estimated_complexity": "medium"
+    },
+    {
+      "id": "FE007",
+      "title": "Booking Confirmation Flow",
+      "description": "Implement booking summary and confirmation screens",
+      "acceptance_criteria": [
+        "Booking summary displays all cost breakdowns",
+        "Payment method selection works",
+        "Stripe payment integration functions",
+        "Booking confirmation screen shows success",
+        "Error handling for payment failures works"
+      ],
+      "dependencies": ["FE006"],
+      "mockup_screens": ["booking-summary", "payment", "booking-confirmed"],
+      "api_endpoints": ["API010_booking_confirmation"],
+      "test_cases": ["TC014", "TC015", "TC016"],
+      "components": ["BookingSummary", "PaymentForm", "BookingConfirmation"],
+      "third_party_integrations": ["Stripe"],
+      "estimated_complexity": "high"
+    },
+    {
+      "id": "FE008",
+      "title": "Chat Interface",
+      "description": "Implement real-time chat screen for sessions",
+      "acceptance_criteria": [
+        "Message list displays chat history",
+        "Real-time message sending and receiving works",
+        "Typing indicators function properly",
+        "System messages (player joins/leaves) display correctly",
+        "Message timestamps and sender information are accurate"
+      ],
+      "dependencies": ["FE005"],
+      "mockup_screens": ["chat"],
+      "api_endpoints": ["API011_chat"],
+      "test_cases": ["TC011", "TC017"],
+      "components": ["ChatScreen", "MessageList", "MessageInput", "TypingIndicator"],
+      "websocket_events": ["chat:message", "chat:typing"],
+      "estimated_complexity": "high"
+    },
+    {
+      "id": "FE009",
+      "title": "Profile and Settings Screens",
+      "description": "Implement user profile and settings management",
+      "acceptance_criteria": [
+        "Profile screen displays user information and stats",
+        "Profile editing functionality works",
+        "Game history and statistics are displayed",
+        "Settings screen with preferences functions",
+        "Other users' public profiles display correctly"
+      ],
+      "dependencies": ["FE001"],
+      "mockup_screens": ["profile", "settings"],
+      "api_endpoints": ["API012_profile"],
+      "test_cases": ["TC013"],
+      "components": ["ProfileScreen", "SettingsScreen", "StatsDisplay", "GameHistory"],
+      "estimated_complexity": "medium"
+    },
+    {
+      "id": "FE010",
+      "title": "Notifications System",
+      "description": "Implement notifications screen and preferences",
+      "acceptance_criteria": [
+        "Notifications list displays all notification types",
+        "Mark as read functionality works",
+        "Notification preferences screen functions",
+        "Push notification handling works",
+        "Real-time notification updates function"
+      ],
+      "dependencies": ["FE001"],
+      "mockup_screens": ["notifications"],
+      "api_endpoints": ["API013_notifications"],
+      "test_cases": ["TC019", "TC020"],
+      "components": ["NotificationsScreen", "NotificationItem", "NotificationSettings"],
+      "websocket_events": ["notification:new"],
+      "estimated_complexity": "medium"
+    },
+    {
+      "id": "FE011",
+      "title": "Report System Interface",
+      "description": "Implement user reporting screens",
+      "acceptance_criteria": [
+        "Report reason selection works",
+        "Report submission form functions",
+        "User's submitted reports list displays",
+        "Report status updates are shown",
+        "Validation prevents self-reporting"
+      ],
+      "dependencies": ["FE001"],
+      "mockup_screens": ["report-user"],
+      "api_endpoints": ["API014_report"],
+      "test_cases": ["TC021"],
+      "components": ["ReportScreen", "ReportForm", "ReportHistory"],
+      "estimated_complexity": "low"
+    },
+    {
+      "id": "FE012",
+      "title": "Navigation and App Structure",
+      "description": "Implement main app navigation and tab structure",
+      "acceptance_criteria": [
+        "Bottom tab navigation works correctly",
+        "Screen transitions are smooth",
+        "Back navigation functions properly",
+        "Deep linking to specific screens works",
+        "App state is maintained during navigation"
+      ],
+      "dependencies": [],
+      "test_cases": ["TC002", "TC015", "TC017"],
+      "mockup_screens": ["all"],
+      "components": ["AppNavigator", "TabBar", "StackNavigator"],
+      "estimated_complexity": "medium"
+    },
+    {
+      "id": "FE013",
+      "title": "Common UI Components",
+      "description": "Implement reusable UI components and design system",
+      "acceptance_criteria": [
+        "Button components with variants work",
+        "Input fields with validation display",
+        "Card components are consistent",
+        "Loading states and empty states work",
+        "Dark theme support functions"
+      ],
+      "dependencies": [],
+      "test_cases": ["TC001", "TC002", "TC004", "TC016"],
+      "components": [
+        "Button", "Input", "Card", "Avatar",
+        "Badge", "Modal", "Toast", "LoadingSpinner"
+      ],
+      "estimated_complexity": "medium"
+    }
+  ],
+  "total_tasks": 13,
+  "complexity_breakdown": {
+    "low": 1,
+    "medium": 8,
+    "high": 4
+  }
+}
