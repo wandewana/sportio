@@ -216,7 +216,7 @@
         "DO NOT write unit tests that mock repositories, services, or database layers",
         "DO NOT mock internal application components (controllers, services, repositories)",
         "DO NOT test methods in isolation - always test the complete request-response flow",
-        "ALL tests MUST use a real database (Testcontainers or embedded database)",
+        "ALL tests MUST use a real dedicated test database (configured in application-test.yml)",
         "ALL tests MUST call real API endpoints via WebTestClient or similar",
         "ALL tests MUST verify the complete flow through actual application layers"
       ]
@@ -230,7 +230,7 @@
           "requirements": [
             "Use @SpringBootTest with real application context",
             "Use WebTestClient to call actual API endpoints",
-            "Use real database via Testcontainers or embedded database (H2/PostgreSQL)",
+            "Use dedicated test database configured in application-test.yml",
             "Verify complete flow: Request -> Controller -> Service -> Repository -> Database -> Response",
             "DO NOT mock any internal components"
           ],
@@ -276,9 +276,9 @@
         "MUST_HAVE_ANNOTATIONS": ["@SpringBootTest", "@AutoConfigureWebTestClient", "{{ADDITIONAL_ANNOTATION}}"],
         "MUST_INJECT": ["WebTestClient", "{{REPOSITORY_FOR_VERIFICATION}}", "{{ADDITIONAL_DEPENDENCY}}"],
         "DATABASE_REQUIREMENTS": [
-          "Use @Testcontainers for PostgreSQL or appropriate database",
-          "OR use embedded database with same schema as production",
-          "Ensure database is clean before each test (@BeforeEach cleanup)",
+          "Use dedicated test database configured in application-test.yml",
+          "Use @ActiveProfiles('test') to load test configuration",
+          "Ensure database is clean before each test (@BeforeEach cleanup or @Sql scripts)",
           "Verify database state after operations (query real database)"
         ],
         "testScenarios_MINIMUM": [
